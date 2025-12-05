@@ -39,7 +39,7 @@ export default function DashboardLayout({
     const navItems = [
         { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
         { path: '/dashboard/videos', icon: Video, label: 'My Library' },
-        { path: '/pricing', icon: CreditCard, label: 'Pricing' },
+        { path: '/dashboard/pricing', icon: CreditCard, label: 'Pricing' },
         { path: '/dashboard/settings', icon: Settings, label: 'Settings' },
     ];
 

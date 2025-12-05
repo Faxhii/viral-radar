@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
 const api = axios.create({
-    baseURL: 'http://localhost:8000', // Removed /api prefix as it's added in endpoints or router
+    baseURL: API_URL,
     headers: {
         'Content-Type': 'application/json',
     },
@@ -46,7 +48,7 @@ export const login = async (credentials: any) => {
     formData.append('username', credentials.email);
     formData.append('password', credentials.password);
     // Use a fresh axios call to avoid default 'application/json' header
-    const response = await axios.post('http://localhost:8000/auth/token', formData);
+    const response = await axios.post(`${API_URL}/auth/token`, formData);
     return response.data;
 };
 

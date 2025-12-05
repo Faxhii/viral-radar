@@ -37,7 +37,8 @@ export default function ReviewsSection() {
 
     const fetchReviews = async () => {
         try {
-            const response = await fetch('http://localhost:8000/reviews');
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+            const response = await fetch(`${API_URL}/reviews`);
             if (response.ok) {
                 const data = await response.json();
                 setReviews(data);
@@ -88,7 +89,8 @@ export default function ReviewsSection() {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('http://localhost:8000/reviews', {
+            const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+            const response = await fetch(`${API_URL}/reviews`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
