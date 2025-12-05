@@ -1,0 +1,135 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { getMe, updateUser } from '@/lib/api';
+import { Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+
+export default function SettingsPage() {
+    const [loading, setLoading] = useState(true);
+    const [saving, setSaving] = useState(false);
+    const [user, setUser] = useState<any>(null);
+    const [fullName, setFullName] = useState('');
+    const [category, setCategory] = useState('Education');
+    const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const userData = await getMe();
+                setUser(userData);
+                if (userData.full_name) setFullName(userData.full_name);
+                if (userData.primary_category) setCategory(userData.primary_category);
+            } catch (error) {
+                console.error('Failed to fetch user settings:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchUser();
+    }, []);
+
+    const handleSave = async () => {
+        setSaving(true);
+        setMessage(null);
+        try {
+            await updateUser({
+                full_name: fullName,
+                primary_category: category
+            });
+            setMessage({ type: 'success', text: 'Settings saved successfully!' });
+
+            // Clear success message after 3 seconds
+            setTimeout(() => setMessage(null), 3000);
+        } catch (error) {
+            console.error('Failed to update settings:', error);
+            setMessage({ type: 'error', text: 'Failed to save settings. Please try again.' });
+        } finally {
+            setSaving(false);
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="flex justify-center items-center min-h-[400px]">
+                <Loader2 className="w-8 h-8 text-purple-500 animate-spin" />
+            </div>
+        );
+    }
+
+    return (
+        <div className="p-8">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="max-w-4xl mx-auto"
+            >
+                <h1 className="text-3xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                    Settings
+                </h1>
+
+                {message && (
+                    <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className={`mb-6 p-4 rounded-xl border flex items-center gap-3 ${message.type === 'success'
+                            ? 'bg-green-500/10 border-green-500/20 text-green-400'
+                            : 'bg-red-500/10 border-red-500/20 text-red-400'
+                            }`}
+                    >
+                        {message.type === 'success' ? <CheckCircle className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
+                        {message.text}
+                    </motion.div>
+                )}
+
+                <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-6 mb-6">
+                    <h2 className="text-xl font-semibold mb-4 text-white">Profile Information</h2>
+                    <div className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-medium text-zinc-400 mb-1">Email</label>
+                            <input
+                                type="email"
+                                disabled
+                                value={user?.email || ''}
+                                className="w-full px-4 py-2 bg-zinc-800/50 border border-zinc-700 rounded-lg text-zinc-500 cursor-not-allowed"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-6">
+                    <h2 className="text-xl font-semibold mb-4 text-white">Preferences</h2>
+                    <div className="space-y-4">
+
+                        <div>
+                            <label className="block text-sm font-medium text-zinc-400 mb-1">Content Category</label>
+                            <select
+                                value={category}
+                                onChange={(e) => setCategory(e.target.value)}
+                                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none text-white"
+                            >
+                                <option>Education</option>
+                                <option>Entertainment</option>
+                                <option>Lifestyle</option>
+                                <option>Gaming</option>
+                                <option>Business</option>
+                                <option>Tech</option>
+                                <option>Comedy</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="mt-6">
+                        <button
+                            onClick={handleSave}
+                            disabled={saving}
+                            className="px-6 py-2 bg-white text-black rounded-lg font-medium hover:bg-zinc-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                        >
+                            {saving && <Loader2 className="w-4 h-4 animate-spin" />}
+                            {saving ? 'Saving...' : 'Save Changes'}
+                        </button>
+                    </div>
+                </div>
+            </motion.div>
+        </div>
+    );
+}

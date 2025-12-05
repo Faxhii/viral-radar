@@ -1,0 +1,110 @@
+"use client";
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { login } from '@/lib/api';
+import { motion } from 'framer-motion';
+import { Zap, AlertCircle } from 'lucide-react';
+import LoadingSpinner from '@/components/ui/LoadingSpinner';
+
+export default function LoginPage() {
+    const router = useRouter();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError('');
+
+        try {
+            const data = await login({ email, password });
+            localStorage.setItem('token', data.access_token);
+            router.push('/dashboard');
+        } catch (err: any) {
+            setError(err.response?.data?.detail || 'Login failed');
+            setLoading(false);
+        }
+    };
+
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-[#050505] text-white p-4 relative overflow-hidden">
+            {/* Background Effects */}
+            <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[600px] h-[600px] bg-pink-600/10 rounded-full blur-[120px] pointer-events-none" />
+
+            <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="w-full max-w-md relative z-10"
+            >
+                <div className="glass p-8 rounded-3xl border border-white/10 shadow-2xl shadow-purple-500/10 backdrop-blur-xl">
+                    <div className="flex justify-center mb-8">
+                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
+                            <Zap className="w-8 h-8 text-white fill-white" />
+                        </div>
+                    </div>
+
+                    <h1 className="text-3xl font-bold mb-2 text-center bg-gradient-to-r from-white via-purple-100 to-white bg-clip-text text-transparent">
+                        Welcome Back
+                    </h1>
+                    <p className="text-center text-zinc-400 mb-8">Sign in to continue your viral journey</p>
+
+                    {error && (
+                        <motion.div
+                            initial={{ opacity: 0, y: -10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-sm flex items-center gap-3"
+                        >
+                            <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                            {error}
+                        </motion.div>
+                    )}
+
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                        <div>
+                            <label className="block text-sm font-medium text-zinc-400 mb-1.5 ml-1">Email</label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full px-5 py-3.5 bg-zinc-900/50 border border-zinc-800 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none transition-all text-white placeholder-zinc-600"
+                                placeholder="name@example.com"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className="block text-sm font-medium text-zinc-400 mb-1.5 ml-1">Password</label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full px-5 py-3.5 bg-zinc-900/50 border border-zinc-800 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none transition-all text-white placeholder-zinc-600"
+                                placeholder="••••••••"
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-lg hover:opacity-90 transition-all shadow-lg shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
+                        >
+                            {loading ? <LoadingSpinner size="sm" /> : 'Sign In'}
+                        </button>
+                    </form>
+
+                    <p className="mt-8 text-center text-zinc-500 text-sm">
+                        Don't have an account?{' '}
+                        <Link href="/register" className="text-purple-400 hover:text-purple-300 transition-colors font-medium hover:underline">
+                            Create Account
+                        </Link>
+                    </p>
+                </div>
+            </motion.div>
+        </div>
+    );
+}
