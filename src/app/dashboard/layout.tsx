@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { LayoutDashboard, Video, Settings, LogOut, Zap } from 'lucide-react';
+import { LayoutDashboard, Video, Settings, LogOut, Zap, CreditCard } from 'lucide-react';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
@@ -39,6 +39,7 @@ export default function DashboardLayout({
     const navItems = [
         { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
         { path: '/dashboard/videos', icon: Video, label: 'My Library' },
+        { path: '/pricing', icon: CreditCard, label: 'Pricing' },
         { path: '/dashboard/settings', icon: Settings, label: 'Settings' },
     ];
 
