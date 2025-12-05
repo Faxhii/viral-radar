@@ -8,6 +8,47 @@ import { motion } from 'framer-motion';
 
 import { Menu, X } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
+import api from '@/lib/api';
+
+function CreditsDisplay() {
+    const [credits, setCredits] = useState<number | null>(null);
+
+    useEffect(() => {
+        const fetchCredits = async () => {
+            try {
+                const response = await api.get('/auth/me');
+                setCredits(response.data.credits);
+            } catch (error) {
+                console.error("Failed to fetch credits", error);
+            }
+        };
+        fetchCredits();
+
+        // Poll for updates every 10 seconds
+        const interval = setInterval(fetchCredits, 10000);
+        return () => clearInterval(interval);
+    }, []);
+
+    if (credits === null) return null;
+
+    return (
+        <div className="mb-6 px-4">
+            <div className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
+                <div className="text-xs text-zinc-400 mb-1 font-medium uppercase tracking-wider">Available Credits</div>
+                <div className="flex items-end gap-2">
+                    <span className="text-3xl font-bold text-white tracking-tight">{credits}</span>
+                    <span className="text-sm text-zinc-400 mb-1.5">credits</span>
+                </div>
+                <div className="mt-3 w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
+                    <div
+                        className="h-full bg-gradient-to-r from-purple-500 to-pink-500 rounded-full"
+                        style={{ width: `${Math.min((credits / 100) * 100, 100)}%` }} // Visual progress
+                    />
+                </div>
+            </div>
+        </div>
+    );
+}
 
 export default function DashboardLayout({
     children,
@@ -101,6 +142,9 @@ export default function DashboardLayout({
                         ViralVision
                     </span>
                 </div>
+
+                {/* Credits Display */}
+                <CreditsDisplay />
 
                 <nav className="space-y-2 flex-1">
                     {navItems.map((item) => (

@@ -63,13 +63,16 @@ export default function PricingPage() {
                         <ul className="space-y-4 mb-8 flex-1">
                             <li className="flex items-center gap-3 text-zinc-300">
                                 <Check className="text-zinc-500" size={18} />
-                                <span className="font-semibold text-white">3 Analyses</span> / month
+                                <span className="font-semibold text-white">3 Credits</span> / one-time
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> Basic Viral Scoring
+                                <Check className="text-zinc-500" size={18} /> 1 Credit = Short Video
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> Script Analysis
+                                <Check className="text-zinc-500" size={18} /> 2 Credits = Long Video
+                            </li>
+                            <li className="flex items-center gap-3 text-zinc-300">
+                                <Check className="text-zinc-500" size={18} /> 0.5 Credits = Script Analysis
                             </li>
                         </ul>
                         <Link href="/dashboard" className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02]">
@@ -97,7 +100,11 @@ export default function PricingPage() {
                         <ul className="space-y-4 mb-8 flex-1">
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">30 Analyses</span> / month
+                                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">40 Credits</span> / month
+                            </li>
+                            <li className="flex items-center gap-3 text-white">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
+                                Enough for 40 Shorts or 20 Long Videos!
                             </li>
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
@@ -106,10 +113,6 @@ export default function PricingPage() {
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
                                 Viral Script Rewrites
-                            </li>
-                            <li className="flex items-center gap-3 text-white">
-                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Priority Processing
                             </li>
                         </ul>
 
@@ -136,10 +139,10 @@ export default function PricingPage() {
                         <ul className="space-y-4 mb-8 flex-1">
                             <li className="flex items-center gap-3 text-zinc-300">
                                 <Check className="text-zinc-500" size={18} />
-                                <span className="font-semibold text-white">60 Analyses</span> / month
+                                <span className="font-semibold text-white">100 Credits</span> / month
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> Everything in Pro
+                                <Check className="text-zinc-500" size={18} /> Best Value per Credit
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
                                 <Check className="text-zinc-500" size={18} /> White-label PDF Reports
