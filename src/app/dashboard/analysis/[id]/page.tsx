@@ -316,7 +316,7 @@ export default function AnalysisPage() {
                     <div className="aspect-video bg-black rounded-3xl overflow-hidden border border-zinc-800 relative group">
                         {analysis.video_url ? (
                             <video
-                                src={analysis.video_url}
+                                src={analysis.video_url.startsWith('http') ? analysis.video_url : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}${analysis.video_url}`}
                                 controls
                                 className="w-full h-full object-contain"
                                 poster="/placeholder.jpg" // Optional
