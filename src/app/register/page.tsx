@@ -179,14 +179,23 @@ export default function RegisterPage() {
                         />
                     </div>
 
-                    <p className="mt-8 text-center text-zinc-500 text-sm">
-                        Already have an account?{' '}
-                        <Link href="/login" className="text-purple-400 hover:text-purple-300 transition-colors font-medium hover:underline">
-                            Sign In
-                        </Link>
-                    </p>
+                    <Link href="/login" className="text-purple-400 hover:text-purple-300 transition-colors font-medium hover:underline">
+                        Sign In
+                    </Link>
+                </p>
+
+                {/* DEBUG SECTION - REMOVE BEFORE PRODUCTION */}
+                <div className="mt-8 p-4 bg-black/50 rounded-xl border border-white/5 text-xs font-mono text-zinc-500 break-all">
+                    <p className="font-bold text-zinc-400 mb-2">⚠️ DEBUG INFO</p>
+                    <p>API URL: <span className={process.env.NEXT_PUBLIC_API_URL ? "text-green-400" : "text-red-400"}>
+                        {process.env.NEXT_PUBLIC_API_URL || 'NOT SET (Using localhost)'}
+                    </span></p>
+                    <p>Google ID: <span className={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ? "text-green-400" : "text-red-400"}>
+                        {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ? '✅ Configured' : '❌ NOT SET (Button Hidden)'}
+                    </span></p>
                 </div>
-            </motion.div>
         </div>
+            </motion.div >
+        </div >
     );
 }
