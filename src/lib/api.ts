@@ -52,6 +52,11 @@ export const login = async (credentials: any) => {
     return response.data;
 };
 
+export const loginWithGoogle = async (token: string) => {
+    const response = await api.post('/auth/google', { token });
+    return response.data;
+};
+
 export const uploadVideo = async (file: File) => {
     const formData = new FormData();
     formData.append('file', file);

@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { login } from '@/lib/api';
+import { login, loginWithGoogle } from '@/lib/api';
+import { GoogleLogin } from '@react-oauth/google';
 import { motion } from 'framer-motion';
 import { Zap, AlertCircle } from 'lucide-react';
 import LoadingSpinner from '@/components/ui/LoadingSpinner';
@@ -96,6 +97,37 @@ export default function LoginPage() {
                             {loading ? <LoadingSpinner size="sm" /> : 'Sign In'}
                         </button>
                     </form>
+
+                    <div className="my-6 flex items-center gap-4">
+                        <div className="h-px bg-zinc-800 flex-1" />
+                        <span className="text-zinc-500 text-xs uppercase tracking-wider">Or continue with</span>
+                        <div className="h-px bg-zinc-800 flex-1" />
+                    </div>
+
+                    <div className="flex justify-center">
+                        <GoogleLogin
+                            onSuccess={async (credentialResponse) => {
+                                if (credentialResponse.credential) {
+                                    setLoading(true);
+                                    try {
+                                        const data = await loginWithGoogle(credentialResponse.credential);
+                                        localStorage.setItem('token', data.access_token);
+                                        router.push('/dashboard');
+                                    } catch (err: any) {
+                                        console.error(err);
+                                        setError('Google Login Failed');
+                                        setLoading(false);
+                                    }
+                                }
+                            }}
+                            onError={() => {
+                                setError('Google Login Failed');
+                            }}
+                            theme="filled_black"
+                            shape="pill"
+                            width="350"
+                        />
+                    </div>
 
                     <p className="mt-8 text-center text-zinc-500 text-sm">
                         Don't have an account?{' '}
