@@ -43,7 +43,7 @@ export default function RefundPolicy() {
                 <section className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">5. Contact Us</h2>
                     <p>
-                        For any billing inquiries or refund requests, please contact us at: <a href="mailto:support@viralradar.in" className="text-purple-400 hover:underline">support@viralradar.in</a>
+                        For any billing inquiries or refund requests, please contact us at: <a href="mailto:viralradar.in@gmail.com" className="text-purple-400 hover:underline">viralradar.in@gmail.com</a>
                     </p>
                 </section>
             </div>

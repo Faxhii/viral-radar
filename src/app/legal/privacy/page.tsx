@@ -50,7 +50,7 @@ export default function PrivacyPolicy() {
                 <section className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">6. Contact Us</h2>
                     <p>
-                        If you have questions about this Privacy Policy, please contact us at: <a href="mailto:support@viralradar.in" className="text-purple-400 hover:underline">support@viralradar.in</a>
+                        If you have questions about this Privacy Policy, please contact us at: <a href="mailto:viralradar.in@gmail.com" className="text-purple-400 hover:underline">viralradar.in@gmail.com</a>
                     </p>
                 </section>
             </div>

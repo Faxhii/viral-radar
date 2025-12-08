@@ -186,16 +186,7 @@ export default function RegisterPage() {
                         </Link>
                     </p>
 
-                    {/* DEBUG SECTION - REMOVE BEFORE PRODUCTION */}
-                    <div className="mt-8 p-4 bg-black/50 rounded-xl border border-white/5 text-xs font-mono text-zinc-500 break-all">
-                        <p className="font-bold text-zinc-400 mb-2">⚠️ DEBUG INFO (Build v2)</p>
-                        <p>API URL: <span className={process.env.NEXT_PUBLIC_API_URL ? "text-green-400" : "text-red-400"}>
-                            {process.env.NEXT_PUBLIC_API_URL || 'NOT SET (Using localhost)'}
-                        </span></p>
-                        <p>Google ID: <span className={process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ? "text-green-400" : "text-red-400"}>
-                            {process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ? '✅ Configured' : '❌ NOT SET (Button Hidden)'}
-                        </span></p>
-                    </div>
+
                 </div>
             </motion.div >
         </div >
