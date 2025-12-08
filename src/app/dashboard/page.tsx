@@ -37,7 +37,13 @@ export default function DashboardPage() {
         try {
             const result = await uploadVideo(file);
             router.push(`/dashboard/analysis/${result.id}`);
-        } catch (err) {
+        } catch (err: any) {
+            console.error("Upload Error:", err);
+            // Check for Insufficient Credits (403 or specific message)
+            if (err.response?.status === 403 || err.message?.includes('credits')) {
+                router.push('/pricing');
+                return;
+            }
             setError('Failed to upload video. Please try again.');
         } finally {
             setLoading(false);
@@ -51,7 +57,13 @@ export default function DashboardPage() {
         try {
             const result = await importLink(url);
             router.push(`/dashboard/analysis/${result.id}`);
-        } catch (err) {
+        } catch (err: any) {
+            console.error("Link Import Error:", err);
+            // Check for Insufficient Credits
+            if (err.response?.status === 403 || err.message?.includes('credits')) {
+                router.push('/pricing');
+                return;
+            }
             setError('Failed to import link. Please check the URL.');
         } finally {
             setLoading(false);
@@ -69,7 +81,13 @@ export default function DashboardPage() {
                 category: scriptCategory
             });
             router.push(`/dashboard/analysis/${result.id}`);
-        } catch (err) {
+        } catch (err: any) {
+            console.error("Script Analysis Error:", err);
+            // Check for Insufficient Credits
+            if (err.response?.status === 403 || err.message?.includes('credits')) {
+                router.push('/pricing');
+                return;
+            }
             setError('Failed to analyze script. Please try again.');
         } finally {
             setLoading(false);
