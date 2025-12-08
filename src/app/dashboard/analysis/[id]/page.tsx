@@ -22,9 +22,10 @@ export default function AnalysisPage() {
 
     useEffect(() => {
         let intervalId: NodeJS.Timeout;
+        let isPolling = true;
 
         const fetchAnalysis = async () => {
-            if (!params.id) return false;
+            if (!params.id || !isPolling) return false;
             try {
                 const data = await getAnalysis(Number(params.id));
                 setAnalysis(data);
@@ -33,7 +34,7 @@ export default function AnalysisPage() {
                 if (data.status === 'completed' && Object.keys(checklistState).length === 0) {
                     const initialChecklist: Record<string, boolean> = {};
 
-                    // Add AI items (default to false/unchecked for user to do them)
+                    // Add AI items
                     if (data.checklist && data.checklist.next_steps) {
                         data.checklist.next_steps.forEach((step: string) => {
                             initialChecklist[step] = false;
@@ -55,30 +56,40 @@ export default function AnalysisPage() {
                     setChecklistState(initialChecklist);
                 }
 
-                if (data.status === 'completed' || data.status === 'failed') {
+                if (data.status === 'completed') {
                     setLoading(false);
                     return true; // Stop polling
                 }
+
+                if (data.status === 'failed') {
+                    setLoading(false);
+                    toast.error("Analysis Failed. Please try again or contact support.");
+                    return true; // Stop polling
+                }
+
             } catch (error) {
                 console.error('Failed to fetch analysis:', error);
-            } finally {
-                // Only set loading to false on first load if we have data or error
-                // But we want to show loading spinner initially? 
-                // Actually, let's keep loading true until first fetch.
             }
-            setLoading(false);
             return false;
         };
 
-        fetchAnalysis();
+        // Initial fetch
+        fetchAnalysis().then(done => {
+            if (!done) {
+                setLoading(false); // Show loading UI but start polling
+                // Start polling every 5 seconds if not done
+                intervalId = setInterval(async () => {
+                    const done = await fetchAnalysis();
+                    if (done) clearInterval(intervalId);
+                }, 5000);
+            }
+        });
 
-        intervalId = setInterval(async () => {
-            const done = await fetchAnalysis();
-            if (done) clearInterval(intervalId);
-        }, 3000);
-
-        return () => clearInterval(intervalId);
-    }, [params.id]); // Removed checklistState dependency to avoid infinite loop, logic handled inside
+        return () => {
+            isPolling = false;
+            clearInterval(intervalId);
+        };
+    }, [params.id]); // Removed checklistState dependency
 
     const toggleChecklistItem = (key: string) => {
         setChecklistState(prev => ({
