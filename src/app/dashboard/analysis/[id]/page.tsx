@@ -280,9 +280,6 @@ export default function AnalysisPage() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
                     <div className="flex items-center gap-3 mb-2">
-                        <span className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider">
-                            Analysis #{analysis.id}
-                        </span>
                         <span className="text-zinc-500 text-sm">
                             {new Date(analysis.created_at).toLocaleDateString()}
                         </span>
