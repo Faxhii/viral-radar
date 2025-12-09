@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { getMe, updateUser } from '@/lib/api';
-import { Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Loader2, CheckCircle, AlertCircle, HelpCircle, ChevronDown, Mail } from 'lucide-react';
 
 export default function SettingsPage() {
     const [loading, setLoading] = useState(true);
@@ -127,6 +127,46 @@ export default function SettingsPage() {
                             {saving && <Loader2 className="w-4 h-4 animate-spin" />}
                             {saving ? 'Saving...' : 'Save Changes'}
                         </button>
+                    </div>
+                </div>
+
+                {/* Help & Support Section */}
+                <div className="bg-zinc-900 rounded-xl border border-zinc-800 p-6 mt-6">
+                    <h2 className="text-xl font-semibold mb-4 text-white flex items-center gap-2">
+                        <HelpCircle className="w-5 h-5 text-blue-400" />
+                        Help & Support
+                    </h2>
+
+                    <div className="space-y-4">
+                        {/* FAQs */}
+                        <div className="space-y-2">
+                            {[
+                                { q: "How do credits work?", a: "Each video analysis costs 1 credit. Longer videos (>10 mins) cost 2 credits. You get 3 free credits to start." },
+                                { q: "How accurate is the AI?", a: "Our AI is trained on thousands of viral videos. While highly accurate in identifying structure and engagement patterns, virality also depends on execution and luck." },
+                                { q: "Can I cancel at any time?", a: "Yes, you can cancel your subscription from the billing portal. You will retain access until the end of your current billing period." }
+                            ].map((faq, index) => (
+                                <details key={index} className="group bg-zinc-800/30 rounded-lg p-3 cursor-pointer">
+                                    <summary className="font-medium text-zinc-300 flex justify-between items-center list-none">
+                                        {faq.q}
+                                        <ChevronDown className="w-4 h-4 text-zinc-500 group-open:rotate-180 transition-transform" />
+                                    </summary>
+                                    <p className="text-sm text-zinc-400 mt-2 pl-1 leading-relaxed">
+                                        {faq.a}
+                                    </p>
+                                </details>
+                            ))}
+                        </div>
+
+                        {/* Contact Support */}
+                        <div className="pt-4 border-t border-zinc-800">
+                            <a
+                                href="mailto:support@viralradar.in"
+                                className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
+                            >
+                                <Mail className="w-4 h-4" />
+                                Need more help? Contact Support
+                            </a>
+                        </div>
                     </div>
                 </div>
             </motion.div>
