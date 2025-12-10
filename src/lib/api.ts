@@ -126,11 +126,11 @@ interface RazorpayOrderResponse {
     created_at: number;
 }
 
-export const createRazorpayOrder = async (planId: string, amount: number) => {
-    // amount in paise (e.g. 2900 = 29 INR)
+export const createRazorpayOrder = async (planId: string, amount: number, currency: string = "INR") => {
     const response = await api.post('/api/razorpay/order', {
         plan_id: planId,
-        amount: amount
+        amount: amount,
+        currency: currency
     });
     return response.data as RazorpayOrderResponse;
 };
