@@ -171,7 +171,7 @@ export default function PricingPage() {
                         </div>
 
                         <h3 className="text-2xl font-bold mb-2 text-white">Pro Creator</h3>
-                        <div className="text-4xl font-bold mb-6">$19<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
+                        <div className="text-4xl font-bold mb-6">₹1499<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
                         <p className="text-purple-200/60 mb-6 text-sm">For serious creators ready to dominate the algorithm.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">
@@ -194,7 +194,7 @@ export default function PricingPage() {
                         </ul>
 
                         <button
-                            onClick={() => handlePayment('pro', 19, 'USD')}
+                            onClick={() => handlePayment('pro', 1499)}
                             disabled={loading}
                             className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-200 text-center font-bold transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
@@ -209,7 +209,7 @@ export default function PricingPage() {
                             <Shield className="text-zinc-400" />
                         </div>
                         <h3 className="text-2xl font-bold mb-2">Agency</h3>
-                        <div className="text-4xl font-bold mb-6">$39<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
+                        <div className="text-4xl font-bold mb-6">₹2999<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
                         <p className="text-zinc-400 mb-6 text-sm">Maximum power for high-volume content production.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">
@@ -229,7 +229,7 @@ export default function PricingPage() {
                         </ul>
 
                         <button
-                            onClick={() => handlePayment('agency', 39, 'USD')}
+                            onClick={() => handlePayment('agency', 2999)}
                             disabled={loading}
                             className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
