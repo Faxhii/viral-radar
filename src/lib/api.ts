@@ -111,4 +111,38 @@ export const updateUser = async (data: any) => {
     return response.data;
 };
 
+// Razorpay types
+interface RazorpayOrderResponse {
+    id: string;
+    entity: string;
+    amount: number;
+    amount_paid: number;
+    amount_due: number;
+    currency: string;
+    receipt: string;
+    status: string;
+    attempts: number;
+    notes: any;
+    created_at: number;
+}
+
+export const createRazorpayOrder = async (planId: string, amount: number) => {
+    // amount in paise (e.g. 2900 = 29 INR)
+    const response = await api.post('/api/razorpay/order', {
+        plan_id: planId,
+        amount: amount
+    });
+    return response.data as RazorpayOrderResponse;
+};
+
+export const verifyRazorpayPayment = async (data: {
+    razorpay_payment_id: string;
+    razorpay_order_id: string;
+    razorpay_signature: string;
+    plan: string;
+}) => {
+    const response = await api.post('/api/razorpay/verify', data);
+    return response.data;
+};
+
 export default api;

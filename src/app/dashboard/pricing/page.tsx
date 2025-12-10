@@ -1,10 +1,84 @@
 "use client";
 
+import { useState } from 'react';
 import { motion } from "framer-motion";
 import { Check, Zap, Star, Crown, Shield } from "lucide-react";
 import Link from "next/link";
+import { createRazorpayOrder, verifyRazorpayPayment } from "@/lib/api";
 
 export default function PricingPage() {
+    const [loading, setLoading] = useState(false);
+
+    const loadRazorpay = () => {
+        return new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+            script.onload = () => resolve(true);
+            script.onerror = () => resolve(false);
+            document.body.appendChild(script);
+        });
+    };
+
+    const handlePayment = async (planId: string, amount: number) => {
+        setLoading(true);
+        try {
+            const res = await loadRazorpay();
+            if (!res) {
+                alert('Razorpay SDK failed to load. Are you online?');
+                return;
+            }
+
+            // 1. Create Order
+            const order = await createRazorpayOrder(planId, amount * 100); // amount is in INR, convert to paise
+
+            // 2. Open Razorpay
+            const options = {
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
+                amount: order.amount.toString(),
+                currency: order.currency,
+                name: "ViralRadar.in",
+                description: `Upgrade to ${planId === 'pro' ? 'Pro' : 'Agency'} Plan`,
+                image: "/logo.png", // Ensure you have a logo or remove this
+                order_id: order.id,
+                handler: async function (response: any) {
+                    // 3. Verify Payment
+                    try {
+                        await verifyRazorpayPayment({
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_signature: response.razorpay_signature,
+                            plan: planId
+                        });
+                        alert('Payment Successful! Subscription upgraded.');
+                        // Reload to reflect changes
+                        window.location.reload();
+                    } catch (error) {
+                        console.error(error);
+                        alert('Payment verification failed.');
+                    }
+                },
+                prefill: {
+                    // We can prefill if we have user info, but for now optional
+                    // name: "User Name",
+                    // email: "user@example.com",
+                    // contact: "9999999999"
+                },
+                theme: {
+                    color: "#a855f7"
+                }
+            };
+
+            const paymentObject = new (window as any).Razorpay(options);
+            paymentObject.open();
+
+        } catch (error) {
+            console.error('Payment Error:', error);
+            alert('Something went wrong. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -94,7 +168,7 @@ export default function PricingPage() {
                         </div>
 
                         <h3 className="text-2xl font-bold mb-2 text-white">Pro Creator</h3>
-                        <div className="text-4xl font-bold mb-6">$14.99<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
+                        <div className="text-4xl font-bold mb-6">₹1499<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
                         <p className="text-purple-200/60 mb-6 text-sm">For serious creators ready to dominate the algorithm.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">
@@ -116,15 +190,14 @@ export default function PricingPage() {
                             </li>
                         </ul>
 
-                        {/* REPLACE THIS URL WITH YOUR ACTUAL LEMON SQUEEZY CHECKOUT URL FOR PRO PLAN */}
-                        <a
-                            href="https://store.lemonsqueezy.com/checkout/buy/..."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-200 text-center font-bold transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg shadow-white/10"
+                        <button
+                            onClick={() => handlePayment('pro', 1499)}
+                            disabled={loading}
+                            className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-200 text-center font-bold transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            <Zap size={20} className="fill-current" /> Upgrade to Pro
-                        </a>
+                            {loading ? <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" /> : <Zap size={20} className="fill-current" />}
+                            Upgrade to Pro
+                        </button>
                     </motion.div>
 
                     {/* Agency Plan */}
@@ -133,7 +206,7 @@ export default function PricingPage() {
                             <Shield className="text-zinc-400" />
                         </div>
                         <h3 className="text-2xl font-bold mb-2">Agency</h3>
-                        <div className="text-4xl font-bold mb-6">$29.99<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
+                        <div className="text-4xl font-bold mb-6">₹2999<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
                         <p className="text-zinc-400 mb-6 text-sm">Maximum power for high-volume content production.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">
@@ -152,15 +225,13 @@ export default function PricingPage() {
                             </li>
                         </ul>
 
-                        {/* REPLACE THIS URL WITH YOUR ACTUAL LEMON SQUEEZY CHECKOUT URL FOR AGENCY PLAN */}
-                        <a
-                            href="https://store.lemonsqueezy.com/checkout/buy/..."
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02]"
+                        <button
+                            onClick={() => handlePayment('agency', 2999)}
+                            disabled={loading}
+                            className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             Get Agency Plan
-                        </a>
+                        </button>
                     </motion.div>
                 </motion.div>
             </div>
