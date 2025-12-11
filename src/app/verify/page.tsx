@@ -3,6 +3,7 @@
 import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { verifyEmail } from '@/lib/api';
 
 function VerifyContent() {
     const router = useRouter();
@@ -21,26 +22,19 @@ function VerifyContent() {
         setLoading(true);
 
         try {
-            const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/auth/verify`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, otp }),
-            });
-
-            const data = await res.json();
-
-            if (!res.ok) {
-                throw new Error(data.detail || 'Verification failed');
-            }
-
+            await verifyEmail({ email, otp });
             setSuccess(true);
             setTimeout(() => {
                 router.push('/login');
             }, 2000);
         } catch (err: any) {
-            setError(err.message);
+            let errorMessage = 'Verification failed';
+            if (err.response) {
+                errorMessage = err.response.data?.detail || `Server Error (${err.response.status})`;
+            } else if (err.message) {
+                errorMessage = err.message;
+            }
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }
