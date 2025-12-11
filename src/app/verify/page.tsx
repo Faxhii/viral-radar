@@ -22,11 +22,21 @@ function VerifyContent() {
         setLoading(true);
 
         try {
-            await verifyEmail({ email, otp });
+            const data = await verifyEmail({ email, otp });
+
+            // Auto-login if token is returned
+            if (data.access_token) {
+                localStorage.setItem('token', data.access_token);
+                // Dispatch event for other components to know auth state changed
+                if (typeof window !== 'undefined') {
+                    window.dispatchEvent(new Event('storage'));
+                }
+            }
+
             setSuccess(true);
             setTimeout(() => {
-                router.push('/login');
-            }, 2000);
+                router.push('/dashboard');
+            }, 1500);
         } catch (err: any) {
             let errorMessage = 'Verification failed';
             if (err.response) {
@@ -60,7 +70,7 @@ function VerifyContent() {
                             </svg>
                         </div>
                         <h3 className="text-xl font-semibold text-white mb-2">Verified Successfully!</h3>
-                        <p className="text-zinc-400">Redirecting to login...</p>
+                        <p className="text-zinc-400">Redirecting to dashboard...</p>
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
