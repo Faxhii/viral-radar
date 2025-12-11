@@ -58,6 +58,11 @@ export const loginWithGoogle = async (token: string) => {
     return response.data;
 };
 
+export const verifyEmail = async (data: { email: string; otp: string }) => {
+    const response = await api.post('/auth/verify', data);
+    return response.data;
+};
+
 export const uploadVideo = async (file: File) => {
     const formData = new FormData();
     formData.append('file', file);

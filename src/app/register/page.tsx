@@ -31,14 +31,9 @@ export default function RegisterPage() {
                 password,
                 full_name: fullName
             });
-            console.log("Registration successful. Logging in...");
+            console.log("Registration successful. Redirecting to verification...");
 
-            // Auto login
-            const loginData = await login({ email, password });
-            console.log("Login successful", loginData);
-
-            localStorage.setItem('token', loginData.access_token);
-            router.push('/dashboard');
+            router.push(`/verify?email=${encodeURIComponent(email)}`);
         } catch (err: any) {
             console.error("Registration Error:", err);
             let errorMessage = 'Registration failed';
