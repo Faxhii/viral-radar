@@ -168,7 +168,7 @@ export default function PricingPage() {
                                 <span className="font-semibold text-white">3 Credits</span> / one-time
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={16} /> Basic Analysis
+                                <Check className="text-zinc-500" size={16} /> 1 Credit = 2 Mins Video
                             </li>
                         </ul>
                         {isCurrentPlan('free') ? (
@@ -191,7 +191,7 @@ export default function PricingPage() {
                             <Zap className="text-blue-400" size={20} />
                         </div>
                         <h3 className="text-xl font-bold mb-2">Starter</h3>
-                        <div className="text-3xl font-bold mb-6">₹30<span className="text-sm text-zinc-500 font-normal">/once</span></div>
+                        <div className="text-3xl font-bold mb-6">₹49<span className="text-sm text-zinc-500 font-normal">/once</span></div>
                         <p className="text-zinc-400 mb-6 text-xs">Quick top-up for a few videos.</p>
 
                         <ul className="space-y-3 mb-8 flex-1 text-sm">
@@ -200,7 +200,7 @@ export default function PricingPage() {
                                 <span className="font-semibold text-white">15 Credits</span>
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-blue-500" size={16} /> 1 Credit = Short Video
+                                <Check className="text-blue-500" size={16} /> 1 Credit = 2 Mins Video
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
                                 <Check className="text-blue-500" size={16} /> One-time payment
@@ -208,7 +208,7 @@ export default function PricingPage() {
                         </ul>
 
                         <button
-                            onClick={() => handlePayment('starter', 30)}
+                            onClick={() => handlePayment('starter', 49)}
                             disabled={loading}
                             className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                         >
@@ -230,17 +230,17 @@ export default function PricingPage() {
                         </div>
 
                         <h3 className="text-2xl font-bold mb-2 text-white">Pro Creator</h3>
-                        <div className="text-4xl font-bold mb-6">₹799<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
+                        <div className="text-4xl font-bold mb-6">₹699<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
                         <p className="text-purple-200/60 mb-6 text-sm">For serious creators ready to dominate the algorithm.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">40 Credits</span> / month
+                                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">50 Credits</span> / month
                             </li>
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Enough for 40 Shorts or 20 Long Videos!
+                                Enough for 50 Shorts!
                             </li>
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
@@ -258,7 +258,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => handlePayment('pro', 799)}
+                                onClick={() => handlePayment('pro', 699)}
                                 disabled={loading}
                                 className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-200 text-center font-bold transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
@@ -274,13 +274,13 @@ export default function PricingPage() {
                             <Shield className="text-zinc-400" />
                         </div>
                         <h3 className="text-2xl font-bold mb-2">Agency</h3>
-                        <div className="text-4xl font-bold mb-6">₹999<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
+                        <div className="text-4xl font-bold mb-6">₹899<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
                         <p className="text-zinc-400 mb-6 text-sm">Maximum power for high-volume content production.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">
                             <li className="flex items-center gap-3 text-zinc-300">
                                 <Check className="text-zinc-500" size={18} />
-                                <span className="font-semibold text-white">100 Credits</span> / month
+                                <span className="font-semibold text-white">110 Credits</span> / month
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
                                 <Check className="text-zinc-500" size={18} /> Best Value per Credit
@@ -299,7 +299,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => handlePayment('agency', 999)}
+                                onClick={() => handlePayment('agency', 899)}
                                 disabled={loading}
                                 className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                             >
