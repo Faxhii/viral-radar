@@ -1,13 +1,33 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Check, Zap, Star, Crown, Shield } from "lucide-react";
 import Link from "next/link";
-import { createRazorpayOrder, verifyRazorpayPayment } from "@/lib/api";
+import { createRazorpayOrder, verifyRazorpayPayment, getMe } from "@/lib/api";
+
+interface User {
+    id: number;
+    email: string;
+    plan: string;
+    credits: number;
+}
 
 export default function PricingPage() {
     const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState<User | null>(null);
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                const userData = await getMe();
+                setUser(userData);
+            } catch (error) {
+                console.log("Not logged in");
+            }
+        };
+        fetchUser();
+    }, []);
 
     const loadRazorpay = () => {
         return new Promise((resolve) => {
@@ -97,6 +117,11 @@ export default function PricingPage() {
         visible: { opacity: 1, y: 0 }
     };
 
+    const isCurrentPlan = (planName: string) => {
+        if (!user) return planName === 'free';
+        return user.plan === planName;
+    };
+
     return (
         <div className="min-h-screen bg-[#050505] text-white pt-24 pb-12 relative overflow-hidden">
             {/* Background Gradients */}
@@ -152,9 +177,15 @@ export default function PricingPage() {
                                 <Check className="text-zinc-500" size={18} /> 0.5 Credits = Script Analysis
                             </li>
                         </ul>
-                        <Link href="/dashboard" className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02]">
-                            Current Plan
-                        </Link>
+                        {isCurrentPlan('free') ? (
+                            <button disabled className="w-full py-4 rounded-xl bg-zinc-700/50 text-zinc-400 text-center font-semibold cursor-not-allowed">
+                                Current Plan
+                            </button>
+                        ) : (
+                            <Link href="/dashboard" className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02]">
+                                Downgrade
+                            </Link>
+                        )}
                     </motion.div>
 
                     {/* Pro Plan (Popular) */}
@@ -193,14 +224,20 @@ export default function PricingPage() {
                             </li>
                         </ul>
 
-                        <button
-                            onClick={() => handlePayment('pro', 1499)}
-                            disabled={loading}
-                            className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-200 text-center font-bold transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            {loading ? <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" /> : <Zap size={20} className="fill-current" />}
-                            Upgrade to Pro
-                        </button>
+                        {isCurrentPlan('pro') ? (
+                            <button disabled className="w-full py-4 rounded-xl bg-zinc-700/50 text-zinc-400 text-center font-bold cursor-not-allowed">
+                                Current Plan
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() => handlePayment('pro', 1499)}
+                                disabled={loading}
+                                className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-200 text-center font-bold transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {loading ? <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" /> : <Zap size={20} className="fill-current" />}
+                                Upgrade to Pro
+                            </button>
+                        )}
                     </motion.div>
 
                     {/* Agency Plan */}
@@ -228,13 +265,19 @@ export default function PricingPage() {
                             </li>
                         </ul>
 
-                        <button
-                            onClick={() => handlePayment('agency', 2999)}
-                            disabled={loading}
-                            className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
-                        >
-                            Get Agency Plan
-                        </button>
+                        {isCurrentPlan('agency') ? (
+                            <button disabled className="w-full py-4 rounded-xl bg-zinc-700/50 text-zinc-400 text-center font-semibold cursor-not-allowed">
+                                Current Plan
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() => handlePayment('agency', 2999)}
+                                disabled={loading}
+                                className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                Get Agency Plan
+                            </button>
+                        )}
                     </motion.div>
                 </motion.div>
             </div>
