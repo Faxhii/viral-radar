@@ -151,41 +151,69 @@ export default function PricingPage() {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto"
+                    className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1400px] mx-auto"
                 >
                     {/* Free Plan */}
-                    <motion.div variants={itemVariants} className="p-8 rounded-3xl bg-zinc-900/40 border border-white/5 backdrop-blur-xl flex flex-col hover:border-white/10 transition-colors">
-                        <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center mb-6">
-                            <Star className="text-zinc-400" />
+                    <motion.div variants={itemVariants} className="p-6 rounded-3xl bg-zinc-900/40 border border-white/5 backdrop-blur-xl flex flex-col hover:border-white/10 transition-colors">
+                        <div className="w-10 h-10 rounded-2xl bg-zinc-800 flex items-center justify-center mb-6">
+                            <Star className="text-zinc-400" size={20} />
                         </div>
-                        <h3 className="text-2xl font-bold mb-2">Starter</h3>
-                        <div className="text-4xl font-bold mb-6">$0<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
-                        <p className="text-zinc-400 mb-6 text-sm">Perfect for trying out the power of AI analysis.</p>
+                        <h3 className="text-xl font-bold mb-2">Free</h3>
+                        <div className="text-3xl font-bold mb-6">$0<span className="text-sm text-zinc-500 font-normal">/mo</span></div>
+                        <p className="text-zinc-400 mb-6 text-xs">Test the waters.</p>
 
-                        <ul className="space-y-4 mb-8 flex-1">
+                        <ul className="space-y-3 mb-8 flex-1 text-sm">
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} />
+                                <Check className="text-zinc-500" size={16} />
                                 <span className="font-semibold text-white">3 Credits</span> / one-time
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> 1 Credit = Short Video
-                            </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> 2 Credits = Long Video
-                            </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> 0.5 Credits = Script Analysis
+                                <Check className="text-zinc-500" size={16} /> Basic Analysis
                             </li>
                         </ul>
                         {isCurrentPlan('free') ? (
-                            <button disabled className="w-full py-4 rounded-xl bg-zinc-700/50 text-zinc-400 text-center font-semibold cursor-not-allowed">
+                            <button disabled className="w-full py-3 rounded-xl bg-zinc-700/50 text-zinc-400 text-center font-semibold cursor-not-allowed text-sm">
                                 Current Plan
                             </button>
                         ) : (
-                            <Link href="/dashboard" className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02]">
+                            <Link href="/dashboard" className="w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02] text-sm">
                                 Downgrade
                             </Link>
                         )}
+                    </motion.div>
+
+                    {/* Starter Plan (New) */}
+                    <motion.div variants={itemVariants} className="p-6 rounded-3xl bg-zinc-900/40 border border-blue-500/30 backdrop-blur-xl flex flex-col hover:border-blue-500/50 transition-colors relative">
+                        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600 px-3 py-1 rounded-full text-xs font-bold shadow-lg shadow-blue-500/20">
+                            QUICK START
+                        </div>
+                        <div className="w-10 h-10 rounded-2xl bg-blue-900/40 flex items-center justify-center mb-6">
+                            <Zap className="text-blue-400" size={20} />
+                        </div>
+                        <h3 className="text-xl font-bold mb-2">Starter</h3>
+                        <div className="text-3xl font-bold mb-6">₹10<span className="text-sm text-zinc-500 font-normal">/once</span></div>
+                        <p className="text-zinc-400 mb-6 text-xs">Quick top-up for a few videos.</p>
+
+                        <ul className="space-y-3 mb-8 flex-1 text-sm">
+                            <li className="flex items-center gap-3 text-zinc-300">
+                                <Check className="text-blue-500" size={16} />
+                                <span className="font-semibold text-white">3 Credits</span>
+                            </li>
+                            <li className="flex items-center gap-3 text-zinc-300">
+                                <Check className="text-blue-500" size={16} /> 1 Credit = Short Video
+                            </li>
+                            <li className="flex items-center gap-3 text-zinc-300">
+                                <Check className="text-blue-500" size={16} /> One-time payment
+                            </li>
+                        </ul>
+
+                        <button
+                            onClick={() => handlePayment('starter', 10)}
+                            disabled={loading}
+                            className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                        >
+                            Get Started
+                        </button>
                     </motion.div>
 
                     {/* Pro Plan (Popular) */}
