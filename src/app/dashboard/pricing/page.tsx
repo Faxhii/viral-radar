@@ -192,7 +192,7 @@ export default function PricingPage() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">Starter</h3>
                         <div className="text-3xl font-bold mb-6">₹49<span className="text-sm text-zinc-500 font-normal">/once</span></div>
-                        <p className="text-zinc-400 mb-6 text-xs">Quick top-up for a few videos.</p>
+                        <p className="text-zinc-400 mb-6 text-xs">Try out all features & meaningful analysis.</p>
 
                         <ul className="space-y-3 mb-8 flex-1 text-sm">
                             <li className="flex items-center gap-3 text-zinc-300">
@@ -203,7 +203,7 @@ export default function PricingPage() {
                                 <Check className="text-blue-500" size={16} /> 1 Credit = 2 Mins Video
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-blue-500" size={16} /> One-time payment
+                                <Check className="text-blue-500" size={16} /> Full AI Analysis Access
                             </li>
                         </ul>
 
@@ -286,10 +286,10 @@ export default function PricingPage() {
                                 <Check className="text-zinc-500" size={18} /> Best Value per Credit
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> White-label PDF Reports
+                                <Check className="text-zinc-500" size={18} /> Priority Analysis Queue
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> API Access (Beta)
+                                <Check className="text-zinc-500" size={18} /> Bulk Video Support
                             </li>
                         </ul>
 

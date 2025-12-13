@@ -141,7 +141,7 @@ export default function SettingsPage() {
                         {/* FAQs */}
                         <div className="space-y-2">
                             {[
-                                { q: "How do credits work?", a: "Each video analysis costs 1 credit. Longer videos (>10 mins) cost 2 credits. You get 3 free credits to start." },
+                                { q: "How do credits work?", a: "Each video analysis (up to 2 mins) costs 1 credit. Longer videos cost 2 credits. You get 3 free credits to start." },
                                 { q: "How accurate is the AI?", a: "Our AI is trained on thousands of viral videos. While highly accurate in identifying structure and engagement patterns, virality also depends on execution and luck." },
                                 { q: "Can I cancel at any time?", a: "Yes, you can cancel your subscription from the billing portal. You will retain access until the end of your current billing period." }
                             ].map((faq, index) => (
