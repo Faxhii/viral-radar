@@ -62,6 +62,7 @@ export const metadata: Metadata = {
 };
 
 import { Toaster } from "@/components/ui/Toaster";
+import Mixpanel from "@/components/Mixpanel";
 
 import { Providers } from "@/components/Providers";
 
@@ -76,6 +77,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        <Mixpanel />
         <Providers>
           {children}
           <Toaster />
