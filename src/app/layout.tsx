@@ -56,6 +56,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  verification: {
+    google: 'YOUR_GOOGLE_VERIFICATION_CODE', // You will get this code from steps in the guide
+  },
 };
 
 import { Toaster } from "@/components/ui/Toaster";

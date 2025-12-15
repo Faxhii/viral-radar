@@ -28,15 +28,15 @@ export default function HeroSection() {
     return (
         <main className="container mx-auto px-6 py-20 text-center relative z-10">
             <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight">
-                Predict Viral Potential <br />
+                ViralRadar: AI for <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-                    Before You Post
+                    Content Creation
                 </span>
             </h1>
 
             <div className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 flex flex-col items-center gap-2">
                 <p>
-                    Paste your link or upload your video. Uncover exactly why your content isn't going viral due to
+                    The ultimate AI tool for content creators. Paste your link or upload your video. Uncover exactly why your content isn't going viral due to
                 </p>
                 <div className="h-8 relative overflow-hidden w-full flex justify-center">
                     <AnimatePresence mode="wait">

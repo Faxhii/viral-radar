@@ -14,11 +14,11 @@ const faqs = [
     },
     {
         question: "How does the credit system work?",
-        answer: "New users start with 3 free credits. Short videos (<60s) cost 1 credit. Long videos (>60s) cost 2 credits. Script Analysis costs just 0.5 credits."
+        answer: "New users start with 3 free credits. Videos up to 2 minutes cost 1 credit. Longer videos cost 2 credits. Script Analysis costs just 0.5 credits."
     },
     {
         question: "Is there a free trial?",
-        answer: "Yes! You start with 3 credits, which is enough to analyze 3 Shorts or try our script analyzer 6 times."
+        answer: "Yes! You start with 3 credits, which is enough to analyze 3 videos (up to 2 mins each) or try our script analyzer 6 times."
     },
     {
         question: "Can I cancel my subscription anytime?",
