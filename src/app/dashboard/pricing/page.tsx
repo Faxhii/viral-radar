@@ -191,7 +191,11 @@ export default function PricingPage() {
                             <Zap className="text-blue-400" size={20} />
                         </div>
                         <h3 className="text-xl font-bold mb-2">Starter</h3>
-                        <div className="text-3xl font-bold mb-6">₹49<span className="text-sm text-zinc-500 font-normal">/once</span></div>
+                        <div className="flex items-baseline gap-2 mb-6">
+                            <span className="text-zinc-500 line-through text-lg">₹199</span>
+                            <span className="text-3xl font-bold">₹49</span>
+                            <span className="text-sm text-zinc-500 font-normal">/once</span>
+                        </div>
                         <p className="text-zinc-400 mb-6 text-xs">Try out all features & meaningful analysis.</p>
 
                         <ul className="space-y-3 mb-8 flex-1 text-sm">
@@ -230,7 +234,11 @@ export default function PricingPage() {
                         </div>
 
                         <h3 className="text-2xl font-bold mb-2 text-white">Pro Creator</h3>
-                        <div className="text-4xl font-bold mb-6">₹699<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
+                        <div className="flex items-baseline gap-2 mb-6">
+                            <span className="text-purple-300/50 line-through text-xl">₹999</span>
+                            <span className="text-4xl font-bold">₹699</span>
+                            <span className="text-lg text-zinc-500 font-normal">/mo</span>
+                        </div>
                         <p className="text-purple-200/60 mb-6 text-sm">For serious creators ready to dominate the algorithm.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">
@@ -274,7 +282,11 @@ export default function PricingPage() {
                             <Shield className="text-zinc-400" />
                         </div>
                         <h3 className="text-2xl font-bold mb-2">Agency</h3>
-                        <div className="text-4xl font-bold mb-6">₹899<span className="text-lg text-zinc-500 font-normal">/mo</span></div>
+                        <div className="flex items-baseline gap-2 mb-6">
+                            <span className="text-zinc-500 line-through text-xl">₹1999</span>
+                            <span className="text-4xl font-bold">₹899</span>
+                            <span className="text-lg text-zinc-500 font-normal">/mo</span>
+                        </div>
                         <p className="text-zinc-400 mb-6 text-sm">Maximum power for high-volume content production.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">

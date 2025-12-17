@@ -14,9 +14,6 @@ export default function Footer() {
                         </p>
 
                         <div className="space-y-4">
-                            <h4 className="text-white font-semibold flex items-center gap-2">
-                                <span className="w-8 h-[1px] bg-zinc-600"></span> About Us
-                            </h4>
                             <div className="bg-zinc-900/50 p-4 rounded-xl border border-white/5">
                                 <p className="text-zinc-300 text-sm italic mb-3">
                                     "I built ViralVision because I saw too many brilliant creators giving up when their content didn't stick. We're here to change that with data."
@@ -34,10 +31,15 @@ export default function Footer() {
                         </div>
                     </div>
 
-                    <div className="flex gap-8 text-sm text-zinc-400">
+                    <div className="flex gap-8 text-sm text-zinc-400 items-center">
+                        <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
                         <Link href="/legal/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
                         <Link href="/legal/terms" className="hover:text-white transition-colors">Terms of Service</Link>
                         <Link href="/legal/refund" className="hover:text-white transition-colors">Refund Policy</Link>
+                        <a href="https://instagram.com/viralradar.in" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
+                            <span className="hidden md:inline">Instagram</span>
+                        </a>
                     </div>
                 </div>
 
