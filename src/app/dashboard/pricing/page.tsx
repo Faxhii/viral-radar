@@ -16,6 +16,8 @@ interface User {
 export default function PricingPage() {
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState<User | null>(null);
+    const [showPaymentNotice, setShowPaymentNotice] = useState(false);
+    const [pendingTransaction, setPendingTransaction] = useState<{ planId: string, amount: number } | null>(null);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -39,8 +41,17 @@ export default function PricingPage() {
         });
     };
 
-    const handlePayment = async (planId: string, amount: number, currency: string = "INR") => {
+    const initiatePayment = (planId: string, amount: number) => {
+        setPendingTransaction({ planId, amount });
+        setShowPaymentNotice(true);
+    };
+
+    const proceedWithPayment = async () => {
+        if (!pendingTransaction) return;
+        const { planId, amount } = pendingTransaction;
+        setShowPaymentNotice(false);
         setLoading(true);
+        const currency = "INR";
         try {
             const res = await loadRazorpay();
             if (!res) {
@@ -128,6 +139,54 @@ export default function PricingPage() {
             <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] bg-pink-600/10 rounded-full blur-[120px] pointer-events-none" />
 
+            {/* Payment Notice Modal */}
+            {showPaymentNotice && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.95 }}
+                        className="bg-zinc-900 border border-white/10 rounded-2xl max-w-md w-full p-6 shadow-2xl relative"
+                    >
+                        <div className="flex items-center gap-3 mb-4 text-purple-400">
+                            <Shield className="w-8 h-8" />
+                            <h3 className="text-xl font-bold text-white">Payment Update</h3>
+                        </div>
+
+                        <div className="space-y-4 text-zinc-300 text-sm leading-relaxed mb-8">
+                            <p>
+                                <strong>Measures to keep our prices low:</strong> We are currently upgrading our business banking infrastructure to bring you these launch offers.
+                            </p>
+                            <p>
+                                To ensure uninterrupted service, payments are temporarily processed through our authorized billing representative, <strong className="text-white">Jumailath Kainottu</strong>.
+                            </p>
+                            <div className="bg-white/5 p-3 rounded-lg border border-white/5 text-xs text-zinc-400">
+                                <p className="flex items-center gap-2 mb-1">
+                                    <Shield size={12} className="text-green-500" />
+                                    Your transaction is <strong>100% secure</strong> & encrypted.
+                                </p>
+                                <p>Backed by Razorpay protection. You will receive a receipt from ViralVision immediately.</p>
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={proceedWithPayment}
+                                className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition-all"
+                            >
+                                Understood, Proceed to Secure Payment
+                            </button>
+                            <button
+                                onClick={() => setShowPaymentNotice(false)}
+                                className="w-full py-3 rounded-xl bg-transparent hover:bg-white/5 text-zinc-400 font-semibold transition-all"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </motion.div>
+                </div>
+            )}
+
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-16">
                     <motion.h1
@@ -212,7 +271,7 @@ export default function PricingPage() {
                         </ul>
 
                         <button
-                            onClick={() => handlePayment('starter', 49)}
+                            onClick={() => initiatePayment('starter', 49)}
                             disabled={loading}
                             className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                         >
@@ -266,7 +325,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => handlePayment('pro', 699)}
+                                onClick={() => initiatePayment('pro', 699)}
                                 disabled={loading}
                                 className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-200 text-center font-bold transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
@@ -311,7 +370,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => handlePayment('agency', 899)}
+                                onClick={() => initiatePayment('agency', 899)}
                                 disabled={loading}
                                 className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
                             >
