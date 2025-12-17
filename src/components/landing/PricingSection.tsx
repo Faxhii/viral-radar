@@ -150,10 +150,6 @@ export default function PricingSection() {
                                 <Check className="text-white" size={18} />
                                 Best Value per Analysis
                             </li>
-                            <li className="flex items-center gap-3 opacity-80 italic">
-                                <Check className="text-white" size={18} />
-                                + Every Viral Tool Unlocked
-                            </li>
                         </ul>
 
                         <Link href="/register" className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-100 text-center font-bold transition-all hover:scale-[1.02] shadow-xl shadow-white/10">
