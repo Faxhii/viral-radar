@@ -101,9 +101,9 @@ export default function PricingSection() {
                     </div>
 
                     {/* Agency (Big Value) */}
-                    <div className="p-8 rounded-3xl bg-zinc-900/40 border border-white/10 backdrop-blur-xl flex flex-col hover:border-white/20 transition-all hover:-translate-y-1 duration-300">
-                        <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center mb-6 text-zinc-400 group-hover:scale-110 transition-transform">
-                            <Shield size={24} />
+                    <div className="p-8 rounded-3xl bg-gradient-to-b from-purple-900/20 to-zinc-900/40 border-2 border-purple-500/50 backdrop-blur-xl flex flex-col relative group shadow-2xl shadow-purple-900/20 hover:scale-105 transition-transform duration-300">
+                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center mb-6 shadow-lg shadow-purple-500/20 group-hover:scale-110 transition-transform duration-300">
+                            <Shield className="text-white fill-white" size={28} />
                         </div>
                         <h3 className="text-xl font-bold mb-2">Agency</h3>
                         <div className="flex items-baseline gap-2 mb-6">
@@ -128,7 +128,7 @@ export default function PricingSection() {
                             </li>
                         </ul>
 
-                        <Link href="/register" className="w-full py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02] text-white">
+                        <Link href="/register" className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-100 text-center font-bold transition-all hover:scale-[1.02] shadow-xl shadow-white/10">
                             Get Agency Access
                         </Link>
                     </div>
