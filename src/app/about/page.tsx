@@ -7,8 +7,11 @@ export default function AboutPage() {
         <div className="min-h-screen bg-black text-white selection:bg-purple-500 selection:text-white flex flex-col">
             {/* Navbar Placeholder / Back Button */}
             <nav className="container mx-auto px-6 py-6 flex justify-between items-center relative z-20">
-                <Link href="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-                    ViralRadar.in
+                <Link href="/" className="flex items-center gap-3">
+                    <img src="/logo.jpg" alt="ViralRadar Logo" className="w-8 h-8 rounded-lg" />
+                    <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+                        ViralRadar.in
+                    </span>
                 </Link>
                 <Link href="/" className="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors">
                     <ArrowLeft size={16} /> Back to Home

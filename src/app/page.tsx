@@ -14,8 +14,11 @@ export default function Home() {
     <div className="min-h-screen bg-black text-white selection:bg-purple-500 selection:text-white" suppressHydrationWarning>
       {/* Navbar */}
       <nav className="container mx-auto px-6 py-6 flex justify-between items-center relative z-20">
-        <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
-          ViralRadar.in
+        <div className="flex items-center gap-3">
+          <img src="/logo.jpg" alt="ViralRadar Logo" className="w-10 h-10 rounded-xl" />
+          <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+            ViralRadar.in
+          </span>
         </div>
         <div className="space-x-4">
           <Link href="/login" className="text-gray-300 hover:text-white transition">Login</Link>

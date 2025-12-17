@@ -17,6 +17,10 @@ export const metadata: Metadata = {
     default: "ViralRadar.in - AI Viral Potential Predictor",
     template: "%s | ViralRadar.in",
   },
+  icons: {
+    icon: "/logo.jpg",
+    apple: "/logo.jpg",
+  },
   description: "Stop guessing what goes viral. ViralRadar.in uses advanced AI to score your short-form videos and scripts before you post. Optimize for TikTok, Reels, and Shorts.",
   keywords: ["viral prediction", "AI video analysis", "TikTok algorithm", "Reels views", "Shorts optimization", "content creator tool", "social media growth"],
   authors: [{ name: "ViralRadar Team" }],

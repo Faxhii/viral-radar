@@ -88,10 +88,8 @@ export default function DashboardLayout({
         <div className="flex h-screen bg-[#050505] text-white overflow-hidden selection:bg-purple-500/30">
             {/* Mobile Header */}
             <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-b border-white/5 p-4 flex justify-between items-center">
-                <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center">
-                        <Zap className="w-4 h-4 text-white fill-white" />
-                    </div>
+                <div className="flex items-center gap-3">
+                    <img src="/logo.jpg" alt="ViralRadar Logo" className="w-8 h-8 rounded-lg" />
                     <span className="text-lg font-bold">ViralVision</span>
                 </div>
                 <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-zinc-400">
@@ -135,9 +133,7 @@ export default function DashboardLayout({
             {/* Sidebar */}
             <aside className="w-72 border-r border-white/5 p-6 hidden md:flex flex-col bg-black/40 backdrop-blur-xl relative z-10">
                 <div className="flex items-center gap-3 mb-10 px-2">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center shadow-lg shadow-purple-500/20">
-                        <Zap className="w-6 h-6 text-white fill-white" />
-                    </div>
+                    <img src="/logo.jpg" alt="ViralRadar Logo" className="w-10 h-10 rounded-xl shadow-lg shadow-purple-500/20" />
                     <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60">
                         ViralVision
                     </span>
