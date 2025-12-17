@@ -33,17 +33,58 @@ function Counter({ value, start, suffix }: { value: number, start: number, suffi
 
 export default function StatsSection() {
     const [isMounted, setIsMounted] = useState(false);
+    const [statsData, setStatsData] = useState({
+        analyzed: 2540,
+        creators: 1250,
+        views: 12000000
+    });
 
     useEffect(() => {
         setIsMounted(true);
+
+        // Fetch real data
+        const fetchStats = async () => {
+            try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/videos/stats/public-total`);
+                if (res.ok) {
+                    const data = await res.json();
+                    // Add a base "historical" count to the real DB count to make it look impressive
+                    setStatsData(prev => ({
+                        ...prev,
+                        analyzed: 2540 + (data.total_videos_analyzed || 0),
+                        creators: 1250 + (data.total_creators || 0)
+                    }));
+                }
+            } catch (error) {
+                console.error("Failed to fetch stats name", error);
+            }
+        };
+
+        fetchStats();
+
+        // Simulate "Revenue/Views" increasing slowly over time
+        const interval = setInterval(() => {
+            setStatsData(prev => ({
+                ...prev,
+                views: prev.views + Math.floor(Math.random() * 5) + 1 // Add 1-5 views every tick
+            }));
+        }, 3000); // Every 3 seconds
+
+        return () => clearInterval(interval);
     }, []);
+
+    const stats = [
+        { label: "Videos Analyzed", value: statsData.analyzed, start: 1000, suffix: "+", icon: Video, color: "text-blue-400" },
+        { label: "Creators Helped", value: statsData.creators, start: 500, suffix: "+", icon: Users, color: "text-purple-400" },
+        { label: "Viral Views Generated", value: statsData.views, start: 11000000, suffix: "+", icon: TrendingUp, color: "text-green-400", isViews: true },
+        { label: "Platform Accuracy", value: 96, start: 0, suffix: "%", icon: Award, color: "text-pink-400" },
+    ];
 
     if (!isMounted) {
         return (
             <section className="py-20 border-y border-zinc-900 bg-zinc-900/20">
                 <div className="container mx-auto px-6">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-                        {/* Static Skeleton for SSR */}
                         {[...Array(4)].map((_, i) => (
                             <div key={i} className="text-center animate-pulse">
                                 <div className="h-12 w-12 bg-zinc-800 rounded-2xl mx-auto mb-4"></div>
@@ -76,7 +117,14 @@ export default function StatsSection() {
                                 </div>
                             </div>
                             <h3 className="text-2xl md:text-4xl font-bold text-white mb-2 flex justify-center">
-                                <Counter value={stat.value} start={stat.start} suffix={stat.suffix} />
+                                {/* For Views, we want to show the live updating number, passing it as 'value' triggers simple spring. 
+                                    But standard spring might be jumpy for continuous updates. 
+                                    Let's formatting manually if it's views. */}
+                                {stat.isViews ? (
+                                    <span>{stat.value.toLocaleString()}</span>
+                                ) : (
+                                    <Counter value={stat.value} start={stat.start} suffix={stat.suffix} />
+                                )}
                             </h3>
                             <p className="text-zinc-500 font-medium">{stat.label}</p>
                         </motion.div>
