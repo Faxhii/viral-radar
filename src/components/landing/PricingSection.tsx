@@ -45,7 +45,7 @@ export default function PricingSection() {
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
-                                Script & Hook Analysis
+                                Complete Video & Script Analysis
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
@@ -54,6 +54,10 @@ export default function PricingSection() {
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
                                 Viral Potential Score
+                            </li>
+                            <li className="flex items-center gap-3 opacity-80 italic">
+                                <Check className="text-blue-500 shrink-0" size={18} />
+                                + Many more insights inside
                             </li>
                         </ul>
 
@@ -87,7 +91,7 @@ export default function PricingSection() {
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Deep Script & Hook Optimization
+                                Advanced Full-Video Analysis
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
@@ -100,6 +104,10 @@ export default function PricingSection() {
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
                                 Viral Script Rewrites
+                            </li>
+                            <li className="flex items-center gap-3 opacity-80 italic">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
+                                + All Deep-Dive Metrics
                             </li>
                         </ul>
 
@@ -141,6 +149,10 @@ export default function PricingSection() {
                             <li className="flex items-center gap-3">
                                 <Check className="text-white" size={18} />
                                 Best Value per Analysis
+                            </li>
+                            <li className="flex items-center gap-3 opacity-80 italic">
+                                <Check className="text-white" size={18} />
+                                + Every Viral Tool Unlocked
                             </li>
                         </ul>
 
