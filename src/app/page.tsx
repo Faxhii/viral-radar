@@ -6,6 +6,7 @@ import ReviewsSection from '@/components/landing/ReviewsSection';
 import FAQSection from '@/components/landing/FAQSection';
 
 import HeroSection from '@/components/landing/HeroSection';
+import PricingSection from '@/components/landing/PricingSection';
 import Footer from '@/components/landing/Footer';
 
 export default function Home() {
@@ -28,6 +29,7 @@ export default function Home() {
       <StatsSection />
       <ReviewsSection />
       <FAQSection />
+      <PricingSection />
 
       <Footer />
     </div>
