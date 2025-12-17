@@ -81,6 +81,21 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "ViralRadar",
+              "url": "https://viralradar.in",
+              "logo": "https://viralradar.in/logo.jpg",
+              "sameAs": [
+                "https://viralradar.in"
+              ]
+            })
+          }}
+        />
         <Mixpanel />
         <Providers>
           {children}
