@@ -255,18 +255,28 @@ export default function PricingPage() {
                             <span className="text-3xl font-bold">₹49</span>
                             <span className="text-sm text-zinc-500 font-normal">/once</span>
                         </div>
-                        <p className="text-zinc-400 mb-6 text-xs">Try out all features & meaningful analysis.</p>
+                        <p className="text-zinc-400 mb-6 text-xs">Perfect for testing the waters and seeing the magic happen.</p>
 
                         <ul className="space-y-3 mb-8 flex-1 text-sm">
                             <li className="flex items-center gap-3 text-zinc-300">
                                 <Check className="text-blue-500" size={16} />
-                                <span className="font-semibold text-white">15 Credits</span>
+                                <span className="font-semibold text-white">15 Credits</span> (Analyze ~15 Shorts)
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-blue-500" size={16} /> 1 Credit = 2 Mins Video
+                                <Check className="text-blue-500" size={16} />
+                                Complete Video & Script Analysis
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-blue-500" size={16} /> Full AI Analysis Access
+                                <Check className="text-blue-500" size={16} />
+                                Actionable Improvement Plan
+                            </li>
+                            <li className="flex items-center gap-3 text-zinc-300">
+                                <Check className="text-blue-500" size={16} />
+                                Viral Potential Score
+                            </li>
+                            <li className="flex items-center gap-3 text-zinc-300 opacity-80 italic">
+                                <Check className="text-blue-500" size={16} />
+                                + Many more insights inside
                             </li>
                         </ul>
 
@@ -300,22 +310,30 @@ export default function PricingPage() {
                         </div>
                         <p className="text-purple-200/60 mb-6 text-sm">For serious creators ready to dominate the algorithm.</p>
 
-                        <ul className="space-y-4 mb-8 flex-1">
+                        <ul className="space-y-4 mb-8 flex-1 text-sm">
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">50 Credits</span> / month
+                                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">50 Credits</span> (Analyze ~50 Shorts)
                             </li>
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Enough for 50 Shorts!
+                                Advanced Full-Video Analysis
                             </li>
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Deep AI Insights & Hooks
+                                Actionable Improvement Plan
+                            </li>
+                            <li className="flex items-center gap-3 text-white">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
+                                Audience Retention Strategy
                             </li>
                             <li className="flex items-center gap-3 text-white">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
                                 Viral Script Rewrites
+                            </li>
+                            <li className="flex items-center gap-3 text-white opacity-80 italic">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
+                                + All Deep-Dive Metrics
                             </li>
                         </ul>
 
@@ -336,9 +354,9 @@ export default function PricingPage() {
                     </motion.div>
 
                     {/* Agency Plan */}
-                    <motion.div variants={itemVariants} className="p-8 rounded-3xl bg-zinc-900/40 border border-white/5 backdrop-blur-xl flex flex-col hover:border-white/10 transition-colors">
-                        <div className="w-12 h-12 rounded-2xl bg-zinc-800 flex items-center justify-center mb-6">
-                            <Shield className="text-zinc-400" />
+                    <motion.div variants={itemVariants} className="p-8 rounded-3xl bg-gradient-to-b from-purple-900/20 to-zinc-900/40 border-2 border-purple-500/50 backdrop-blur-xl flex flex-col relative group shadow-2xl shadow-purple-900/20 hover:scale-105 transition-transform duration-300">
+                        <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center mb-6 shadow-lg shadow-purple-500/20 group-hover:scale-110 transition-transform duration-300">
+                            <Shield className="text-white fill-white" strokeWidth={0} />
                         </div>
                         <h3 className="text-2xl font-bold mb-2">Agency</h3>
                         <div className="flex items-baseline gap-2 mb-6">
@@ -346,35 +364,42 @@ export default function PricingPage() {
                             <span className="text-4xl font-bold">₹899</span>
                             <span className="text-lg text-zinc-500 font-normal">/mo</span>
                         </div>
-                        <p className="text-zinc-400 mb-6 text-sm">Maximum power for high-volume content production.</p>
+                        <p className="text-zinc-400 mb-6 text-sm">Maximum power for high-volume content production & full video analysis.</p>
 
-                        <ul className="space-y-4 mb-8 flex-1">
+                        <ul className="space-y-4 mb-8 flex-1 text-sm">
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} />
-                                <span className="font-semibold text-white">110 Credits</span> / month
+                                <Check className="text-white" size={18} />
+                                <span className="font-semibold text-white">110 Credits</span> (Analyze ~110 Shorts)
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> Best Value per Credit
+                                <Check className="text-white" size={18} />
+                                Priority Analysis Queue (Skip Line)
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> Priority Analysis Queue
+                                <Check className="text-white" size={18} />
+                                Advanced Script & Content Strategy
                             </li>
                             <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={18} /> Bulk Video Support
+                                <Check className="text-white" size={18} />
+                                Comprehensive Growth Roadmap
+                            </li>
+                            <li className="flex items-center gap-3 text-zinc-300">
+                                <Check className="text-white" size={18} />
+                                Best Value per Analysis
                             </li>
                         </ul>
 
                         {isCurrentPlan('agency') ? (
-                            <button disabled className="w-full py-4 rounded-xl bg-zinc-700/50 text-zinc-400 text-center font-semibold cursor-not-allowed">
+                            <button disabled className="w-full py-4 rounded-xl bg-zinc-700/50 text-white text-center font-semibold cursor-not-allowed">
                                 Current Plan
                             </button>
                         ) : (
                             <button
                                 onClick={() => initiatePayment('agency', 899)}
                                 disabled={loading}
-                                className="w-full py-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-100 text-center font-bold transition-all hover:scale-[1.02] shadow-xl shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                                Get Agency Plan
+                                Get Agency Access
                             </button>
                         )}
                     </motion.div>
