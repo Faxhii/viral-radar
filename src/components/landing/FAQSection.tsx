@@ -14,7 +14,7 @@ const faqs = [
     },
     {
         question: "How does the credit system work?",
-        answer: "New users start with 3 free credits. Videos up to 2 minutes cost 1 credit. Longer videos cost 2 credits. Script Analysis costs just 0.5 credits."
+        answer: "New users start with 3 free credits. Video analysis costs 1 Credit for every 2 minutes of duration (e.g., a 12-minute video costs 6 credits). Script Analysis remains at 0.5 credits."
     },
     {
         question: "Is there a free trial?",

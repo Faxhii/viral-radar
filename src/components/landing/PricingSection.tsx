@@ -41,7 +41,7 @@ export default function PricingSection() {
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-zinc-300">
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
-                                <span className="font-semibold text-white">15 Credits</span> (Analyze ~15 Shorts)
+                                <span className="font-semibold text-white">15 Credits</span> (1 Credit = 2 Mins Video)
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
@@ -87,7 +87,7 @@ export default function PricingSection() {
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-white">
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                <span className="font-bold">50 Credits</span> (Analyze ~50 Shorts)
+                                <span className="font-bold">50 Credits</span> (1 Credit = 2 Mins Video)
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
@@ -132,7 +132,7 @@ export default function PricingSection() {
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-zinc-300">
                             <li className="flex items-center gap-3">
                                 <Check className="text-white" size={18} />
-                                <span className="font-semibold text-white">110 Credits</span> (Analyze ~110 Shorts)
+                                <span className="font-semibold text-white">110 Credits</span> (1 Credit = 2 Mins Video)
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-white" size={18} />
