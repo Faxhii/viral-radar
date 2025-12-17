@@ -27,14 +27,14 @@ export default function HeroSection() {
 
     return (
         <main className="container mx-auto px-6 py-20 text-center relative z-10">
-            <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight">
+            <h1 className="text-4xl md:text-7xl font-bold mb-8 tracking-tight">
                 ViralRadar: AI for <br />
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
                     Content Creation
                 </span>
             </h1>
 
-            <div className="text-xl text-gray-400 max-w-2xl mx-auto mb-12 flex flex-col items-center gap-2">
+            <div className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 flex flex-col items-center gap-2">
                 <p>
                     The ultimate AI tool for content creators. Paste your link or upload your video. Uncover exactly why your content isn't going viral due to
                 </p>
@@ -54,14 +54,14 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link href="/register" className="group flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-200 transition shadow-lg shadow-white/10">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 px-4 sm:px-0">
+                <Link href="/register" className="group w-full sm:w-auto flex items-center justify-center gap-2 bg-white text-black px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-200 transition shadow-lg shadow-white/10">
                     Analyze Video Now
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <button
                     onClick={() => setShowDemo(true)}
-                    className="flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-gray-700 hover:bg-gray-900 transition"
+                    className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-full border border-gray-700 hover:bg-gray-900 transition"
                 >
                     <Play className="w-5 h-5" />
                     Watch Demo

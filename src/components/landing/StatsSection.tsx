@@ -59,7 +59,7 @@ export default function StatsSection() {
 
     return (
         <section className="py-20 border-y border-zinc-900 bg-zinc-900/20">
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-4 md:px-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                     {stats.map((stat, index) => (
                         <motion.div
@@ -75,7 +75,7 @@ export default function StatsSection() {
                                     <stat.icon className="w-6 h-6" />
                                 </div>
                             </div>
-                            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 flex justify-center">
+                            <h3 className="text-2xl md:text-4xl font-bold text-white mb-2 flex justify-center">
                                 <Counter value={stat.value} start={stat.start} suffix={stat.suffix} />
                             </h3>
                             <p className="text-zinc-500 font-medium">{stat.label}</p>
