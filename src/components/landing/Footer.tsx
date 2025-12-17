@@ -13,22 +13,7 @@ export default function Footer() {
                             Predict viral potential before you post.
                         </p>
 
-                        <div className="space-y-4">
-                            <div className="bg-zinc-900/50 p-4 rounded-xl border border-white/5">
-                                <p className="text-zinc-300 text-sm italic mb-3">
-                                    "I built ViralVision because I saw too many brilliant creators giving up when their content didn't stick. We're here to change that with data."
-                                </p>
-                                <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-pink-500 flex items-center justify-center text-xs font-bold text-white">
-                                        MF
-                                    </div>
-                                    <div>
-                                        <div className="text-white text-sm font-semibold">Muhammed Fadhi</div>
-                                        <div className="text-zinc-500 text-xs">Entrepreneur & Founder</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
 
                     <div className="flex gap-8 text-sm text-zinc-400 items-center">
