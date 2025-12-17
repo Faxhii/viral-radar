@@ -45,11 +45,11 @@ export default function PricingSection() {
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
-                                Basic Script & Hook Analysis
+                                Script & Hook Analysis
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
-                                Video Improvement Suggestions
+                                Actionable Improvement Plan
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
