@@ -5,6 +5,7 @@ import { Upload, Link as LinkIcon, Loader2, AlertCircle, Sparkles, TrendingUp, Z
 import { uploadVideo, importLink, getStats, analyzeScript } from '@/lib/api';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import UpgradeModal from '@/components/UpgradeModal';
 
 export default function DashboardPage() {
     const router = useRouter();
@@ -16,7 +17,9 @@ export default function DashboardPage() {
     const [scriptCategory, setScriptCategory] = useState('Education');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
+
     const [stats, setStats] = useState({ total_analyzed: 0, avg_score: 0, growth_potential: '--' });
+    const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -39,9 +42,9 @@ export default function DashboardPage() {
             router.push(`/dashboard/analysis/${result.id}`);
         } catch (err: any) {
             console.error("Upload Error:", err);
-            // Check for Insufficient Credits (403 or specific message)
-            if (err.response?.status === 403 || err.message?.includes('credits')) {
-                router.push('/pricing');
+            // Check for Insufficient Credits (402, 403 or specific message)
+            if (err.response?.status === 402 || err.response?.status === 403 || err.message?.includes('credits')) {
+                setShowUpgradeModal(true);
                 return;
             }
             setError('Failed to upload video. Please try again.');
@@ -60,8 +63,8 @@ export default function DashboardPage() {
         } catch (err: any) {
             console.error("Link Import Error:", err);
             // Check for Insufficient Credits
-            if (err.response?.status === 403 || err.message?.includes('credits')) {
-                router.push('/pricing');
+            if (err.response?.status === 402 || err.response?.status === 403 || err.message?.includes('credits')) {
+                setShowUpgradeModal(true);
                 return;
             }
             setError('Failed to import link. Please check the URL.');
@@ -84,8 +87,8 @@ export default function DashboardPage() {
         } catch (err: any) {
             console.error("Script Analysis Error:", err);
             // Check for Insufficient Credits
-            if (err.response?.status === 403 || err.message?.includes('credits')) {
-                router.push('/pricing');
+            if (err.response?.status === 402 || err.response?.status === 403 || err.message?.includes('credits')) {
+                setShowUpgradeModal(true);
                 return;
             }
             setError('Failed to analyze script. Please try again.');
@@ -333,6 +336,12 @@ export default function DashboardPage() {
                     </div>
                 </div>
             </motion.div>
-        </div>
+
+
+            <UpgradeModal
+                isOpen={showUpgradeModal}
+                onClose={() => setShowUpgradeModal(false)}
+            />
+        </div >
     );
 }
