@@ -41,15 +41,19 @@ export default function PricingSection() {
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-zinc-300">
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
-                                <span className="font-semibold text-white">15 Credits</span>
+                                <span className="font-semibold text-white">15 Credits</span> (Analyze ~15 Shorts)
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
-                                1 Credit = 2 Mins Video
+                                Basic Script & Hook Analysis
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
-                                Full AI Analysis Access
+                                Video Improvement Suggestions
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Check className="text-blue-500 shrink-0" size={18} />
+                                Viral Potential Score
                             </li>
                         </ul>
 
@@ -79,15 +83,19 @@ export default function PricingSection() {
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-white">
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                <span className="font-bold">50 Credits</span> / month
+                                <span className="font-bold">50 Credits</span> (Analyze ~50 Shorts)
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Enough for 50 Shorts!
+                                Deep Script & Hook Optimization
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Deep AI Insights & Hooks
+                                Actionable Improvement Plan
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
+                                Audience Retention Strategy
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
@@ -111,20 +119,28 @@ export default function PricingSection() {
                             <span className="text-4xl font-bold text-white">₹899</span>
                             <span className="text-sm text-zinc-500 font-normal">/mo</span>
                         </div>
-                        <p className="text-zinc-400 mb-8 text-sm h-10">Maximum power for high-volume content production.</p>
+                        <p className="text-zinc-400 mb-8 text-sm h-10">Maximum power for high-volume content production & full video analysis.</p>
 
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-zinc-300">
                             <li className="flex items-center gap-3">
-                                <Check className="text-zinc-500" size={18} />
-                                <span className="font-semibold text-white">110 Credits</span> / month
+                                <Check className="text-white" size={18} />
+                                <span className="font-semibold text-white">110 Credits</span> (Analyze ~110 Shorts)
                             </li>
                             <li className="flex items-center gap-3">
-                                <Check className="text-zinc-500" size={18} />
-                                Best Value per Credit
+                                <Check className="text-white" size={18} />
+                                Priority Analysis Queue (Skip Line)
                             </li>
                             <li className="flex items-center gap-3">
-                                <Check className="text-zinc-500" size={18} />
-                                Priority Analysis Queue
+                                <Check className="text-white" size={18} />
+                                Advanced Script & Content Strategy
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Check className="text-white" size={18} />
+                                Comprehensive Growth Roadmap
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Check className="text-white" size={18} />
+                                Best Value per Analysis
                             </li>
                         </ul>
 
