@@ -11,6 +11,7 @@ interface User {
     email: string;
     plan: string;
     credits: number;
+    has_used_starter: boolean;
 }
 
 export default function PricingPage() {
@@ -280,13 +281,22 @@ export default function PricingPage() {
                             </li>
                         </ul>
 
-                        <button
-                            onClick={() => initiatePayment('starter', 49)}
-                            disabled={loading}
-                            className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
-                        >
-                            Get Started
-                        </button>
+                        {user?.has_used_starter ? (
+                            <button
+                                disabled
+                                className="w-full py-3 rounded-xl bg-zinc-800 text-zinc-500 text-center font-semibold cursor-not-allowed text-sm"
+                            >
+                                One-Time Offer Used
+                            </button>
+                        ) : (
+                            <button
+                                onClick={() => initiatePayment('starter', 49)}
+                                disabled={loading}
+                                className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                            >
+                                Get Started
+                            </button>
+                        )}
                     </motion.div>
 
                     {/* Pro Plan (Popular) */}
