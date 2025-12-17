@@ -142,34 +142,34 @@ export default function DemoAnimation() {
                     >
                         <div className="flex items-center gap-6">
                             {/* Score Card */}
-                            <div className="bg-zinc-900 border border-zinc-800 p-6 rounded-2xl flex flex-col items-center gap-2 shadow-2xl shadow-purple-500/10">
-                                <span className="text-zinc-400 text-sm font-medium">Viral Score</span>
-                                <div className="text-5xl font-bold bg-gradient-to-br from-green-400 to-emerald-600 bg-clip-text text-transparent">
+                            <div className="bg-zinc-900 border border-zinc-800 p-8 rounded-3xl flex flex-col items-center gap-2 shadow-2xl shadow-purple-500/10">
+                                <span className="text-zinc-400 text-lg font-medium">Viral Score</span>
+                                <div className="text-7xl font-bold bg-gradient-to-br from-green-400 to-emerald-600 bg-clip-text text-transparent py-2">
                                     {score}
                                 </div>
-                                <div className="flex items-center gap-1 text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded-full">
-                                    <Sparkles className="w-3 h-3" /> Excellent
+                                <div className="flex items-center gap-1 text-sm text-green-400 bg-green-400/10 px-3 py-1.5 rounded-full font-semibold">
+                                    <Sparkles className="w-4 h-4" /> Excellent
                                 </div>
                             </div>
 
                             {/* Stats */}
-                            <div className="space-y-3">
-                                <div className="bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl flex items-center gap-3 w-48">
-                                    <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
-                                        <BarChart2 className="w-4 h-4 text-blue-400" />
+                            <div className="space-y-4">
+                                <div className="bg-zinc-900/50 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 w-60">
+                                    <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                                        <BarChart2 className="w-5 h-5 text-blue-400" />
                                     </div>
                                     <div>
-                                        <div className="text-xs text-zinc-500">Predicted Views</div>
-                                        <div className="text-sm font-bold text-white">10k - 50k</div>
+                                        <div className="text-xs text-zinc-500 font-medium uppercase tracking-wider">Predicted Views</div>
+                                        <div className="text-lg font-bold text-white">10k - 50k</div>
                                     </div>
                                 </div>
-                                <div className="bg-zinc-900/50 border border-zinc-800 p-3 rounded-xl flex items-center gap-3 w-48">
-                                    <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
-                                        <Zap className="w-4 h-4 text-purple-400" />
+                                <div className="bg-zinc-900/50 border border-zinc-800 p-4 rounded-xl flex items-center gap-4 w-60">
+                                    <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center">
+                                        <Zap className="w-5 h-5 text-purple-400" />
                                     </div>
                                     <div>
-                                        <div className="text-xs text-zinc-500">Hook Strength</div>
-                                        <div className="text-sm font-bold text-white">Strong</div>
+                                        <div className="text-xs text-zinc-500 font-medium uppercase tracking-wider">Hook Strength</div>
+                                        <div className="text-lg font-bold text-white">Strong</div>
                                     </div>
                                 </div>
                             </div>
@@ -182,7 +182,7 @@ export default function DemoAnimation() {
                             transition={{ delay: 0.5 }}
                             className="bg-gradient-to-r from-purple-900/20 to-pink-900/20 border border-purple-500/20 p-4 rounded-xl w-full text-center"
                         >
-                            <p className="text-sm text-purple-200">
+                            <p className="text-base md:text-lg text-purple-200">
                                 <span className="font-bold">AI Tip:</span> Your hook is great! Try cutting the silence at 0:04 to improve retention.
                             </p>
                         </motion.div>
