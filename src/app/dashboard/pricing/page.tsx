@@ -165,7 +165,7 @@ export default function PricingPage() {
                                     <Shield size={12} className="text-green-500" />
                                     Your transaction is <strong>100% secure</strong> & encrypted.
                                 </p>
-                                <p>Backed by Razorpay protection. You will receive a receipt from ViralVision immediately.</p>
+                                <p>Backed by Razorpay protection. You will receive a receipt from ViralRadar immediately.</p>
                             </div>
                         </div>
 

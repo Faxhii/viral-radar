@@ -7,7 +7,7 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                     <div className="text-left md:w-1/3">
                         <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
-                            ViralVision AI
+                            ViralRadar AI
                         </h3>
                         <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
                             Predict viral potential before you post.
@@ -29,7 +29,7 @@ export default function Footer() {
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-white/5 text-zinc-600 text-sm">
-                    © {new Date().getFullYear()} ViralVision AI. All rights reserved.
+                    © {new Date().getFullYear()} ViralRadar AI. All rights reserved.
                 </div>
             </div>
         </footer>

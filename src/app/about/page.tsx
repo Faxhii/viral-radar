@@ -28,7 +28,7 @@ export default function AboutPage() {
 
                     <div className="space-y-8 text-zinc-300 text-lg leading-relaxed">
                         <p>
-                            Welcome to <span className="text-white font-semibold">ViralVision AI</span>. We're on a mission to decode the algorithms that rule our digital lives and put that power back into the hands of creators.
+                            Welcome to <span className="text-white font-semibold">ViralRadar AI</span>. We're on a mission to decode the algorithms that rule our digital lives and put that power back into the hands of creators.
                         </p>
 
                         <div className="bg-zinc-900/40 p-8 rounded-3xl border border-white/5 backdrop-blur-sm">
@@ -37,7 +37,7 @@ export default function AboutPage() {
                                 My name is <strong className="text-white">Muhammed Fadhi</strong>, and like many of you, I've spent countless hours creating content only to watch it get lost in the feed. I realized that going viral isn't just luck—it's science. It's about hooks, pacing, and hitting the right psychological triggers.
                             </p>
                             <p>
-                                I built ViralVision to bridge the gap between creativity and data. By analyzing thousands of viral videos, we've trained an AI that can predict potential hits before you even hit publish.
+                                I built ViralRadar to bridge the gap between creativity and data. By analyzing thousands of viral videos, we've trained an AI that can predict potential hits before you even hit publish.
                             </p>
                         </div>
 

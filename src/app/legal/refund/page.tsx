@@ -8,7 +8,7 @@ export default function RefundPolicy() {
                 <section className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">1. General Policy</h2>
                     <p>
-                        At ViralVision AI, we strive to provide high-quality AI analysis for your content. However, due to the significant computational costs associated with processing video and audio using advanced AI models, we have a strict refund policy.
+                        At ViralRadar AI, we strive to provide high-quality AI analysis for your content. However, due to the significant computational costs associated with processing video and audio using advanced AI models, we have a strict refund policy.
                     </p>
                 </section>
 

@@ -6,7 +6,7 @@ const testimonials = [
     {
         name: "Sarah Jenkins",
         role: "Lifestyle Creator",
-        content: "ViralVision completely changed my strategy. My average views went from 2k to 50k in just two weeks!",
+        content: "ViralRadar completely changed my strategy. My average views went from 2k to 50k in just two weeks!",
         image: "https://i.pravatar.cc/150?u=a042581f4e29026024d"
     },
     {

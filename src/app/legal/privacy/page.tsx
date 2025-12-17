@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
                 <section className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">1. Introduction</h2>
                     <p>
-                        Welcome to ViralVision AI ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy.
+                        Welcome to ViralRadar AI ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy.
                         This Privacy Policy explains how we collect, use, disclosure, and safeguard your information when you use our website and services.
                     </p>
                 </section>

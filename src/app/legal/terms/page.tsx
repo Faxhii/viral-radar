@@ -8,14 +8,14 @@ export default function TermsOfService() {
                 <section className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">1. Agreement to Terms</h2>
                     <p>
-                        By accessing or using ViralVision AI, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the service.
+                        By accessing or using ViralRadar AI, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the service.
                     </p>
                 </section>
 
                 <section className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">2. Description of Service</h2>
                     <p>
-                        ViralVision AI provides artificial intelligence-based analysis of video content to estimate "viral potential."
+                        ViralRadar AI provides artificial intelligence-based analysis of video content to estimate "viral potential."
                         <strong>Disclaimer:</strong> The "Viral Score" and insights are estimates based on AI analysis. We do not guarantee that your content will go viral or achieve specific performance metrics.
                     </p>
                 </section>
@@ -49,7 +49,7 @@ export default function TermsOfService() {
                 <section className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">6. Limitation of Liability</h2>
                     <p>
-                        In no event shall ViralVision AI, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
+                        In no event shall ViralRadar AI, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses.
                     </p>
                 </section>
             </div>
