@@ -89,6 +89,11 @@ export const getAnalysis = async (id: number) => {
     return response.data;
 };
 
+export const getAnalysisBySequence = async (customId: number) => {
+    const response = await api.get(`/api/videos/analysis/seq/${customId}`);
+    return response.data;
+};
+
 export const downloadReportPdf = async (id: number) => {
     const response = await api.get(`/api/videos/${id}/report.pdf`, {
         responseType: 'blob',

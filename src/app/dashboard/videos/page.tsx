@@ -131,9 +131,9 @@ export default function MyVideosPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredVideos.map((video, i) => (
                         <Link
-                            href={video.analysis_id ? `/dashboard/analysis/${video.analysis_id}` : '#'}
+                            href={video.custom_id ? `/dashboard/analysis/${video.custom_id}` : '#'}
                             key={video.id}
-                            className={!video.analysis_id ? 'pointer-events-none' : ''}
+                            className={!video.custom_id ? 'pointer-events-none' : ''}
                         >
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
@@ -164,7 +164,7 @@ export default function MyVideosPage() {
                                 <div className="p-6">
                                     <div className="flex justify-between items-start mb-4">
                                         <h3 className="font-semibold text-xl text-white truncate pr-4">
-                                            {video.title || `${video.source_type === 'script' ? 'Script Analysis' : 'Video Analysis'} #${video.id}`}
+                                            {video.title || `${video.source_type === 'script' ? 'Script Analysis' : 'Video Analysis'} #${video.custom_id || video.id}`}
                                         </h3>
                                         <span className="text-xs text-zinc-500 font-medium bg-white/5 px-2 py-1 rounded-lg">
                                             {new Date(video.created_at).toLocaleDateString()}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
-import { getAnalysis, downloadReportPdf } from '@/lib/api';
+import { getAnalysisBySequence, downloadReportPdf } from '@/lib/api';
 import { motion } from 'framer-motion';
 import {
     Play, Download, Share2, CheckCircle, AlertTriangle,
@@ -34,7 +34,7 @@ export default function AnalysisPage() {
         const fetchAnalysis = async () => {
             if (!params.id || !isPolling) return false;
             try {
-                const data = await getAnalysis(Number(params.id));
+                const data = await getAnalysisBySequence(Number(params.id));
                 setAnalysis(data);
 
                 // Initialize checklist state if not already set
@@ -287,6 +287,9 @@ export default function AnalysisPage() {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
                 <div>
                     <div className="flex items-center gap-3 mb-2">
+                        <span className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider">
+                            Analysis #{analysis.custom_id}
+                        </span>
                         <span className="text-zinc-500 text-sm">
                             {new Date(analysis.created_at).toLocaleDateString()}
                         </span>
@@ -305,7 +308,7 @@ export default function AnalysisPage() {
                                 const url = window.URL.createObjectURL(blob);
                                 const a = document.createElement('a');
                                 a.href = url;
-                                a.download = `analysis_${analysis.id}.pdf`;
+                                a.download = `analysis_${analysis.custom_id}.pdf`;
                                 document.body.appendChild(a);
                                 a.click();
                                 window.URL.revokeObjectURL(url);

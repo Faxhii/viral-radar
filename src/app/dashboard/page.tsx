@@ -39,7 +39,7 @@ export default function DashboardPage() {
         setError('');
         try {
             const result = await uploadVideo(file);
-            router.push(`/dashboard/analysis/${result.id}`);
+            router.push(`/dashboard/analysis/${result.custom_id}`);
         } catch (err: any) {
             console.error("Upload Error:", err);
             // Check for Insufficient Credits (402, 403 or specific message)
@@ -59,7 +59,7 @@ export default function DashboardPage() {
         setError('');
         try {
             const result = await importLink(url);
-            router.push(`/dashboard/analysis/${result.id}`);
+            router.push(`/dashboard/analysis/${result.custom_id}`);
         } catch (err: any) {
             console.error("Link Import Error:", err);
             // Check for Insufficient Credits
@@ -83,7 +83,7 @@ export default function DashboardPage() {
                 platform: scriptPlatform,
                 category: scriptCategory
             });
-            router.push(`/dashboard/analysis/${result.id}`);
+            router.push(`/dashboard/analysis/${result.custom_id}`);
         } catch (err: any) {
             console.error("Script Analysis Error:", err);
             // Check for Insufficient Credits

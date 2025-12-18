@@ -30,7 +30,7 @@ export default function ScriptAnalysisView({ analysis }: ScriptAnalysisViewProps
                 <div>
                     <div className="flex items-center gap-3 mb-2">
                         <span className="px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-wider">
-                            Script Analysis #{analysis.id}
+                            Script Analysis #{analysis.custom_id}
                         </span>
                         <span className="text-zinc-500 text-sm">
                             {new Date(analysis.created_at).toLocaleDateString()}
@@ -50,7 +50,7 @@ export default function ScriptAnalysisView({ analysis }: ScriptAnalysisViewProps
                                 const url = window.URL.createObjectURL(blob);
                                 const a = document.createElement('a');
                                 a.href = url;
-                                a.download = `analysis_${analysis.id}.pdf`;
+                                a.download = `analysis_${analysis.custom_id}.pdf`;
                                 document.body.appendChild(a);
                                 a.click();
                                 window.URL.revokeObjectURL(url);
