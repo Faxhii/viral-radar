@@ -12,6 +12,13 @@ import { toast } from 'sonner';
 
 import ScriptAnalysisView from '@/components/ScriptAnalysisView';
 
+const getYoutubeId = (url: string) => {
+    if (!url) return null;
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+};
+
 export default function AnalysisPage() {
     const params = useParams();
     const [analysis, setAnalysis] = useState<any>(null);
@@ -322,12 +329,19 @@ export default function AnalysisPage() {
                 <div className="lg:col-span-2 space-y-8">
                     {/* Video Player */}
                     <div className="aspect-video bg-black rounded-3xl overflow-hidden border border-zinc-800 relative group">
-                        {analysis.video_url ? (
+                        {analysis.source_url && getYoutubeId(analysis.source_url) ? (
+                            <iframe
+                                src={`https://www.youtube.com/embed/${getYoutubeId(analysis.source_url)}`}
+                                className="w-full h-full"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            />
+                        ) : analysis.video_url ? (
                             <video
                                 src={analysis.video_url.startsWith('http') ? analysis.video_url : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}${analysis.video_url}`}
                                 controls
                                 className="w-full h-full object-contain"
-                                poster="/placeholder.jpg" // Optional
+                                poster="/placeholder.jpg"
                             />
                         ) : (
                             <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/50">
@@ -336,7 +350,7 @@ export default function AnalysisPage() {
                             </div>
                         )}
 
-                        {!analysis.video_url && (
+                        {!analysis.video_url && !analysis.source_url && (
                             <div className="absolute bottom-4 left-4 right-4 glass p-4 rounded-xl">
                                 <p className="text-sm font-medium text-zinc-300">Video Source</p>
                                 <p className="text-xs text-zinc-500 truncate">ID: {analysis.video_id}</p>
