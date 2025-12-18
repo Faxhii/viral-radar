@@ -3,7 +3,9 @@ import Link from 'next/link';
 import { ArrowRight, Play, BarChart2, CheckCircle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import DemoModal from '@/components/DemoModal';
+import dynamic from 'next/dynamic';
+
+const DemoModal = dynamic(() => import('@/components/DemoModal'), { ssr: false });
 
 const failureReasons = [
     "Weak Hook",
