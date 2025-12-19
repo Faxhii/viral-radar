@@ -107,6 +107,9 @@ export default function DashboardLayout({
                         className="md:hidden fixed inset-0 z-40 bg-black pt-20 px-6 pb-6"
                     >
                         <nav className="space-y-4">
+                            <div className="mb-6">
+                                <CreditsDisplay />
+                            </div>
                             {navItems.map((item) => (
                                 <Link
                                     key={item.path}
