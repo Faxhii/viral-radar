@@ -53,12 +53,39 @@ export default function DashboardPage() {
         }
     };
 
+    const resolveLink = async (url: string) => {
+        // Try Cobalt Public API from browser
+        // This bypasses Cloud Run IP blocking because the request comes from the user's browser
+        try {
+            console.log("Resolving link client-side:", url);
+            const res = await fetch('https://api.cobalt.tools/api/json', {
+                method: 'POST',
+                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url, filenamePattern: 'basic' })
+            });
+            const data = await res.json();
+            if (data.url) {
+                console.log("Resolved direct URL:", data.url);
+                return data.url;
+            }
+        } catch (e) {
+            console.warn("Client-side resolution failed, falling back to backend:", e);
+        }
+        return null;
+    };
+
     const handleLinkImport = async () => {
         if (!url) return;
         setLoading(true);
         setError('');
         try {
-            const result = await importLink(url);
+            // Attempt client-side resolution first to bypass Cloud Run IP blocks
+            let directUrl = null;
+            if (url.includes('youtube.com') || url.includes('youtu.be') || url.includes('instagram.com') || url.includes('tiktok.com')) {
+                directUrl = await resolveLink(url);
+            }
+
+            const result = await importLink(url, directUrl);
             router.push(`/dashboard/analysis/${result.custom_id}`);
         } catch (err: any) {
             console.error("Link Import Error:", err);

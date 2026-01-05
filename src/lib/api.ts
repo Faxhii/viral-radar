@@ -74,8 +74,11 @@ export const uploadVideo = async (file: File) => {
     return response.data;
 };
 
-export const importLink = async (url: string) => {
-    const response = await api.post('/api/videos/link', { source_url: url });
+export const importLink = async (url: string, direct_download_url?: string | null) => {
+    const response = await api.post('/api/videos/link', {
+        source_url: url,
+        direct_download_url: direct_download_url
+    });
     return response.data;
 };
 
