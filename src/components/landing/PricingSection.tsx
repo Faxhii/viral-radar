@@ -32,8 +32,8 @@ export default function PricingSection() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">Starter</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">₹199</span>
-                            <span className="text-4xl font-bold text-white">₹49</span>
+                            <span className="text-zinc-500 line-through text-lg">$10</span>
+                            <span className="text-4xl font-bold text-white">$2</span>
                             <span className="text-sm text-zinc-500 font-normal">/once</span>
                         </div>
                         <p className="text-zinc-400 mb-8 text-sm h-10">Perfect for testing the waters and seeing the magic happen.</p>
@@ -78,8 +78,8 @@ export default function PricingSection() {
 
                         <h3 className="text-2xl font-bold mb-2 text-white">Pro Creator</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">₹999</span>
-                            <span className="text-5xl font-bold text-white">₹699</span>
+                            <span className="text-zinc-500 line-through text-lg">$24</span>
+                            <span className="text-5xl font-bold text-white">$12</span>
                             <span className="text-sm text-zinc-500 font-normal">/mo</span>
                         </div>
                         <p className="text-purple-200/80 mb-8 text-sm h-10">For serious creators ready to dominate the algorithm.</p>
@@ -123,8 +123,8 @@ export default function PricingSection() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">Agency</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">₹1999</span>
-                            <span className="text-4xl font-bold text-white">₹899</span>
+                            <span className="text-zinc-500 line-through text-lg">$39</span>
+                            <span className="text-4xl font-bold text-white">$20</span>
                             <span className="text-sm text-zinc-500 font-normal">/mo</span>
                         </div>
                         <p className="text-zinc-400 mb-8 text-sm h-10">Maximum power for high-volume content production & full video analysis.</p>
