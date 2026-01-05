@@ -54,14 +54,15 @@ export default function DashboardPage() {
     };
 
     const resolveLink = async (url: string) => {
-        // Try Cobalt Public API from browser
-        // This bypasses Cloud Run IP blocking because the request comes from the user's browser
+        // Use our own Vercel API Route as a Proxy
+        // This solves CORS (because it's same-origin)
+        // And uses Vercel's IP which is likely not blocked
         try {
-            console.log("Resolving link client-side:", url);
-            const res = await fetch('https://api.cobalt.tools/api/json', {
+            console.log("Resolving link via Vercel Proxy:", url);
+            const res = await fetch('/api/resolve-url', {
                 method: 'POST',
-                headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-                body: JSON.stringify({ url, filenamePattern: 'basic' })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ url })
             });
             const data = await res.json();
             if (data.url) {
@@ -69,7 +70,7 @@ export default function DashboardPage() {
                 return data.url;
             }
         } catch (e) {
-            console.warn("Client-side resolution failed, falling back to backend:", e);
+            console.warn("Vercel Proxy resolution failed:", e);
         }
         return null;
     };
