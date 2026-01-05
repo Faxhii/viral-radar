@@ -52,7 +52,7 @@ export default function PricingPage() {
         const { planId, amount } = pendingTransaction;
         setShowPaymentNotice(false);
         setLoading(true);
-        const currency = "USD";
+        const currency = "INR";
         try {
             const res = await loadRazorpay();
             if (!res) {
@@ -62,7 +62,7 @@ export default function PricingPage() {
 
             // 1. Create Order
             // Razorpay checks: 
-            // USD: amount in cents (1000 = $10)
+            // INR: amount in paise (1000 = ₹10)
             const order = await createRazorpayOrder(planId, amount * 100, currency);
 
             // 2. Open Razorpay
@@ -158,7 +158,7 @@ export default function PricingPage() {
                                 <strong>Measures to keep our prices low:</strong> We are currently upgrading our business banking infrastructure to bring you these launch offers.
                             </p>
                             <p>
-                                To ensure uninterrupted service, payments are processed securely via our global payment partner.
+                                To ensure uninterrupted service, payments are temporarily processed through our authorized billing representative, <strong className="text-white">Jumailath Kainottu</strong>.
                             </p>
                             <div className="bg-white/5 p-3 rounded-lg border border-white/5 text-xs text-zinc-400">
                                 <p className="flex items-center gap-2 mb-1">
@@ -251,8 +251,8 @@ export default function PricingPage() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">Starter</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">$10</span>
-                            <span className="text-3xl font-bold">$2</span>
+                            <span className="text-zinc-500 line-through text-lg">₹199</span>
+                            <span className="text-3xl font-bold">₹49</span>
                             <span className="text-sm text-zinc-500 font-normal">/once</span>
                         </div>
                         <p className="text-zinc-400 mb-6 text-xs">Perfect for testing the waters and seeing the magic happen.</p>
@@ -289,7 +289,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => initiatePayment('starter', 2)}
+                                onClick={() => initiatePayment('starter', 49)}
                                 disabled={loading}
                                 className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                             >
@@ -313,8 +313,8 @@ export default function PricingPage() {
 
                         <h3 className="text-2xl font-bold mb-2 text-white">Pro Creator</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-purple-300/50 line-through text-xl">$24</span>
-                            <span className="text-4xl font-bold">$12</span>
+                            <span className="text-purple-300/50 line-through text-xl">₹999</span>
+                            <span className="text-4xl font-bold">₹699</span>
                             <span className="text-lg text-zinc-500 font-normal">/mo</span>
                         </div>
                         <p className="text-purple-200/60 mb-6 text-sm">For serious creators ready to dominate the algorithm.</p>
@@ -352,7 +352,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => initiatePayment('pro', 12)}
+                                onClick={() => initiatePayment('pro', 699)}
                                 disabled={loading}
                                 className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-200 text-center font-bold transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
@@ -369,8 +369,8 @@ export default function PricingPage() {
                         </div>
                         <h3 className="text-2xl font-bold mb-2">Agency</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-xl">$39</span>
-                            <span className="text-4xl font-bold">$20</span>
+                            <span className="text-zinc-500 line-through text-xl">₹1999</span>
+                            <span className="text-4xl font-bold">₹899</span>
                             <span className="text-lg text-zinc-500 font-normal">/mo</span>
                         </div>
                         <p className="text-zinc-400 mb-6 text-sm">Maximum power for high-volume content production & full video analysis.</p>
@@ -404,7 +404,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => initiatePayment('agency', 20)}
+                                onClick={() => initiatePayment('agency', 899)}
                                 disabled={loading}
                                 className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-100 text-center font-bold transition-all hover:scale-[1.02] shadow-xl shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
