@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from "framer-motion";
 import { Check, Zap, Star, Crown, Shield } from "lucide-react";
 import Link from "next/link";
-import { createRazorpayOrder, verifyRazorpayPayment, getMe } from "@/lib/api";
+import { createDodoCheckoutSession, getMe } from "@/lib/api";
 
 interface User {
     id: number;
@@ -17,8 +17,8 @@ interface User {
 export default function PricingPage() {
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState<User | null>(null);
-    const [showPaymentNotice, setShowPaymentNotice] = useState(false);
-    const [pendingTransaction, setPendingTransaction] = useState<{ planId: string, amount: number } | null>(null);
+    // const [showPaymentNotice, setShowPaymentNotice] = useState(false); // Removed for Dodo
+    // const [pendingTransaction, setPendingTransaction] = useState<{ planId: string, amount: number } | null>(null);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -32,82 +32,19 @@ export default function PricingPage() {
         fetchUser();
     }, []);
 
-    const loadRazorpay = () => {
-        return new Promise((resolve) => {
-            const script = document.createElement('script');
-            script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-            script.onload = () => resolve(true);
-            script.onerror = () => resolve(false);
-            document.body.appendChild(script);
-        });
-    };
-
-    const initiatePayment = (planId: string, amount: number) => {
-        setPendingTransaction({ planId, amount });
-        setShowPaymentNotice(true);
-    };
-
-    const proceedWithPayment = async () => {
-        if (!pendingTransaction) return;
-        const { planId, amount } = pendingTransaction;
-        setShowPaymentNotice(false);
+    const initiatePayment = async (planId: string, amount: number) => {
         setLoading(true);
-        const currency = "INR";
         try {
-            const res = await loadRazorpay();
-            if (!res) {
-                alert('Razorpay SDK failed to load. Are you online?');
-                return;
+            // Amount is passed in dollars, convert to cents
+            const res = await createDodoCheckoutSession(planId, amount * 100);
+            if (res.checkout_url) {
+                window.location.href = res.checkout_url;
+            } else {
+                alert("Failed to initialize payment gateway.");
             }
-
-            // 1. Create Order
-            // Razorpay checks: 
-            // INR: amount in paise (1000 = ₹10)
-            const order = await createRazorpayOrder(planId, amount * 100, currency);
-
-            // 2. Open Razorpay
-            const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Enter the Key ID generated from the Dashboard
-                amount: order.amount.toString(),
-                currency: order.currency,
-                name: "ViralRadar.in",
-                description: `Upgrade to ${planId === 'pro' ? 'Pro' : 'Agency'} Plan`,
-                image: "/logo.png", // Ensure you have a logo or remove this
-                order_id: order.id,
-                handler: async function (response: any) {
-                    // 3. Verify Payment
-                    try {
-                        await verifyRazorpayPayment({
-                            razorpay_payment_id: response.razorpay_payment_id,
-                            razorpay_order_id: response.razorpay_order_id,
-                            razorpay_signature: response.razorpay_signature,
-                            plan: planId
-                        });
-                        alert('Payment Successful! Subscription upgraded.');
-                        // Reload to reflect changes
-                        window.location.reload();
-                    } catch (error) {
-                        console.error(error);
-                        alert('Payment verification failed.');
-                    }
-                },
-                prefill: {
-                    // We can prefill if we have user info, but for now optional
-                    // name: "User Name",
-                    // email: "user@example.com",
-                    // contact: "9999999999"
-                },
-                theme: {
-                    color: "#a855f7"
-                }
-            };
-
-            const paymentObject = new (window as any).Razorpay(options);
-            paymentObject.open();
-
         } catch (error) {
-            console.error('Payment Error:', error);
-            alert('Something went wrong. Please try again.');
+            console.error(error);
+            alert("Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -139,53 +76,7 @@ export default function PricingPage() {
             <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute bottom-[-20%] left-[-10%] w-[800px] h-[800px] bg-pink-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-            {/* Payment Notice Modal */}
-            {showPaymentNotice && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        className="bg-zinc-900 border border-white/10 rounded-2xl max-w-md w-full p-6 shadow-2xl relative"
-                    >
-                        <div className="flex items-center gap-3 mb-4 text-purple-400">
-                            <Shield className="w-8 h-8" />
-                            <h3 className="text-xl font-bold text-white">Payment Update</h3>
-                        </div>
 
-                        <div className="space-y-4 text-zinc-300 text-sm leading-relaxed mb-8">
-                            <p>
-                                <strong>Measures to keep our prices low:</strong> We are currently upgrading our business banking infrastructure to bring you these launch offers.
-                            </p>
-                            <p>
-                                To ensure uninterrupted service, payments are temporarily processed through our authorized billing representative, <strong className="text-white">Jumailath Kainottu</strong>.
-                            </p>
-                            <div className="bg-white/5 p-3 rounded-lg border border-white/5 text-xs text-zinc-400">
-                                <p className="flex items-center gap-2 mb-1">
-                                    <Shield size={12} className="text-green-500" />
-                                    Your transaction is <strong>100% secure</strong> & encrypted.
-                                </p>
-                                <p>Backed by Razorpay protection. You will receive a receipt from ViralRadar immediately.</p>
-                            </div>
-                        </div>
-
-                        <div className="flex flex-col gap-3">
-                            <button
-                                onClick={proceedWithPayment}
-                                className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition-all"
-                            >
-                                Understood, Proceed to Secure Payment
-                            </button>
-                            <button
-                                onClick={() => setShowPaymentNotice(false)}
-                                className="w-full py-3 rounded-xl bg-transparent hover:bg-white/5 text-zinc-400 font-semibold transition-all"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </motion.div>
-                </div>
-            )}
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-16">
@@ -251,8 +142,8 @@ export default function PricingPage() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">Starter</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">₹199</span>
-                            <span className="text-3xl font-bold">₹49</span>
+                            <span className="text-zinc-500 line-through text-lg">$5</span>
+                            <span className="text-3xl font-bold">$2</span>
                             <span className="text-sm text-zinc-500 font-normal">/once</span>
                         </div>
                         <p className="text-zinc-400 mb-6 text-xs">Perfect for testing the waters and seeing the magic happen.</p>
@@ -289,7 +180,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => initiatePayment('starter', 49)}
+                                onClick={() => initiatePayment('starter', 2)}
                                 disabled={loading}
                                 className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                             >
@@ -313,8 +204,8 @@ export default function PricingPage() {
 
                         <h3 className="text-2xl font-bold mb-2 text-white">Pro Creator</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-purple-300/50 line-through text-xl">₹999</span>
-                            <span className="text-4xl font-bold">₹699</span>
+                            <span className="text-purple-300/50 line-through text-xl">$29</span>
+                            <span className="text-4xl font-bold">$12</span>
                             <span className="text-lg text-zinc-500 font-normal">/mo</span>
                         </div>
                         <p className="text-purple-200/60 mb-6 text-sm">For serious creators ready to dominate the algorithm.</p>
@@ -352,7 +243,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => initiatePayment('pro', 699)}
+                                onClick={() => initiatePayment('pro', 12)}
                                 disabled={loading}
                                 className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-200 text-center font-bold transition-all hover:scale-[1.02] flex items-center justify-center gap-2 shadow-lg shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
@@ -369,8 +260,8 @@ export default function PricingPage() {
                         </div>
                         <h3 className="text-2xl font-bold mb-2">Agency</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-xl">₹1999</span>
-                            <span className="text-4xl font-bold">₹899</span>
+                            <span className="text-zinc-500 line-through text-xl">$49</span>
+                            <span className="text-4xl font-bold">$20</span>
                             <span className="text-lg text-zinc-500 font-normal">/mo</span>
                         </div>
                         <p className="text-zinc-400 mb-6 text-sm">Maximum power for high-volume content production & full video analysis.</p>
@@ -404,7 +295,7 @@ export default function PricingPage() {
                             </button>
                         ) : (
                             <button
-                                onClick={() => initiatePayment('agency', 899)}
+                                onClick={() => initiatePayment('agency', 20)}
                                 disabled={loading}
                                 className="w-full py-4 rounded-xl bg-white text-black hover:bg-zinc-100 text-center font-bold transition-all hover:scale-[1.02] shadow-xl shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed"
                             >

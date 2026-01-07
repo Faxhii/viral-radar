@@ -158,4 +158,18 @@ export const verifyRazorpayPayment = async (data: {
     return response.data;
 };
 
+// Dodo Payments types
+interface DodoCheckoutResponse {
+    checkout_url: string;
+}
+
+export const createDodoCheckoutSession = async (planId: string, amount: number) => {
+    // amount in cents
+    const response = await api.post('/api/dodopayments/create-checkout-session', {
+        plan_id: planId,
+        amount: amount
+    });
+    return response.data as DodoCheckoutResponse;
+};
+
 export default api;
