@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const rawUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080').replace(/\/$/, '');
-const API_URL = rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`;
+// Ensure protocol is present. If it doesn't start with http, prepend https://
+const API_URL = rawUrl.match(/^https?:\/\//) ? rawUrl : `https://${rawUrl}`;
 console.log('Current API URL:', API_URL);
 
 const api = axios.create({
