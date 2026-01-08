@@ -32,8 +32,8 @@ export default function PricingSection() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">Starter</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">₹199</span>
-                            <span className="text-4xl font-bold text-white">₹49</span>
+                            <span className="text-zinc-500 line-through text-lg">$5</span>
+                            <span className="text-4xl font-bold text-white">$2</span>
                             <span className="text-sm text-zinc-500 font-normal">/once</span>
                         </div>
                         <p className="text-zinc-400 mb-8 text-sm h-10">Perfect for testing the waters and seeing the magic happen.</p>
@@ -41,7 +41,7 @@ export default function PricingSection() {
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-zinc-300">
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
-                                <span className="font-semibold text-white">15 Credits</span> (1 Credit = 2 Mins Video)
+                                <span className="font-semibold text-white">15 Credits</span> (Analyze ~15 Shorts)
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-blue-500 shrink-0" size={18} />
@@ -67,7 +67,7 @@ export default function PricingSection() {
                     </div>
 
                     {/* Pro Creator (Popular) */}
-                    <div className="p-8 rounded-3xl bg-gradient-to-b from-purple-900/20 to-zinc-900/40 border-2 border-purple-500/50 backdrop-blur-xl flex flex-col relative group scale-105 shadow-2xl shadow-purple-900/20 z-10">
+                    <div className="p-8 rounded-3xl bg-gradient-to-b from-purple-900/20 to-zinc-900/40 border-2 border-purple-500/50 backdrop-blur-xl flex flex-col relative group scale-105 shadow-2xl shadow-purple-900/20 z-10 transition-transform duration-300 hover:scale-110">
                         <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full text-sm font-bold shadow-lg shadow-purple-500/30 flex items-center gap-2 uppercase tracking-wide">
                             <Crown size={16} className="fill-white" /> Most Popular
                         </div>
@@ -78,8 +78,8 @@ export default function PricingSection() {
 
                         <h3 className="text-2xl font-bold mb-2 text-white">Pro Creator</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">₹999</span>
-                            <span className="text-5xl font-bold text-white">₹699</span>
+                            <span className="text-zinc-500 line-through text-lg">$29</span>
+                            <span className="text-5xl font-bold text-white">$12</span>
                             <span className="text-sm text-zinc-500 font-normal">/mo</span>
                         </div>
                         <p className="text-purple-200/80 mb-8 text-sm h-10">For serious creators ready to dominate the algorithm.</p>
@@ -87,7 +87,7 @@ export default function PricingSection() {
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-white">
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                <span className="font-bold">50 Credits</span> (1 Credit = 2 Mins Video)
+                                <span className="font-bold">50 Credits</span> (Analyze ~50 Shorts)
                             </li>
                             <li className="flex items-center gap-3">
                                 <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
@@ -123,8 +123,8 @@ export default function PricingSection() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">Agency</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">₹1999</span>
-                            <span className="text-4xl font-bold text-white">₹899</span>
+                            <span className="text-zinc-500 line-through text-lg">$49</span>
+                            <span className="text-4xl font-bold text-white">$20</span>
                             <span className="text-sm text-zinc-500 font-normal">/mo</span>
                         </div>
                         <p className="text-zinc-400 mb-8 text-sm h-10">Maximum power for high-volume content production & full video analysis.</p>
@@ -132,7 +132,7 @@ export default function PricingSection() {
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-zinc-300">
                             <li className="flex items-center gap-3">
                                 <Check className="text-white" size={18} />
-                                <span className="font-semibold text-white">110 Credits</span> (1 Credit = 2 Mins Video)
+                                <span className="font-semibold text-white">110 Credits</span> (Analyze ~110 Shorts)
                             </li>
                             <li className="flex items-center gap-3">
                                 <Check className="text-white" size={18} />
