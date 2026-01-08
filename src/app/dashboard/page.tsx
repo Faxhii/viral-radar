@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Upload, Link as LinkIcon, Loader2, AlertCircle, Sparkles, TrendingUp, Zap, FileText } from 'lucide-react';
 import { uploadVideo, importLink, getStats, analyzeScript } from '@/lib/api';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import UpgradeModal from '@/components/UpgradeModal';
 
@@ -21,6 +21,8 @@ export default function DashboardPage() {
     const [stats, setStats] = useState({ total_analyzed: 0, avg_score: 0, growth_potential: '--' });
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
+    const searchParams = useSearchParams();
+
     useEffect(() => {
         const fetchStats = async () => {
             try {
@@ -31,7 +33,17 @@ export default function DashboardPage() {
             }
         };
         fetchStats();
-    }, []);
+
+        // Check for payment success
+        if (searchParams.get('payment') === 'success') {
+            // Ideally use a Toast here, for now using alert or state to show a modal
+            alert("Payment Successful! Your credits have been updated.");
+            // Clear the param to avoid showing it again on refresh
+            router.replace('/dashboard');
+            // Re-fetch user data to update credits in UI
+            fetchStats();
+        }
+    }, [searchParams, router]);
 
     const handleUpload = async () => {
         if (!file) return;
