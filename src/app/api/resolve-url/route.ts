@@ -8,13 +8,17 @@ export async function POST(request: Request) {
         console.log(`[Vercel Proxy] Resolving: ${url}`);
 
         // Cycle through instances if one fails
-        const instances = [
-            'https://api.cobalt.tools/api/json',
-            'https://co.wuk.sh/api/json',
-            'https://cobalt.kwiatekmiki.pl/api/json'
+        const cobaltInstances = [
+            'https://api.cobalt.tools',
+            'https://cobalt.kwiatekmiki.pl',
+            'https://co.wuk.sh',
+            'https://cobalt.teambart.org',
+            'https://hyper.cobalt.tools',
+            'https://cobalt.sneed.today'
         ];
 
-        for (const apiBase of instances) {
+        for (const baseUrl of cobaltInstances) {
+            const apiBase = baseUrl + '/api/json';
             try {
                 const response = await fetch(apiBase, {
                     method: 'POST',
