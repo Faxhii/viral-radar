@@ -32,11 +32,11 @@ export default function PricingSection() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">Starter</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">$5</span>
-                            <span className="text-4xl font-bold text-white">$2</span>
-                            <span className="text-sm text-zinc-500 font-normal">/once</span>
+                            <span className="text-zinc-500 line-through text-lg">$19</span>
+                            <span className="text-4xl font-bold text-white">$9</span>
+                            <span className="text-sm text-zinc-500 font-normal">/mo</span>
                         </div>
-                        <p className="text-zinc-400 mb-8 text-sm h-10">Perfect for testing the waters and seeing the magic happen.</p>
+                        <p className="text-zinc-400 mb-8 text-sm h-10">Perfect for creators just starting their viral journey.</p>
 
                         <ul className="space-y-4 mb-8 flex-1 text-sm text-zinc-300">
                             <li className="flex items-center gap-3">

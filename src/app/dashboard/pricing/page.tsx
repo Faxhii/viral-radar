@@ -142,11 +142,11 @@ export default function PricingPage() {
                         </div>
                         <h3 className="text-xl font-bold mb-2">Starter</h3>
                         <div className="flex items-baseline gap-2 mb-6">
-                            <span className="text-zinc-500 line-through text-lg">$5</span>
-                            <span className="text-3xl font-bold">$2</span>
-                            <span className="text-sm text-zinc-500 font-normal">/once</span>
+                            <span className="text-zinc-500 line-through text-lg">$19</span>
+                            <span className="text-3xl font-bold">$9</span>
+                            <span className="text-sm text-zinc-500 font-normal">/mo</span>
                         </div>
-                        <p className="text-zinc-400 mb-6 text-xs">Perfect for testing the waters and seeing the magic happen.</p>
+                        <p className="text-zinc-400 mb-6 text-xs">Perfect for creators just starting their viral journey.</p>
 
                         <ul className="space-y-3 mb-8 flex-1 text-sm">
                             <li className="flex items-center gap-3 text-zinc-300">
@@ -171,16 +171,16 @@ export default function PricingPage() {
                             </li>
                         </ul>
 
-                        {user?.has_used_starter ? (
+                        {isCurrentPlan('starter') ? (
                             <button
                                 disabled
-                                className="w-full py-3 rounded-xl bg-zinc-800 text-zinc-500 text-center font-semibold cursor-not-allowed text-sm"
+                                className="w-full py-3 rounded-xl bg-zinc-700/50 text-zinc-400 text-center font-semibold cursor-not-allowed text-sm"
                             >
-                                One-Time Offer Used
+                                Current Plan
                             </button>
                         ) : (
                             <button
-                                onClick={() => initiatePayment('starter', 2)}
+                                onClick={() => initiatePayment('starter', 9)}
                                 disabled={loading}
                                 className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-center font-semibold transition-all hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed text-sm"
                             >
