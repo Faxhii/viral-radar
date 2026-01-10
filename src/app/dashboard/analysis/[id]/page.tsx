@@ -332,14 +332,71 @@ export default function AnalysisPage() {
                 <div className="lg:col-span-2 space-y-8">
                     {/* Video Player */}
                     <div className="aspect-video bg-black rounded-3xl overflow-hidden border border-zinc-800 relative group">
-                        {analysis.source_url && getYoutubeId(analysis.source_url) ? (
-                            <iframe
-                                src={`https://www.youtube.com/embed/${getYoutubeId(analysis.source_url)}`}
-                                className="w-full h-full"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowFullScreen
-                            />
+                        {analysis.source_url ? (
+                            (() => {
+                                // YouTube (Long + Shorts)
+                                const ytMatch = analysis.source_url.match(/^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=|shorts\/)([^#&?]*).*/);
+                                const ytId = (ytMatch && ytMatch[2].length === 11) ? ytMatch[2] : null;
+
+                                // TikTok
+                                // Pattern: tiktok.com/@user/video/VIDEO_ID
+                                const ttMatch = analysis.source_url.match(/tiktok\.com\/@[\w.-]+\/video\/(\d+)/);
+                                const ttId = ttMatch ? ttMatch[1] : null;
+
+                                // Instagram (Reels + Posts)
+                                // Pattern: instagram.com/reel/SHORTCODE or /p/SHORTCODE
+                                const igMatch = analysis.source_url.match(/instagram\.com\/(?:reel|p)\/([\w-]+)/);
+                                const igId = igMatch ? igMatch[1] : null;
+
+                                if (ytId) {
+                                    return (
+                                        <iframe
+                                            src={`https://www.youtube.com/embed/${ytId}`}
+                                            className="w-full h-full"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        />
+                                    );
+                                } else if (ttId) {
+                                    return (
+                                        <iframe
+                                            src={`https://www.tiktok.com/embed/v2/${ttId}`}
+                                            className="w-full h-full"
+                                            allowFullScreen
+                                        />
+                                    );
+                                } else if (igId) {
+                                    return (
+                                        <iframe
+                                            src={`https://www.instagram.com/p/${igId}/embed`}
+                                            className="w-full h-full"
+                                            allowFullScreen
+                                            scrolling="no"
+                                        />
+                                    );
+                                } else {
+                                    // Fallback to local player if source_url exists but no embed match
+                                    // Or generic message
+                                    if (analysis.video_url) {
+                                        return (
+                                            <video
+                                                src={analysis.video_url.startsWith('http') ? analysis.video_url : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}${analysis.video_url}`}
+                                                controls
+                                                className="w-full h-full object-contain"
+                                                poster="/placeholder.jpg"
+                                            />
+                                        );
+                                    }
+                                    return (
+                                        <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/50">
+                                            <AlertTriangle className="w-12 h-12 text-yellow-500 mb-2" />
+                                            <p className="text-zinc-500">Preview not available for this link.</p>
+                                        </div>
+                                    );
+                                }
+                            })()
                         ) : analysis.video_url ? (
+                            // Uploads (Local File)
                             <video
                                 src={analysis.video_url.startsWith('http') ? analysis.video_url : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080'}${analysis.video_url}`}
                                 controls
