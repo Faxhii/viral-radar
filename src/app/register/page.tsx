@@ -114,6 +114,7 @@ export default function RegisterPage() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="w-full px-5 py-3.5 bg-zinc-900/50 border border-zinc-800 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none transition-all text-white placeholder-zinc-600"
                                 placeholder="••••••••"
+                                maxLength={72}
                                 required
                             />
                         </div>
