@@ -150,29 +150,9 @@ export default function RegisterPage() {
                         <div className="h-px bg-zinc-800 flex-1" />
                     </div>
 
-                    <div className="flex justify-center">
-                        <GoogleLogin
-                            onSuccess={async (credentialResponse) => {
-                                if (credentialResponse.credential) {
-                                    setLoading(true);
-                                    try {
-                                        const data = await loginWithGoogle(credentialResponse.credential);
-                                        localStorage.setItem('token', data.access_token);
-                                        router.push('/dashboard');
-                                    } catch (err: any) {
-                                        console.error(err);
-                                        setError('Google Login Failed');
-                                        setLoading(false);
-                                    }
-                                }
-                            }}
-                            onError={() => {
-                                setError('Google Login Failed');
-                            }}
-                            theme="filled_black"
-                            shape="pill"
-                            width="350"
-                        />
+                    <div className="flex justify-center text-zinc-500 text-sm italic">
+                        {/* <GoogleLogin ... /> - Temporarily disabled for build fix */}
+                        Google Login coming soon
                     </div>
 
                     <p className="mt-8 text-center text-zinc-500 text-sm">

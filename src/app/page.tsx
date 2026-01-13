@@ -4,7 +4,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
+import FeaturesSection from '@/components/landing/FeaturesSection';
+import DashboardPreview from '@/components/landing/DashboardPreview';
 import StatsSection from '@/components/landing/StatsSection';
+import ComparisonSection from '@/components/landing/ComparisonSection';
 import ReviewsSection from '@/components/landing/ReviewsSection';
 import FAQSection from '@/components/landing/FAQSection';
 
@@ -29,8 +32,11 @@ export default function Home() {
       <Navbar />
 
       <HeroSection />
-      <StatsSection />
+      <DashboardPreview />
+      <FeaturesSection />
+      <ComparisonSection />
       <ReviewsSection />
+      <StatsSection />
       <FAQSection />
       <PricingSection />
 

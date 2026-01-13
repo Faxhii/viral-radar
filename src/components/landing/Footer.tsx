@@ -1,35 +1,64 @@
 import Link from 'next/link';
+import { Twitter, Instagram, Linkedin, Github } from 'lucide-react';
 
 export default function Footer() {
     return (
-        <footer className="border-t border-white/5 bg-black py-12 text-center relative z-10">
-            <div className="container mx-auto px-6">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                    <div className="text-left md:w-1/3">
-                        <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600 mb-4">
-                            ViralRadar AI
-                        </h3>
-                        <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
-                            Predict viral potential before you post.
+        <footer className="relative border-t border-white/5 bg-[#030014] pt-20 pb-10 overflow-hidden">
+            {/* Background Glow */}
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-purple-900/20 blur-[120px] pointer-events-none" />
+
+            <div className="container mx-auto px-6 relative z-10">
+                <div className="grid md:grid-cols-4 gap-12 mb-16">
+                    <div className="col-span-1 md:col-span-2">
+                        <Link href="/" className="inline-block mb-6">
+                            <span className="text-2xl font-bold font-heading text-white">
+                                Viral<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Radar</span>
+                            </span>
+                        </Link>
+                        <p className="text-gray-400 max-w-sm mb-6 leading-relaxed">
+                            The advanced AI platform that predicts viral potential before you post.
+                            Stop guessing and start dominating the algorithm.
                         </p>
-
-
+                        <div className="flex gap-4">
+                            {[
+                                { icon: Twitter, href: "#" },
+                                { icon: Instagram, href: "https://instagram.com/viralradar.in" },
+                                { icon: Linkedin, href: "#" }
+                            ].map((social, i) => (
+                                <a
+                                    key={i}
+                                    href={social.href}
+                                    className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-purple-500/50 transition-all duration-300"
+                                >
+                                    <social.icon size={18} />
+                                </a>
+                            ))}
+                        </div>
                     </div>
 
-                    <div className="flex gap-8 text-sm text-zinc-400 items-center">
-                        <Link href="/about" className="hover:text-white transition-colors">About Us</Link>
-                        <Link href="/legal/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-                        <Link href="/legal/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-                        <Link href="/legal/refund" className="hover:text-white transition-colors">Refund Policy</Link>
-                        <a href="https://instagram.com/viralradar.in" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors flex items-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
-                            <span className="hidden md:inline">Instagram</span>
-                        </a>
+                    <div>
+                        <h4 className="font-bold text-white mb-6 font-heading">Product</h4>
+                        <ul className="space-y-4 text-gray-400">
+                            <li><Link href="#features" className="hover:text-purple-400 transition-colors">Features</Link></li>
+                            <li><Link href="#pricing" className="hover:text-purple-400 transition-colors">Pricing</Link></li>
+                            <li><Link href="#reviews" className="hover:text-purple-400 transition-colors">Success Stories</Link></li>
+                            <li><Link href="/login" className="hover:text-purple-400 transition-colors">Login</Link></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h4 className="font-bold text-white mb-6 font-heading">Legal</h4>
+                        <ul className="space-y-4 text-gray-400">
+                            <li><Link href="/legal/privacy" className="hover:text-purple-400 transition-colors">Privacy Policy</Link></li>
+                            <li><Link href="/legal/terms" className="hover:text-purple-400 transition-colors">Terms of Service</Link></li>
+                            <li><Link href="/legal/refund" className="hover:text-purple-400 transition-colors">Refund Policy</Link></li>
+                        </ul>
                     </div>
                 </div>
 
-                <div className="mt-12 pt-8 border-t border-white/5 text-zinc-600 text-sm">
-                    © {new Date().getFullYear()} ViralRadar AI. All rights reserved.
+                <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+                    <p>© {new Date().getFullYear()} ViralRadar AI. All rights reserved.</p>
+                    <p>Designed for the future of content creation.</p>
                 </div>
             </div>
         </footer>
