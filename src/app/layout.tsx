@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Providers } from "@/components/Providers";
 
 export default function RootLayout({
   children,
@@ -31,7 +32,9 @@ export default function RootLayout({
         } as React.CSSProperties}
         suppressHydrationWarning
       >
-        {children}
+        <Providers>
+          {children}
+        </Providers>
       </body>
     </html>
   );

@@ -42,7 +42,7 @@ export default function LoginPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="w-full max-w-md relative z-10"
             >
-                <div className="glass p-8 rounded-3xl border border-white/10 shadow-2xl shadow-purple-500/10 backdrop-blur-xl">
+                <div className="glass-3d p-8 md:p-10 border border-white/10 shadow-2xl shadow-purple-500/10 !bg-[#0a0a0b]/80">
                     <div className="flex justify-center mb-8">
                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
                             <Zap className="w-8 h-8 text-white fill-white" />
@@ -67,23 +67,23 @@ export default function LoginPage() {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div>
-                            <label className="block text-sm font-medium text-zinc-400 mb-1.5 ml-1">Email</label>
+                            <label className="block text-sm font-medium text-zinc-300 mb-1.5 ml-1">Email</label>
                             <input
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-5 py-3.5 bg-zinc-900/50 border border-zinc-800 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none transition-all text-white placeholder-zinc-600"
+                                className="w-full px-5 py-3.5 glass-input rounded-xl text-white placeholder-zinc-500"
                                 placeholder="name@example.com"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-zinc-400 mb-1.5 ml-1">Password</label>
+                            <label className="block text-sm font-medium text-zinc-300 mb-1.5 ml-1">Password</label>
                             <input
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full px-5 py-3.5 bg-zinc-900/50 border border-zinc-800 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none transition-all text-white placeholder-zinc-600"
+                                className="w-full px-5 py-3.5 glass-input rounded-xl text-white placeholder-zinc-500"
                                 placeholder="••••••••"
                                 required
                             />
@@ -92,7 +92,7 @@ export default function LoginPage() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-lg hover:opacity-90 transition-all shadow-lg shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
+                            className="w-full py-4 glass-button rounded-xl font-bold text-lg text-white shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-4 bg-gradient-to-r from-purple-600/80 to-pink-600/80 hover:from-purple-500 hover:to-pink-500"
                         >
                             {loading ? <LoadingSpinner size="sm" /> : 'Sign In'}
                         </button>
@@ -104,14 +104,34 @@ export default function LoginPage() {
                         <div className="h-px bg-zinc-800 flex-1" />
                     </div>
 
-                    <div className="flex justify-center text-zinc-500 text-sm italic">
-                        {/* <GoogleLogin ... /> - Temporarily disabled for build fix */}
-                        Google Login coming soon
+                    <div className="flex justify-center">
+                        <GoogleLogin
+                            onSuccess={async (credentialResponse) => {
+                                if (credentialResponse.credential) {
+                                    setLoading(true);
+                                    try {
+                                        const data = await loginWithGoogle(credentialResponse.credential);
+                                        localStorage.setItem('token', data.access_token);
+                                        router.push('/dashboard');
+                                    } catch (err: any) {
+                                        console.error(err);
+                                        setError('Google Login Failed');
+                                        setLoading(false);
+                                    }
+                                }
+                            }}
+                            onError={() => {
+                                setError('Google Login Failed');
+                            }}
+                            theme="filled_black"
+                            shape="pill"
+                            width="350"
+                        />
                     </div>
 
-                    <p className="mt-8 text-center text-zinc-500 text-sm">
+                    <p className="mt-8 text-center text-zinc-400 text-sm">
                         Don't have an account?{' '}
-                        <Link href="/register" className="text-purple-400 hover:text-purple-300 transition-colors font-medium hover:underline">
+                        <Link href="/register" className="text-purple-400 hover:text-purple-300 transition-colors font-medium hover:shadow-[0_0_20px_rgba(192,132,252,0.5)]">
                             Create Account
                         </Link>
                     </p>

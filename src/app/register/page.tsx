@@ -60,7 +60,7 @@ export default function RegisterPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="w-full max-w-md relative z-10"
             >
-                <div className="glass p-8 rounded-3xl border border-white/10 shadow-2xl shadow-purple-500/10 backdrop-blur-xl">
+                <div className="glass-3d p-8 md:p-10 border border-white/10 shadow-2xl shadow-purple-500/10 !bg-[#0a0a0b]/80">
                     <div className="flex justify-center mb-8">
                         <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-purple-600 to-pink-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
                             <Zap className="w-8 h-8 text-white fill-white" />
@@ -85,34 +85,34 @@ export default function RegisterPage() {
 
                     <form onSubmit={handleSubmit} className="space-y-5">
                         <div>
-                            <label className="block text-sm font-medium text-zinc-400 mb-1.5 ml-1">Full Name</label>
+                            <label className="block text-sm font-medium text-zinc-300 mb-1.5 ml-1">Full Name</label>
                             <input
                                 type="text"
                                 value={fullName}
                                 onChange={(e) => setFullName(e.target.value)}
-                                className="w-full px-5 py-3.5 bg-zinc-900/50 border border-zinc-800 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none transition-all text-white placeholder-zinc-600"
+                                className="w-full px-5 py-3.5 glass-input rounded-xl text-white placeholder-zinc-500"
                                 placeholder="John Doe"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-zinc-400 mb-1.5 ml-1">Email</label>
+                            <label className="block text-sm font-medium text-zinc-300 mb-1.5 ml-1">Email</label>
                             <input
                                 type="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-5 py-3.5 bg-zinc-900/50 border border-zinc-800 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none transition-all text-white placeholder-zinc-600"
+                                className="w-full px-5 py-3.5 glass-input rounded-xl text-white placeholder-zinc-500"
                                 placeholder="name@example.com"
                                 required
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-zinc-400 mb-1.5 ml-1">Password</label>
+                            <label className="block text-sm font-medium text-zinc-300 mb-1.5 ml-1">Password</label>
                             <input
                                 type="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full px-5 py-3.5 bg-zinc-900/50 border border-zinc-800 rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 outline-none transition-all text-white placeholder-zinc-600"
+                                className="w-full px-5 py-3.5 glass-input rounded-xl text-white placeholder-zinc-500"
                                 placeholder="••••••••"
                                 maxLength={72}
                                 required
@@ -138,7 +138,7 @@ export default function RegisterPage() {
                         <button
                             type="submit"
                             disabled={loading || !agreedToTerms}
-                            className="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-lg hover:opacity-90 transition-all shadow-lg shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-2"
+                            className="w-full py-4 glass-button rounded-xl font-bold text-lg text-white shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mt-4 bg-gradient-to-r from-purple-600/80 to-pink-600/80 hover:from-purple-500 hover:to-pink-500"
                         >
                             {loading ? <LoadingSpinner size="sm" /> : 'Get Started'}
                         </button>
