@@ -33,7 +33,7 @@ export default function ReviewsSection() {
 
     const fetchReviews = async () => {
         try {
-            const rawUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+            const rawUrl = (process.env.NEXT_PUBLIC_API_URL || 'https://viral-radar-backend.up.railway.app').replace(/\/$/, '');
             const API_URL = rawUrl.match(/^https?:\/\//) ? rawUrl : `https://${rawUrl}`;
 
             try {

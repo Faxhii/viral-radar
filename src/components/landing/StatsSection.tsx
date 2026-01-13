@@ -12,7 +12,7 @@ export default function StatsSection() {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+                const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://viral-radar-backend.up.railway.app';
                 const res = await fetch(`${baseUrl}/api/videos/stats/public-total`);
                 if (res.ok) {
                     const data = await res.json();
