@@ -24,7 +24,8 @@ export default function LoginPage() {
         try {
             const data = await login({ email, password });
             localStorage.setItem('token', data.access_token);
-            router.push('/dashboard');
+            // Force full reload to ensure global state (headers, context) is fresh
+            window.location.href = '/dashboard';
         } catch (err: any) {
             setError(err.response?.data?.detail || 'Login failed');
             setLoading(false);
@@ -112,7 +113,7 @@ export default function LoginPage() {
                                     try {
                                         const data = await loginWithGoogle(credentialResponse.credential);
                                         localStorage.setItem('token', data.access_token);
-                                        router.push('/dashboard');
+                                        window.location.href = '/dashboard';
                                     } catch (err: any) {
                                         console.error(err);
                                         setError('Google Login Failed');

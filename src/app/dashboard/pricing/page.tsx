@@ -34,17 +34,20 @@ export default function PricingPage() {
 
     const initiatePayment = async (planId: string, amount: number) => {
         setLoading(true);
+        import { toast } from 'sonner';
+
+        // ... (inside component)
         try {
             // Amount is passed in dollars, convert to cents
             const res = await createDodoCheckoutSession(planId, amount * 100);
             if (res.checkout_url) {
                 window.location.href = res.checkout_url;
             } else {
-                alert("Failed to initialize payment gateway.");
+                toast.error("Failed to initialize payment gateway.");
             }
         } catch (error) {
             console.error(error);
-            alert("Something went wrong. Please try again.");
+            toast.error("Something went wrong. Please try again.");
         } finally {
             setLoading(false);
         }

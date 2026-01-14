@@ -33,7 +33,7 @@ api.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             // Token expired or invalid
             localStorage.removeItem('token');
-            if (window.location.pathname !== '/') {
+            if (!['/', '/login', '/register'].includes(window.location.pathname)) {
                 window.location.href = '/';
             }
         }

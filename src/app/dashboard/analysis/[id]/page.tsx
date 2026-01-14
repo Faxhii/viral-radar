@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { getAnalysisBySequence, downloadReportPdf } from '@/lib/api';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
     Play, Download, Share2, CheckCircle, AlertTriangle,
     TrendingUp, Award, Zap, Target, Hash, FileText, ChevronLeft, Sparkles,
@@ -13,7 +13,7 @@ import { toast } from 'sonner';
 import ScriptAnalysisView from '@/components/ScriptAnalysisView';
 
 // Animation Variants
-const containerVariants = {
+const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -24,7 +24,7 @@ const containerVariants = {
     }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
         y: 0,
@@ -262,8 +262,8 @@ export default function AnalysisPage() {
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
                                     className={`flex-1 py-3 text-sm font-bold uppercase tracking-wider rounded-xl transition-all relative ${activeTab === tab
-                                            ? 'text-white bg-[#1E1E26] shadow-lg'
-                                            : 'text-zinc-500 hover:text-zinc-300 hover:bg-[#1E1E26]/50'
+                                        ? 'text-white bg-[#1E1E26] shadow-lg'
+                                        : 'text-zinc-500 hover:text-zinc-300 hover:bg-[#1E1E26]/50'
                                         }`}
                                 >
                                     {tab}
@@ -475,13 +475,13 @@ export default function AnalysisPage() {
                                     key={key}
                                     onClick={() => toggleChecklistItem(key)}
                                     className={`group flex items-start gap-4 p-4 rounded-xl border transition-all cursor-pointer ${isChecked
-                                            ? 'bg-blue-500/5 border-blue-500/20'
-                                            : 'bg-[#1E1E26] border-transparent hover:border-[#2D2D39]'
+                                        ? 'bg-blue-500/5 border-blue-500/20'
+                                        : 'bg-[#1E1E26] border-transparent hover:border-[#2D2D39]'
                                         }`}
                                 >
                                     <div className={`mt-0.5 w-6 h-6 rounded-full flex items-center justify-center border transition-all ${isChecked
-                                            ? 'bg-blue-500 border-blue-500 text-white'
-                                            : 'bg-transparent border-zinc-700 text-transparent group-hover:border-zinc-500'
+                                        ? 'bg-blue-500 border-blue-500 text-white'
+                                        : 'bg-transparent border-zinc-700 text-transparent group-hover:border-zinc-500'
                                         }`}>
                                         <CheckCircle className="w-3.5 h-3.5" />
                                     </div>

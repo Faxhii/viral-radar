@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import {
     FileText, Share2, Download, CheckCircle, AlertTriangle,
     TrendingUp, Award, Zap, Target, Hash, Copy, Sparkles, ArrowLeft
@@ -14,7 +14,7 @@ interface ScriptAnalysisViewProps {
     analysis: any;
 }
 
-const containerVariants = {
+const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -25,7 +25,7 @@ const containerVariants = {
     }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
         y: 0,
@@ -145,8 +145,8 @@ export default function ScriptAnalysisView({ analysis }: ScriptAnalysisViewProps
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
                                     className={`flex-1 py-3 text-sm font-bold uppercase tracking-wider rounded-xl transition-all relative ${activeTab === tab
-                                            ? 'text-white bg-[#1E1E26] shadow-lg'
-                                            : 'text-zinc-500 hover:text-zinc-300 hover:bg-[#1E1E26]/50'
+                                        ? 'text-white bg-[#1E1E26] shadow-lg'
+                                        : 'text-zinc-500 hover:text-zinc-300 hover:bg-[#1E1E26]/50'
                                         }`}
                                 >
                                     {tab}

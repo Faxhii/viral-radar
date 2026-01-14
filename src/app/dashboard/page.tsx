@@ -6,6 +6,7 @@ import { uploadVideo, importLink, getStats, analyzeScript } from '@/lib/api';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import UpgradeModal from '@/components/UpgradeModal';
+import { toast } from 'sonner';
 
 export default function DashboardPage() {
     const router = useRouter();
@@ -35,9 +36,13 @@ export default function DashboardPage() {
         fetchStats();
 
         if (searchParams.get('payment') === 'success') {
-            alert("Payment Successful! Your credits have been updated.");
+            toast.success("Payment verified", { description: "Your credits have been updated." });
             router.replace('/dashboard');
+            // Re-fetch to ensure UI is in sync
             fetchStats();
+        } else if (searchParams.get('payment') === 'failed' || searchParams.get('canceled')) {
+            toast.error("Payment incomplete", { description: "No charges were made." });
+            router.replace('/dashboard');
         }
     }, [searchParams, router]);
 
