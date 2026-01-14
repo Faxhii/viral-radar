@@ -30,7 +30,7 @@ export default function ComparisonSection() {
                         <div className="relative aspect-[9/16] bg-zinc-900 rounded-[2.5rem] overflow-hidden border-8 border-zinc-800 shadow-2xl group-hover:transform group-hover:scale-[1.02] transition-transform duration-500">
                             {/* Video Placeholder Image (Bored/Struggle) */}
                             <img
-                                src="https://images.unsplash.com/photo-1627341935570-8b1b0b5c1c4f?q=80&w=2000&auto=format&fit=crop"
+                                src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=800&auto=format&fit=crop"
                                 alt="Before AI"
                                 className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale-[50%]"
                             />
@@ -96,7 +96,7 @@ export default function ComparisonSection() {
                         <div className="relative aspect-[9/16] bg-[#0a0a0b] rounded-[2.5rem] overflow-hidden border-8 border-purple-500/20 shadow-[0_0_50px_rgba(168,85,247,0.2)] group-hover:transform group-hover:scale-[1.02] transition-transform duration-500">
                             {/* Video Placeholder Image (Viral/Happy) */}
                             <img
-                                src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?q=80&w=2000&auto=format&fit=crop"
+                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
                                 alt="After AI"
                                 className="absolute inset-0 w-full h-full object-cover"
                             />
