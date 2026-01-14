@@ -43,7 +43,7 @@ export default function DashboardPreview() {
                         y: y,
                         transformStyle: "preserve-3d",
                     }}
-                    className="relative w-full max-w-6xl mx-auto aspect-[16/10] md:aspect-[16/9] bg-[#0a0a0b] rounded-2xl border border-white/10 shadow-2xl overflow-hidden glass-card"
+                    className="relative w-full max-w-6xl mx-auto aspect-auto md:aspect-[16/9] bg-[#0a0a0b] rounded-2xl border border-white/10 shadow-2xl overflow-hidden glass-card"
                 >
                     {/* --- Mock Dashboard UI --- */}
 
