@@ -1,183 +1,138 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { Play, Heart, MessageCircle, Share2, TrendingUp, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Zap, AlertTriangle, CheckCircle2, Ban, TrendingUp, Sparkles } from 'lucide-react';
 
 export default function ComparisonSection() {
     return (
         <section className="py-24 relative overflow-hidden bg-[#050507]">
-            {/* Background Gradients */}
-            <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px] pointer-events-none" />
+            {/* Background Effects */}
+            <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-[0.03] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[300px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-bold mb-4 font-heading text-white">
-                        See the <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">Viral Difference</span>
+                        From <span className="text-zinc-500 line-through decoration-red-500/50">Generic</span> to <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">Viral</span>
                     </h2>
                     <p className="text-gray-400 max-w-2xl mx-auto">
-                        Don't just take our word for it. See how our AI optimization transforms content into viral sensations.
+                        See how our AI rewrites your scripts to capture attention instantly.
                     </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                    {/* BEFORE CARD */}
-                    <div className="relative group perspective-1000">
-                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-zinc-800/90 backdrop-blur-md px-6 py-2 rounded-full border border-white/10 text-zinc-400 font-bold text-sm tracking-wider uppercase z-20">
-                            Before AI
-                        </div>
+                <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 max-w-6xl mx-auto relative">
 
-                        <div className="relative aspect-[9/16] bg-zinc-900 rounded-[2.5rem] overflow-hidden border-8 border-zinc-800 shadow-2xl group-hover:transform group-hover:scale-[1.02] transition-transform duration-500">
-                            {/* Video Placeholder Image (Bored/Struggle) */}
-                            <img
-                                src="https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=800&auto=format&fit=crop"
-                                alt="Before AI"
-                                className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale-[50%]"
-                            />
-
-                            {/* Overlay UI */}
-                            <div className="absolute inset-0 flex flex-col justify-between p-6 bg-gradient-to-b from-black/40 via-transparent to-black/80">
-                                <div className="flex justify-between items-start opacity-70">
-                                    <div className="bg-black/50 p-2 rounded-full backdrop-blur-md">
-                                        <AlertCircle className="text-red-400 w-5 h-5" />
-                                    </div>
-                                    <div className="bg-black/50 px-3 py-1 rounded-full text-xs font-mono text-zinc-400 backdrop-blur-md">
-                                        Viral Score: 12
-                                    </div>
-                                </div>
-
-                                <div className="space-y-4">
-                                    {/* Stats (Low) */}
-                                    <div className="flex items-end gap-2 text-zinc-500">
-                                        <div className="text-4xl font-bold text-white">242</div>
-                                        <div className="text-sm pb-1 font-medium">views</div>
-                                    </div>
-
-                                    {/* Mock Player Controls */}
-                                    <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-                                        <div className="w-[30%] h-full bg-zinc-500" />
-                                    </div>
-
-                                    <div className="flex items-center justify-between text-white/50">
-                                        <Play className="w-6 h-6 fill-white/50" />
-                                        <div className="flex gap-4">
-                                            <Heart className="w-5 h-5" />
-                                            <MessageCircle className="w-5 h-5" />
-                                            <Share2 className="w-5 h-5" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Floating Feedback Card */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="absolute -right-4 top-1/4 bg-zinc-900/90 backdrop-blur-md p-4 rounded-xl border border-white/5 shadow-xl max-w-[200px] hidden md:block z-30"
-                        >
-                            <div className="flex gap-2 items-start mb-2">
-                                <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
-                                <span className="text-xs font-bold text-zinc-400">Analysis Failed</span>
-                            </div>
-                            <p className="text-xs text-zinc-500 leading-relaxed">
-                                &quot;Hook is too slow. Audience dropped off at 0:03. Lighting is inconsistent.&quot;
-                            </p>
-                        </motion.div>
+                    {/* CENTER ICON (Absolute on desktop, relative on mobile) */}
+                    <div className="z-20 md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 flex items-center justify-center w-16 h-16 rounded-full bg-black border border-zinc-800 shadow-[0_0_30px_rgba(168,85,247,0.3)]">
+                        <Zap className="w-8 h-8 text-yellow-400 fill-yellow-400 animate-pulse" />
                     </div>
 
-                    {/* AFTER CARD */}
-                    <div className="relative group mt-12 md:mt-0 perspective-1000">
-                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full shadow-[0_0_20px_rgba(168,85,247,0.5)] text-white font-bold text-sm tracking-wider uppercase z-20">
-                            After ViralRadar
-                        </div>
+                    {/* BEFORE CARD (Original Draft) */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="w-full md:w-1/2"
+                    >
+                        <div className="relative group rounded-3xl bg-[#0a0a0b] border border-red-900/20 overflow-hidden shadow-2xl">
+                            <div className="absolute inset-0 bg-red-900/5 opacity-50 pointer-events-none" />
 
-                        <div className="relative aspect-[9/16] bg-[#0a0a0b] rounded-[2.5rem] overflow-hidden border-8 border-purple-500/20 shadow-[0_0_50px_rgba(168,85,247,0.2)] group-hover:transform group-hover:scale-[1.02] transition-transform duration-500">
-                            {/* Video Placeholder Image (Viral/Happy) */}
-                            <img
-                                src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop"
-                                alt="After AI"
-                                className="absolute inset-0 w-full h-full object-cover"
-                            />
-
-                            {/* Overlay UI */}
-                            <div className="absolute inset-0 flex flex-col justify-between p-6 bg-gradient-to-b from-black/20 via-transparent to-black/90">
-                                <div className="flex justify-between items-start">
-                                    <div className="bg-green-500 px-3 py-1 rounded-full text-xs font-bold text-black flex items-center gap-1 shadow-lg shadow-green-500/20">
-                                        <TrendingUp size={12} /> TRENDING
-                                    </div>
-                                    <div className="bg-black/40 px-3 py-1 rounded-full text-xs font-mono text-green-400 border border-green-500/30 backdrop-blur-md shadow-[0_0_15px_rgba(74,222,128,0.2)]">
-                                        Viral Score: 98
+                            {/* Header */}
+                            <div className="p-6 border-b border-white/5 flex items-center justify-between">
+                                <div>
+                                    <h3 className="text-xl font-bold text-white mb-1">Original Draft</h3>
+                                    <div className="flex items-center gap-2 text-xs font-mono text-red-400 uppercase tracking-wider">
+                                        <AlertTriangle size={12} /> Status: Needs Work
                                     </div>
                                 </div>
-
-                                {/* Comments / Engagement Popups */}
-                                <div className="absolute top-1/3 right-4 space-y-3">
-                                    <motion.div
-                                        initial={{ opacity: 0, x: 20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.5 }}
-                                        className="bg-black/60 backdrop-blur-md p-2 rounded-lg rounded-tr-none border border-white/10 text-[10px] text-white w-32 shadow-lg"
-                                    >
-                                        🔥 This actually works!
-                                    </motion.div>
-                                    <motion.div
-                                        initial={{ opacity: 0, x: 20 }}
-                                        whileInView={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.8 }}
-                                        className="bg-black/60 backdrop-blur-md p-2 rounded-lg rounded-tr-none border border-white/10 text-[10px] text-white w-32 shadow-lg"
-                                    >
-                                        Sending this to my team 🚀
-                                    </motion.div>
+                                <div className="relative w-16 h-16 flex items-center justify-center">
+                                    <svg className="absolute inset-0 w-full h-full -rotate-90">
+                                        <circle cx="32" cy="32" r="28" stroke="#3f3f46" strokeWidth="4" fill="transparent" />
+                                        <circle cx="32" cy="32" r="28" stroke="#ef4444" strokeWidth="4" fill="transparent" strokeDasharray="175.9" strokeDashoffset={175.9 - (175.9 * 34) / 100} />
+                                    </svg>
+                                    <span className="text-lg font-bold text-red-500">34</span>
                                 </div>
+                            </div>
 
+                            {/* Content Body */}
+                            <div className="p-8 font-mono text-sm leading-relaxed text-zinc-400 bg-black/20 min-h-[300px]">
                                 <div className="space-y-4">
-                                    {/* Stats (High) */}
-                                    <div className="flex items-end gap-2 text-white">
-                                        <div className="text-5xl font-bold drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">1.2M</div>
-                                        <div className="text-sm pb-1 font-medium text-purple-200">views</div>
-                                    </div>
+                                    <p className="opacity-50">01  Hi guys, welcome back to my channel.</p>
+                                    <p className="opacity-50">02  Today I want to talk about how to make</p>
+                                    <p className="opacity-50">03  coffee at home. It&apos;s really easy and...</p>
+                                    <p className="opacity-50">04  you can save some money I guess.</p>
+                                    <p className="opacity-50">05  First, get your beans...</p>
+                                </div>
 
-                                    {/* Mock Player Controls */}
-                                    <div className="h-1 bg-white/20 rounded-full overflow-hidden">
-                                        <motion.div
-                                            initial={{ width: "30%" }}
-                                            whileInView={{ width: "100%" }}
-                                            transition={{ duration: 3, ease: "linear" }}
-                                            className="h-full bg-gradient-to-r from-purple-500 to-pink-500"
-                                        />
+                                <div className="mt-8 pt-6 border-t border-white/5 space-y-3">
+                                    <div className="flex items-center gap-3 text-red-400/80">
+                                        <Ban size={16} />
+                                        <span>Hook is too generic and soft.</span>
                                     </div>
-
-                                    <div className="flex items-center justify-between text-white">
-                                        <Play className="w-6 h-6 fill-white" />
-                                        <div className="flex gap-4">
-                                            <div className="flex items-center gap-1 text-sm"><Heart className="w-5 h-5 fill-purple-500 text-purple-500" /> 124K</div>
-                                            <div className="flex items-center gap-1 text-sm"><MessageCircle className="w-5 h-5" /> 8.2K</div>
-                                            <Share2 className="w-5 h-5" />
-                                        </div>
+                                    <div className="flex gap-2 mt-4">
+                                        <span className="px-3 py-1 rounded bg-red-950/30 border border-red-900/30 text-red-500 text-xs">Low Retention</span>
+                                        <span className="px-3 py-1 rounded bg-red-950/30 border border-red-900/30 text-red-500 text-xs">Slow Pacing</span>
+                                        <span className="px-3 py-1 rounded bg-red-950/30 border border-red-900/30 text-red-500 text-xs">Weak Intro</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </motion.div>
 
-                        {/* Floating Success Card */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="absolute -left-4 top-1/4 glass-card p-4 rounded-xl border border-green-500/20 shadow-[0_0_30px_rgba(74,222,128,0.1)] max-w-[200px] hidden md:block z-30"
-                        >
-                            <div className="flex gap-2 items-start mb-2">
-                                <CheckCircle2 className="w-4 h-4 text-green-400 shrink-0 mt-0.5" />
-                                <span className="text-xs font-bold text-white">Perfectly Optimized</span>
+                    {/* AFTER CARD (ViralRadar Optimized) */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="w-full md:w-1/2"
+                    >
+                        <div className="relative group rounded-3xl bg-[#0a0a0b] border border-green-500/20 overflow-hidden shadow-[0_0_50px_rgba(34,197,94,0.1)]">
+                            <div className="absolute inset-0 bg-green-500/5 opacity-30 pointer-events-none" />
+
+                            {/* Header */}
+                            <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/5">
+                                <div>
+                                    <div className="flex items-center gap-2">
+                                        <h3 className="text-xl font-bold text-white mb-1">ViralRadar Optimized</h3>
+                                        <CheckCircle2 size={18} className="text-green-500 fill-green-500/20" />
+                                    </div>
+                                    <div className="flex items-center gap-2 text-xs font-mono text-green-400 uppercase tracking-wider">
+                                        <Sparkles size={12} /> Status: Viral Potential
+                                    </div>
+                                </div>
+                                <div className="relative w-16 h-16 flex items-center justify-center">
+                                    <div className="absolute inset-0 bg-green-500/20 blur-xl rounded-full" />
+                                    <svg className="absolute inset-0 w-full h-full -rotate-90">
+                                        <circle cx="32" cy="32" r="28" stroke="#3f3f46" strokeWidth="4" fill="transparent" />
+                                        <circle cx="32" cy="32" r="28" stroke="#22c55e" strokeWidth="4" fill="transparent" strokeDasharray="175.9" strokeDashoffset={175.9 - (175.9 * 92) / 100} />
+                                    </svg>
+                                    <span className="text-lg font-bold text-green-400 relative z-10">92</span>
+                                </div>
                             </div>
-                            <div className="space-y-1">
-                                <div className="text-[10px] text-zinc-400 flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> Hook retention &gt; 80%</div>
-                                <div className="text-[10px] text-zinc-400 flex items-center gap-1"><div className="w-1.5 h-1.5 rounded-full bg-green-500" /> Trending Audio Matched</div>
+
+                            {/* Content Body */}
+                            <div className="p-8 font-mono text-sm leading-relaxed text-zinc-300 bg-black/40 min-h-[300px]">
+                                <div className="space-y-4">
+                                    <p>01  Stop overpaying for Starbucks.</p>
+                                    <p>02  Here is how to brew <span className="bg-green-500/20 text-green-300 px-1 rounded">barista-level</span></p>
+                                    <p>03  coffee for <span className="bg-green-500/20 text-green-300 px-1 rounded">$0.50</span> at home.</p>
+                                    <p>04  All you need is this one trick...</p>
+                                </div>
+
+                                <div className="mt-8 pt-6 border-t border-white/5 space-y-3">
+                                    <div className="flex items-center gap-3 text-green-400">
+                                        <TrendingUp size={16} />
+                                        <span>Strong hook triggers curiosity immediately.</span>
+                                    </div>
+                                    <div className="flex gap-2 mt-4">
+                                        <span className="px-3 py-1 rounded bg-green-500/10 border border-green-500/20 text-green-400 text-xs">High Retention</span>
+                                        <span className="px-3 py-1 rounded bg-green-500/10 border border-green-500/20 text-green-400 text-xs">Power Words</span>
+                                        <span className="px-3 py-1 rounded bg-green-500/10 border border-green-500/20 text-green-400 text-xs">Clear Value</span>
+                                    </div>
+                                </div>
                             </div>
-                        </motion.div>
-                    </div>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>
