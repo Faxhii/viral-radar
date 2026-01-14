@@ -24,8 +24,13 @@ export default function LoginPage() {
         try {
             const data = await login({ email, password });
             localStorage.setItem('token', data.access_token);
+
+            // Check for pending redirect
+            const redirectTo = localStorage.getItem('redirect_after_login') || '/dashboard';
+            localStorage.removeItem('redirect_after_login');
+
             // Force full reload to ensure global state (headers, context) is fresh
-            window.location.href = '/dashboard';
+            window.location.href = redirectTo;
         } catch (err: any) {
             setError(err.response?.data?.detail || 'Login failed');
             setLoading(false);
@@ -113,7 +118,11 @@ export default function LoginPage() {
                                     try {
                                         const data = await loginWithGoogle(credentialResponse.credential);
                                         localStorage.setItem('token', data.access_token);
-                                        window.location.href = '/dashboard';
+
+                                        const redirectTo = localStorage.getItem('redirect_after_login') || '/dashboard';
+                                        localStorage.removeItem('redirect_after_login');
+
+                                        window.location.href = redirectTo;
                                     } catch (err: any) {
                                         console.error(err);
                                         setError('Google Login Failed');

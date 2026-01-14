@@ -34,6 +34,8 @@ api.interceptors.response.use(
             // Token expired or invalid
             localStorage.removeItem('token');
             if (!['/', '/login', '/register'].includes(window.location.pathname)) {
+                // Save the current location to redirect back after login
+                localStorage.setItem('redirect_after_login', window.location.pathname + window.location.search);
                 window.location.href = '/';
             }
         }
