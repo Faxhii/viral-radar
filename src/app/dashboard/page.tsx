@@ -37,12 +37,28 @@ export default function DashboardPage() {
 
         if (searchParams.get('payment') === 'success') {
             toast.success("Payment verified", { description: "Your credits have been updated." });
-            router.replace('/dashboard');
-            // Re-fetch to ensure UI is in sync
-            fetchStats();
+            // Check if we need to return to a specific page (like Pricing or Analysis)
+            const returnUrl = localStorage.getItem('payment_return_url');
+            if (returnUrl && !returnUrl.includes('/dashboard?')) { // Avoid loops if returnUrl IS dashboard
+                localStorage.removeItem('payment_return_url');
+                window.location.href = returnUrl;
+                // Note: Ideally we'd pass the success param too, but the user just wants to "go back".
+                // Actually, let's keep it simple. If they paid, staying on dashboard is often fine,
+                // BUT if they were on Pricing, they might want to see the "Current Plan" update there.
+                // Let's force a reload on that page.
+            } else {
+                router.replace('/dashboard');
+                fetchStats();
+            }
         } else if (searchParams.get('payment') === 'failed' || searchParams.get('canceled')) {
             toast.error("Payment incomplete", { description: "No charges were made." });
-            router.replace('/dashboard');
+            const returnUrl = localStorage.getItem('payment_return_url');
+            if (returnUrl) {
+                localStorage.removeItem('payment_return_url');
+                window.location.href = returnUrl;
+            } else {
+                router.replace('/dashboard');
+            }
         }
     }, [searchParams, router]);
 

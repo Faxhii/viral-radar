@@ -39,6 +39,8 @@ export default function PricingPage() {
             // Amount is passed in dollars, convert to cents
             const res = await createDodoCheckoutSession(planId, amount * 100);
             if (res.checkout_url) {
+                // Save context for where to return after payment
+                localStorage.setItem('payment_return_url', window.location.href);
                 window.location.href = res.checkout_url;
             } else {
                 toast.error("Failed to initialize payment gateway.");

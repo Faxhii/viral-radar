@@ -2,7 +2,7 @@
 
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
-import { BarChart3, PieChart, Activity, Users, Settings, Zap, CheckCircle2 } from 'lucide-react';
+import { Upload, Sparkles, TrendingUp, Zap, FileText, Link as LinkIcon, ChevronRight } from 'lucide-react';
 
 export default function DashboardPreview() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -21,17 +21,24 @@ export default function DashboardPreview() {
     const y = useTransform(scrollYProgress, [0, 0.4], [100, 0]);
 
     return (
-        <section ref={containerRef} className="py-20 min-h-[80vh] perspective-1000 bg-black overflow-hidden relative">
+        <section ref={containerRef} className="py-24 min-h-[80vh] perspective-1000 bg-black overflow-hidden relative border-t border-white/5">
             {/* Ambient Background Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-900/20 rounded-full blur-[120px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[120px] pointer-events-none" />
 
             <div className="container mx-auto px-4 perspective-[1200px]">
-                <div className="text-center mb-12">
+                <div className="text-center mb-16">
+                    <motion.div
+                        style={{ opacity: opacity }}
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1E1E26] border border-[#2D2D39] text-purple-400 text-xs font-medium uppercase tracking-wider mb-6 shadow-xl"
+                    >
+                        <Sparkles className="w-3.5 h-3.5" />
+                        <span>AI-Powered Viral Analysis</span>
+                    </motion.div>
                     <motion.h2
                         style={{ opacity: opacity }}
-                        className="text-2xl md:text-3xl font-bold text-gray-400 mb-2"
+                        className="text-4xl md:text-5xl font-bold mb-4 font-heading text-white"
                     >
-                        Powerful Insights at your Fingertips
+                        Create Your Next <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Viral Hit</span>
                     </motion.h2>
                 </div>
 
@@ -43,114 +50,64 @@ export default function DashboardPreview() {
                         y: y,
                         transformStyle: "preserve-3d",
                     }}
-                    className="relative w-full max-w-6xl mx-auto aspect-auto md:aspect-[16/9] bg-[#0F0F12] rounded-2xl border border-white/10 shadow-2xl overflow-hidden"
+                    className="relative w-full max-w-5xl mx-auto bg-[#050507] rounded-3xl border border-white/10 shadow-2xl overflow-hidden p-6 md:p-8"
                 >
                     {/* --- Mock Dashboard UI --- */}
 
-                    {/* Window Header */}
-                    <div className="h-12 border-b border-white/5 flex items-center justify-between px-6 bg-[#0F0F12]">
-                        <div className="flex items-center gap-2">
-                            <div className="w-3 h-3 rounded-full bg-[#FF5F57]" /> {/* Red */}
-                            <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" /> {/* Yellow */}
-                            <div className="w-3 h-3 rounded-full bg-[#28C840]" /> {/* Green */}
-                        </div>
-                        <div className="h-2 w-32 bg-white/5 rounded-full" />
+                    {/* Stats Row */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        {[
+                            { label: 'Total Analyzed', value: '30', icon: TrendingUp, color: 'text-blue-400', bg: 'bg-blue-500/10', trend: true },
+                            { label: 'Avg. Viral Score', value: '57', icon: Zap, color: 'text-purple-400', bg: 'bg-purple-500/10', trend: false },
+                            { label: 'Growth Potential', value: 'High', icon: Sparkles, color: 'text-orange-400', bg: 'bg-orange-500/10', trend: false },
+                        ].map((stat, i) => (
+                            <div
+                                key={stat.label}
+                                className="bg-[#13131A] border border-white/5 p-5 rounded-2xl relative overflow-hidden flex items-start justify-between"
+                            >
+                                <div>
+                                    <p className="text-zinc-500 text-xs font-medium mb-1 uppercase tracking-wide">{stat.label}</p>
+                                    <h3 className="text-2xl font-bold text-white">{stat.value}</h3>
+                                </div>
+                                <div className={`p-2.5 rounded-xl ${stat.bg} ${stat.color}`}>
+                                    <stat.icon className="w-5 h-5" />
+                                </div>
+                            </div>
+                        ))}
                     </div>
 
-                    <div className="flex h-full">
-                        {/* Sidebar */}
-                        <div className="w-16 md:w-64 border-r border-white/5 p-6 flex flex-col gap-2 bg-[#0F0F12] hidden md:flex">
-                            {/* Logo Stub / Profile Stub */}
-                            <div className="h-10 w-full mb-6 bg-white/5 rounded-lg animate-pulse opacity-20" />
-
-                            {[
-                                { i: BarChart3, l: "Overview", active: true },
-                                { i: Zap, l: "Viral Forecast" },
-                                { i: Activity, l: "Analytics" },
-                                { i: Users, l: "Audience" },
-                                { i: Settings, l: "Settings" },
-                            ].map((item, idx) => (
-                                <div key={idx} className={`flex items-center gap-3 px-4 py-3 rounded-xl cursor-default transition-all ${item.active
-                                        ? 'bg-[#5D3EA8] text-white shadow-lg shadow-purple-900/20 font-medium'
-                                        : 'text-gray-500 hover:text-gray-300 hover:bg-white/5'
-                                    }`}>
-                                    <item.i size={18} strokeWidth={item.active ? 2.5 : 2} />
-                                    <span className="text-sm">{item.l}</span>
+                    {/* Main Action Area */}
+                    <div className="bg-[#13131A] border border-white/5 rounded-3xl overflow-hidden shadow-xl mb-6 relative">
+                        {/* Header Tabs */}
+                        <div className="flex justify-center border-b border-white/5 p-2 bg-[#0F0F12]/50">
+                            <div className="flex p-1 bg-[#0a0a0b] rounded-xl border border-white/5 items-center gap-1">
+                                <div className="px-5 py-2 rounded-lg text-xs font-medium bg-[#1E1E26] text-white shadow-lg border border-white/5 flex items-center gap-2">
+                                    <Upload className="w-3.5 h-3.5" /> Upload Video
                                 </div>
-                            ))}
+                                <div className="px-5 py-2 rounded-lg text-xs font-medium text-zinc-500 flex items-center gap-2">
+                                    <LinkIcon className="w-3.5 h-3.5" /> Paste Link
+                                </div>
+                                <div className="px-5 py-2 rounded-lg text-xs font-medium text-zinc-500 flex items-center gap-2">
+                                    <FileText className="w-3.5 h-3.5" /> Analyze Script
+                                </div>
+                            </div>
                         </div>
 
-                        {/* Main Content */}
-                        <div className="flex-1 p-6 md:p-8 overflow-hidden bg-[#0a0a0b]">
-
-                            {/* Top Stats Row */}
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                                <div className="bg-[#13131A] p-5 rounded-2xl border border-white/5 shadow-sm">
-                                    <div className="text-gray-500 text-xs uppercase font-bold mb-3 tracking-wider">Total Views</div>
-                                    <div className="flex items-end gap-3">
-                                        <div className="text-3xl font-bold text-white">2.4M</div>
-                                        <div className="text-green-400 text-sm font-medium mb-1">↑ 12%</div>
-                                    </div>
-                                </div>
-                                <div className="bg-[#13131A] p-5 rounded-2xl border border-white/5 shadow-sm">
-                                    <div className="text-gray-500 text-xs uppercase font-bold mb-3 tracking-wider">Avg. Retention</div>
-                                    <div className="flex items-end gap-3">
-                                        <div className="text-3xl font-bold text-white">68%</div>
-                                        <div className="text-green-400 text-sm font-medium mb-1">↑ 5%</div>
-                                    </div>
-                                </div>
-                                <div className="bg-[#13131A] p-5 rounded-2xl border border-white/5 shadow-sm">
-                                    <div className="text-gray-500 text-xs uppercase font-bold mb-3 tracking-wider">Viral Score</div>
-                                    <div className="flex items-end gap-1">
-                                        <div className="text-3xl font-bold text-purple-400">92</div>
-                                        <div className="text-gray-600 text-sm mb-1 font-medium">/100</div>
-                                    </div>
-                                </div>
+                        {/* Content */}
+                        <div className="p-12 text-center">
+                            <div className="w-20 h-20 bg-[#1E1E26] border border-white/5 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl relative">
+                                <div className="absolute inset-0 bg-purple-500/20 blur-xl rounded-full" />
+                                <Upload className="w-8 h-8 text-purple-400 relative z-10" />
                             </div>
+                            <h3 className="text-xl font-bold mb-2 text-white">Upload your video</h3>
+                            <p className="text-zinc-500 mb-8 text-sm max-w-xs mx-auto">Drag and drop matches the real dashboard experience.</p>
 
-                            {/* Main Chart Area */}
-                            <div className="bg-[#13131A] p-6 rounded-3xl border border-white/5 h-72 mb-6 relative overflow-hidden flex flex-col justify-between">
-                                <div className="flex justify-between items-center mb-4">
-                                    <h3 className="font-bold text-white text-lg">Performance Forecast</h3>
-                                    <div className="flex gap-2">
-                                        <div className="px-3 py-1.5 rounded-lg bg-white/5 text-xs text-gray-500 hover:bg-white/10 cursor-pointer transition-colors">7 Days</div>
-                                        <div className="px-3 py-1.5 rounded-lg bg-[#5D3EA8] text-xs text-white cursor-pointer shadow-lg shadow-purple-900/20">30 Days</div>
-                                    </div>
-                                </div>
-
-                                {/* Chart Bars */}
-                                <div className="flex items-end justify-between h-full gap-2 px-2 pb-2">
-                                    {[40, 55, 45, 60, 50, 75, 65, 85, 80, 95, 100, 90, 80, 70, 60].map((h, i) => (
-                                        <motion.div
-                                            key={i}
-                                            initial={{ height: 0 }}
-                                            whileInView={{ height: `${h}%` }}
-                                            viewport={{ once: true }}
-                                            transition={{ duration: 0.8, delay: i * 0.05, ease: "easeOut" }}
-                                            className="w-full bg-gradient-to-t from-purple-900/50 to-[#7C3AED] rounded-t-md opacity-90 hover:opacity-100 transition-opacity"
-                                        />
-                                    ))}
-                                </div>
+                            <div className="inline-flex cursor-default bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-3 rounded-xl font-bold opacity-90 shadow-lg shadow-purple-500/20 items-center gap-2 text-sm">
+                                Start Analysis <ChevronRight className="w-4 h-4" />
                             </div>
-
-                            {/* Recent Analysis Row */}
-                            <div className="bg-[#13131A] p-4 rounded-2xl border border-white/5 flex items-center justify-between">
-                                <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                                        <PieChart size={20} className="text-gray-400" />
-                                    </div>
-                                    <div>
-                                        <div className="text-sm font-bold text-white">My_Viral_Video.mp4</div>
-                                        <div className="text-xs text-gray-500">Processed 2 mins ago</div>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-2 text-green-400 text-xs font-bold border border-green-500/10 px-3 py-1.5 rounded-full bg-green-500/5">
-                                    <CheckCircle2 size={12} /> Optimization Ready
-                                </div>
-                            </div>
-
                         </div>
                     </div>
+
                 </motion.div>
             </div>
         </section>
