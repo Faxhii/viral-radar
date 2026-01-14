@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Check, Zap, Star, Crown, Shield } from "lucide-react";
 import Link from "next/link";
 import { createDodoCheckoutSession, getMe } from "@/lib/api";
+import { toast } from 'sonner';
 
 interface User {
     id: number;
@@ -34,9 +35,6 @@ export default function PricingPage() {
 
     const initiatePayment = async (planId: string, amount: number) => {
         setLoading(true);
-        import { toast } from 'sonner';
-
-        // ... (inside component)
         try {
             // Amount is passed in dollars, convert to cents
             const res = await createDodoCheckoutSession(planId, amount * 100);
