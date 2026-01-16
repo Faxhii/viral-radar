@@ -35,10 +35,10 @@ function CreditsDisplay() {
     return (
         <div className="mb-6 px-4">
             <div className="bg-gradient-to-r from-purple-900/40 to-pink-900/40 border border-white/10 rounded-2xl p-4 backdrop-blur-sm">
-                <div className="text-xs text-zinc-400 mb-1 font-medium uppercase tracking-wider">Available Credits</div>
+                <div className="text-xs text-muted-foreground mb-1 font-medium uppercase tracking-wider">Available Credits</div>
                 <div className="flex items-end gap-2">
-                    <span className="text-3xl font-bold text-white tracking-tight">{credits}</span>
-                    <span className="text-sm text-zinc-400 mb-1.5">credits</span>
+                    <span className="text-3xl font-bold text-foreground tracking-tight">{credits}</span>
+                    <span className="text-sm text-muted-foreground mb-1.5">credits</span>
                 </div>
                 <div className="mt-3 w-full bg-white/5 rounded-full h-1.5 overflow-hidden">
                     <div
