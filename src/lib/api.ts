@@ -128,6 +128,11 @@ export const updateUser = async (data: any) => {
     return response.data;
 };
 
+export const submitOnboarding = async (data: any) => {
+    const response = await api.post('/auth/onboarding', data);
+    return response.data;
+};
+
 // Razorpay types
 interface RazorpayOrderResponse {
     id: string;

@@ -65,7 +65,21 @@ export default function DashboardLayout({
         const token = localStorage.getItem('token');
         if (!token) {
             router.push('/login');
+            return;
         }
+
+        // Check onboarding status
+        const checkOnboarding = async () => {
+            try {
+                const res = await api.get('/auth/me');
+                if (!res.data.onboarding_completed) {
+                    router.push('/onboarding');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        checkOnboarding();
     }, [router]);
 
     const handleLogout = () => {
