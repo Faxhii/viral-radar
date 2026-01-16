@@ -10,7 +10,11 @@ export default function SettingsPage() {
     const [saving, setSaving] = useState(false);
     const [user, setUser] = useState<any>(null);
     const [fullName, setFullName] = useState('');
+    const [platform, setPlatform] = useState('TikTok');
     const [category, setCategory] = useState('Education');
+    const [goal, setGoal] = useState('Go Viral');
+    const [tone, setTone] = useState('Professional');
+    const [audience, setAudience] = useState('General Public');
     const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 
     useEffect(() => {
@@ -19,7 +23,11 @@ export default function SettingsPage() {
                 const userData = await getMe();
                 setUser(userData);
                 if (userData.full_name) setFullName(userData.full_name);
+                if (userData.primary_platform) setPlatform(userData.primary_platform);
                 if (userData.primary_category) setCategory(userData.primary_category);
+                if (userData.content_goal) setGoal(userData.content_goal);
+                if (userData.video_tone) setTone(userData.video_tone);
+                if (userData.target_audience) setAudience(userData.target_audience);
             } catch (error) {
                 console.error('Failed to fetch user settings:', error);
             } finally {
@@ -35,7 +43,11 @@ export default function SettingsPage() {
         try {
             await updateUser({
                 full_name: fullName,
-                primary_category: category
+                primary_platform: platform,
+                primary_category: category,
+                content_goal: goal,
+                video_tone: tone,
+                target_audience: audience
             });
             setMessage({ type: 'success', text: 'Settings saved successfully!' });
 
@@ -102,6 +114,21 @@ export default function SettingsPage() {
                     <div className="space-y-4">
 
                         <div>
+                            <label className="block text-sm font-medium text-zinc-400 mb-1">Primary Platform</label>
+                            <select
+                                value={platform}
+                                onChange={(e) => setPlatform(e.target.value)}
+                                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none text-white"
+                            >
+                                <option>TikTok</option>
+                                <option>Instagram Reels</option>
+                                <option>YouTube Shorts</option>
+                                <option>LinkedIn</option>
+                                <option>Cross-Platform</option>
+                            </select>
+                        </div>
+
+                        <div>
                             <label className="block text-sm font-medium text-zinc-400 mb-1">Content Category</label>
                             <select
                                 value={category}
@@ -115,6 +142,49 @@ export default function SettingsPage() {
                                 <option>Business</option>
                                 <option>Tech</option>
                                 <option>Comedy</option>
+                                <option>Motivational</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-zinc-400 mb-1">Content Goal</label>
+                            <select
+                                value={goal}
+                                onChange={(e) => setGoal(e.target.value)}
+                                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none text-white"
+                            >
+                                <option>Go Viral</option>
+                                <option>Engagement</option>
+                                <option>Sales</option>
+                                <option>Brand</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-zinc-400 mb-1">Video Tone</label>
+                            <select
+                                value={tone}
+                                onChange={(e) => setTone(e.target.value)}
+                                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none text-white"
+                            >
+                                <option>High Energy</option>
+                                <option>Professional</option>
+                                <option>Storytelling</option>
+                                <option>Humorous</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-zinc-400 mb-1">Target Audience</label>
+                            <select
+                                value={audience}
+                                onChange={(e) => setAudience(e.target.value)}
+                                className="w-full px-4 py-2 bg-zinc-800 border border-zinc-700 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none text-white"
+                            >
+                                <option>Gen Z</option>
+                                <option>Millennials</option>
+                                <option>Professionals</option>
+                                <option>General Public</option>
                             </select>
                         </div>
                     </div>
