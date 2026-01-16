@@ -6,8 +6,49 @@
 }
 
 :root {
+  /* Light Mode Defaults */
+  --background: #ffffff;
+  --foreground: #09090b;
+  --card: #ffffff;
+  --card-foreground: #09090b;
+  --popover: #ffffff;
+  --popover-foreground: #09090b;
+  --primary: #18181b;
+  --primary-foreground: #fafafa;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #18181b;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --accent: #f4f4f5;
+  --accent-foreground: #18181b;
+  --destructive: #ef4444;
+  --destructive-foreground: #fafafa;
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #18181b;
+}
+
+.dark {
+  /* Dark Mode Defaults */
   --background: #030014;
   --foreground: #ffffff;
+  --card: #09090b;
+  --card-foreground: #fafafa;
+  --popover: #09090b;
+  --popover-foreground: #fafafa;
+  --primary: #fafafa;
+  --primary-foreground: #18181b;
+  --secondary: #27272a;
+  --secondary-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --accent: #27272a;
+  --accent-foreground: #fafafa;
+  --destructive: #7f1d1d;
+  --destructive-foreground: #fafafa;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #d4d4d8;
 }
 
 /* Explicitly force fonts */
@@ -15,12 +56,16 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-family: 'Inter', sans-serif !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+.dark body {
   background-image:
     radial-gradient(circle at 50% 0%, #2e1065 0%, transparent 40%),
     radial-gradient(circle at 0% 50%, #000000 0%, transparent 50%),
     radial-gradient(circle at 100% 50%, #000000 0%, transparent 50%);
   background-attachment: fixed;
-  overflow-x: hidden;
 }
 
 h1,
