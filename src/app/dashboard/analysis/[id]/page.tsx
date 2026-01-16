@@ -18,20 +18,10 @@ export default function AnalysisPage() {
     const router = useRouter();
     const [analysis, setAnalysis] = useState<any>(null);
     const [loading, setLoading] = useState(true);
-    const [stats, setStats] = useState<any>(null);
     const [checklistState, setChecklistState] = useState<Record<string, boolean>>({});
 
     useEffect(() => {
         let isPolling = true;
-
-        // Fetch User Stats for Benchmarking
-        const fetchStats = async () => {
-            try {
-                const data = await import('@/lib/api').then(m => m.getStats());
-                setStats(data);
-            } catch (e) { console.error("Failed to fetch stats"); }
-        };
-        fetchStats();
 
         const fetchAnalysis = async () => {
             if (!params.id || !isPolling) return;
@@ -139,12 +129,6 @@ export default function AnalysisPage() {
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center flex-col">
                             <span className="text-5xl font-black text-foreground">{analysis.overall_score}</span>
-                            {stats && stats.avg_score > 0 && (
-                                <div className={`flex items-center gap-1 mt-1 text-xs font-medium px-2 py-0.5 rounded-full ${analysis.overall_score >= stats.avg_score ? 'bg-green-500/10 text-green-600 dark:text-green-400' : 'bg-red-500/10 text-red-600 dark:text-red-400'}`}>
-                                    {analysis.overall_score >= stats.avg_score ? <TrendingUp className="w-3 h-3" /> : <TrendingUp className="w-3 h-3 rotate-180" />}
-                                    {Math.abs(analysis.overall_score - stats.avg_score)} vs avg
-                                </div>
-                            )}
                         </div>
                     </div>
 
