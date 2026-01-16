@@ -27,15 +27,26 @@ export function ThemeProvider({
     defaultTheme = "dark",
     storageKey = "vite-ui-theme",
 }: ThemeProviderProps) {
-    const [theme, setTheme] = useState<Theme>(() => (typeof window !== "undefined" ? localStorage.getItem(storageKey) as Theme || defaultTheme : defaultTheme));
+    // Start with defaultTheme to match server render
+    const [theme, setTheme] = useState<Theme>(defaultTheme);
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
-        const root = window.document.documentElement;
+        setMounted(true);
+        const storedTheme = localStorage.getItem(storageKey) as Theme;
+        if (storedTheme) {
+            setTheme(storedTheme);
+        }
+    }, [storageKey]);
 
+    useEffect(() => {
+        if (!mounted) return;
+
+        const root = window.document.documentElement;
         root.classList.remove("light", "dark");
         root.classList.add(theme);
         localStorage.setItem(storageKey, theme);
-    }, [theme, storageKey]);
+    }, [theme, storageKey, mounted]);
 
     const value = {
         theme,
@@ -44,6 +55,9 @@ export function ThemeProvider({
         },
     };
 
+    // Before hydration, render with defaults to prevent mismatch
+    // or just render but allow effect to fix it.
+    // Suppress mismatch warning in layout is key.
     return (
         <ThemeProviderContext.Provider value={value}>
             {children}
