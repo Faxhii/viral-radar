@@ -23,14 +23,14 @@ export default function HeroSection() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-purple-900/10 blur-[120px]" />
             </div>
 
-            <div className="container relative z-10 px-4 mx-auto text-center mt-10">
+            <div className="container relative z-10 px-4 mx-auto text-center mt-20 md:mt-32">
 
                 {/* Main Heading */}
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="text-5xl md:text-7xl font-bold font-sans mb-6 tracking-tight text-white max-w-5xl mx-auto leading-[1.1]"
+                    className="text-3xl sm:text-5xl md:text-7xl font-bold font-sans mb-6 tracking-tight text-white max-w-5xl mx-auto leading-[1.1]"
                 >
                     ViralRadar AI: Elevate Your <br className="hidden md:block" />
                     Content Creation with <span className="text-gray-400">Data-Driven Insights</span>
