@@ -27,7 +27,7 @@ export default function Home() {
   }, [router]);
 
   return (
-    <div className="dark min-h-screen bg-black text-white selection:bg-purple-500 selection:text-white">
+    <div className="dark min-h-screen bg-black text-white selection:bg-purple-500 selection:text-white overflow-x-hidden w-full">
       {/* Navbar */}
       <Navbar />
 
