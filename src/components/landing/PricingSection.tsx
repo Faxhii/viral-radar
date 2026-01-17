@@ -36,12 +36,14 @@ export default function PricingSection() {
                             <span className="text-sm text-gray-500">/month</span>
                         </div>
 
+                        <div className="text-sm font-bold text-purple-400 mb-4">15 Credits / Month</div>
+
                         <ul className="space-y-4 mb-8 flex-1">
                             {[
-                                "Viral Score",
-                                "Actionable Lens",
-                                "Viral Views Generated",
-                                "Platform Accuracy"
+                                "Analyze 15 Short Videos",
+                                "OR 3 Long Videos (10m)",
+                                "OR 30 AI Script Analyses",
+                                "Basic Viral Score"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-sm text-gray-400">
                                     <Check className="text-gray-600 shrink-0" size={16} />
@@ -77,12 +79,14 @@ export default function PricingSection() {
                             <span className="text-sm text-gray-400">/month</span>
                         </div>
 
+                        <div className="text-sm font-bold text-green-400 mb-4">25 Credits / Month</div>
+
                         <ul className="space-y-4 mb-8 flex-1">
                             {[
-                                "Pro Creator Features",
-                                "Actionable Checklists",
-                                "Viral Video Generated",
-                                "Hook Optimization"
+                                "Analyze 25 Short Videos",
+                                "OR 5 Long Videos (10m)",
+                                "OR 50 AI Script Analyses",
+                                "Deep Psychology Analysis"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-sm text-gray-200">
                                     <div className="p-1 rounded-full bg-green-500/20 shadow-[0_0_10px_rgba(34,197,94,0.3)]">
@@ -113,12 +117,14 @@ export default function PricingSection() {
                             <span className="text-sm text-gray-500">/month</span>
                         </div>
 
+                        <div className="text-sm font-bold text-purple-400 mb-4">50 Credits / Month</div>
+
                         <ul className="space-y-4 mb-8 flex-1">
                             {[
-                                "20+ Hidden Viral Features",
-                                "Hook Optimization",
-                                "Platform Accuracy",
-                                "Agency Team Consensus"
+                                "Analyze 50 Short Videos",
+                                "OR 10 Long Videos (10m)",
+                                "OR 100 AI Script Analyses",
+                                "Team Consensus & Priority"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-sm text-gray-400">
                                     <Check className="text-gray-600 shrink-0" size={16} />

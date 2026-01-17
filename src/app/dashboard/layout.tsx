@@ -122,7 +122,7 @@ export default function DashboardLayout({
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
-                        className="md:hidden fixed inset-0 z-40 bg-background pt-20 px-6 pb-6"
+                        className="md:hidden fixed inset-0 z-[60] bg-zinc-950/95 backdrop-blur-xl pt-24 px-6 pb-6 text-white"
                     >
                         <nav className="space-y-4">
                             <div className="mb-6">

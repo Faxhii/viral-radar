@@ -452,9 +452,9 @@ function ScriptAnalysisForm({
                             <button
                                 key={p}
                                 onClick={() => setScriptPlatform(p)}
-                                className={`text-left px-4 py-3 rounded-xl text-sm font-medium transition-all ${scriptPlatform === p
-                                    ? 'bg-primary text-primary-foreground shadow-md'
-                                    : 'bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
+                                className={`text-left px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 border ${scriptPlatform === p
+                                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25 border-transparent'
+                                    : 'bg-secondary/30 border-border/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
                                     }`}
                             >
                                 {p}
@@ -473,9 +473,9 @@ function ScriptAnalysisForm({
                             <button
                                 key={c}
                                 onClick={() => setScriptCategory(c)}
-                                className={`px-3 py-3 rounded-xl text-sm font-medium transition-all text-center ${scriptCategory === c
-                                    ? 'bg-primary text-primary-foreground shadow-md'
-                                    : 'bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
+                                className={`px-3 py-3 rounded-xl text-sm font-medium transition-all text-center border duration-200 ${scriptCategory === c
+                                    ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white shadow-lg shadow-blue-500/25 border-transparent'
+                                    : 'bg-secondary/30 border-border/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
                                     }`}
                             >
                                 {c}
@@ -499,13 +499,13 @@ function ScriptAnalysisForm({
                                     <button
                                         key={opt.value}
                                         onClick={() => pref.setter(opt.value)}
-                                        className={`px-3 py-2 rounded-lg text-xs font-medium transition-all text-left flex items-center justify-between ${pref.value === opt.value
-                                            ? 'bg-primary/10 text-primary border border-primary/20'
-                                            : 'bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
+                                        className={`px-3 py-2.5 rounded-xl text-xs font-bold transition-all text-left flex items-center justify-between border duration-200 ${pref.value === opt.value
+                                            ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-md border-transparent'
+                                            : 'bg-secondary/30 border-border/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
                                             }`}
                                     >
                                         {opt.label}
-                                        {pref.value === opt.value && <Check className="w-3 h-3" />}
+                                        {pref.value === opt.value && <Check className="w-3 h-3 text-white" />}
                                     </button>
                                 ))}
                             </div>
