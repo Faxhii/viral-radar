@@ -16,6 +16,11 @@ export default function DashboardPage() {
     const [scriptContent, setScriptContent] = useState('');
     const [scriptPlatform, setScriptPlatform] = useState('TikTok');
     const [scriptCategory, setScriptCategory] = useState('Education');
+    // New Onboarding-style preferences
+    const [scriptGoal, setScriptGoal] = useState('Go Viral');
+    const [scriptTone, setScriptTone] = useState('High Energy');
+    const [scriptAudience, setScriptAudience] = useState('Gen Z');
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
@@ -23,6 +28,8 @@ export default function DashboardPage() {
     const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
     const searchParams = useSearchParams();
+
+    // ... (useEffect remains same) ...
 
     useEffect(() => {
         const fetchStats = async () => {
@@ -37,15 +44,10 @@ export default function DashboardPage() {
 
         if (searchParams.get('payment') === 'success') {
             toast.success("Payment verified", { description: "Your credits have been updated." });
-            // Check if we need to return to a specific page (like Pricing or Analysis)
             const returnUrl = localStorage.getItem('payment_return_url');
-            if (returnUrl && !returnUrl.includes('/dashboard?')) { // Avoid loops if returnUrl IS dashboard
+            if (returnUrl && !returnUrl.includes('/dashboard?')) {
                 localStorage.removeItem('payment_return_url');
                 window.location.href = returnUrl;
-                // Note: Ideally we'd pass the success param too, but the user just wants to "go back".
-                // Actually, let's keep it simple. If they paid, staying on dashboard is often fine,
-                // BUT if they were on Pricing, they might want to see the "Current Plan" update there.
-                // Let's force a reload on that page.
             } else {
                 router.replace('/dashboard');
                 fetchStats();
@@ -125,8 +127,18 @@ export default function DashboardPage() {
         setLoading(true);
         setError('');
         try {
+            // Inject preferences into script content as Context for the AI
+            // This allows us to use specific preferences without migrating the database
+            const enrichedScriptContent = `CONTEXT_START
+Goal: ${scriptGoal}
+Tone: ${scriptTone}
+Audience: ${scriptAudience}
+CONTEXT_END
+
+${scriptContent}`;
+
             const result = await analyzeScript({
-                script_content: scriptContent,
+                script_content: enrichedScriptContent,
                 platform: scriptPlatform,
                 category: scriptCategory
             });
@@ -149,7 +161,7 @@ export default function DashboardPage() {
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#1E1E26] border border-[#2D2D39] text-purple-400 text-xs font-medium uppercase tracking-wider mb-6 shadow-xl"
+                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-secondary border border-border text-purple-500 text-xs font-medium uppercase tracking-wider mb-6 shadow-xl"
                 >
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>AI-Powered Viral Analysis</span>
@@ -158,7 +170,7 @@ export default function DashboardPage() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
-                    className="text-4xl md:text-5xl font-bold mb-4 font-heading text-white"
+                    className="text-4xl md:text-5xl font-bold mb-4 font-heading text-foreground"
                 >
                     Create Your Next <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">Viral Hit</span>
                 </motion.h1>
@@ -166,7 +178,7 @@ export default function DashboardPage() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="text-zinc-500 text-lg max-w-2xl mx-auto font-light"
+                    className="text-muted-foreground text-lg max-w-2xl mx-auto font-light"
                 >
                     Upload your video or paste a link to get instant, AI-driven insights on how to maximize your reach and engagement.
                 </motion.p>
@@ -184,19 +196,17 @@ export default function DashboardPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 + (i * 0.1) }}
-                        className="bg-[#13131A] border border-white/5 p-6 rounded-2xl relative overflow-hidden group hover:border-purple-500/20 transition-all duration-300"
+                        className="glass-card p-6 rounded-3xl border border-border group hover:border-purple-500/30 transition-all duration-300"
                     >
                         <div className="flex items-start justify-between">
                             <div>
-                                <p className="text-zinc-500 text-sm font-medium mb-1">{stat.label}</p>
-                                <h3 className="text-3xl font-bold text-white">{stat.value}</h3>
+                                <p className="text-muted-foreground text-sm font-medium mb-1">{stat.label}</p>
+                                <h3 className="text-3xl font-bold text-foreground">{stat.value}</h3>
                             </div>
-                            <div className={`p-3 rounded-xl ${stat.bg} ${stat.color}`}>
+                            <div className={`p-3 rounded-2xl ${stat.bg} ${stat.color}`}>
                                 <stat.icon className="w-6 h-6" />
                             </div>
                         </div>
-                        {/* Decorative glow */}
-                        <div className={`absolute -right-4 -bottom-4 w-24 h-24 rounded-full ${stat.bg} blur-2xl opacity-20 group-hover:opacity-40 transition-opacity`} />
                     </motion.div>
                 ))}
             </div>
@@ -206,34 +216,34 @@ export default function DashboardPage() {
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 }}
-                className="bg-[#13131A] border border-white/5 rounded-3xl overflow-hidden shadow-2xl shadow-black/50"
+                className="glass-card border border-border rounded-3xl overflow-hidden shadow-2xl backdrop-blur-xl"
             >
                 {/* Tab Navigation */}
-                <div className="flex justify-center border-b border-white/5 p-2 bg-[#0F0F12]/50 backdrop-blur-md sticky top-0 z-20">
-                    <div className="flex p-1 bg-[#0a0a0b] rounded-xl border border-white/5">
+                <div className="flex justify-center border-b border-border p-2 bg-secondary/30 backdrop-blur-md sticky top-0 z-20">
+                    <div className="flex p-1 bg-background/50 rounded-2xl border border-border/50">
                         <button
                             onClick={() => setActiveTab('upload')}
-                            className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2 ${activeTab === 'upload'
-                                ? 'bg-[#1E1E26] text-white shadow-lg shadow-purple-900/10 border border-white/5'
-                                : 'text-zinc-500 hover:text-zinc-300'
+                            className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2 ${activeTab === 'upload'
+                                ? 'bg-card text-foreground shadow-lg shadow-purple-900/10 border border-border'
+                                : 'text-muted-foreground hover:text-foreground'
                                 }`}
                         >
                             <Upload className="w-4 h-4" /> Upload Video
                         </button>
                         <button
                             onClick={() => setActiveTab('link')}
-                            className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2 ${activeTab === 'link'
-                                ? 'bg-[#1E1E26] text-white shadow-lg shadow-purple-900/10 border border-white/5'
-                                : 'text-zinc-500 hover:text-zinc-300'
+                            className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2 ${activeTab === 'link'
+                                ? 'bg-card text-foreground shadow-lg shadow-purple-900/10 border border-border'
+                                : 'text-muted-foreground hover:text-foreground'
                                 }`}
                         >
                             <LinkIcon className="w-4 h-4" /> Paste Link
                         </button>
                         <button
                             onClick={() => setActiveTab('script')}
-                            className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 flex items-center gap-2 ${activeTab === 'script'
-                                ? 'bg-[#1E1E26] text-white shadow-lg shadow-purple-900/10 border border-white/5'
-                                : 'text-zinc-500 hover:text-zinc-300'
+                            className={`px-6 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 flex items-center gap-2 ${activeTab === 'script'
+                                ? 'bg-card text-foreground shadow-lg shadow-purple-900/10 border border-border'
+                                : 'text-muted-foreground hover:text-foreground'
                                 }`}
                         >
                             <FileText className="w-4 h-4" /> Analyze Script
@@ -253,18 +263,18 @@ export default function DashboardPage() {
                                 className="text-center max-w-xl mx-auto"
                             >
                                 <div
-                                    className={`border-2 border-dashed rounded-3xl p-12 transition-all duration-300 relative group overflow-hidden ${file ? 'border-purple-500/50 bg-purple-500/5' : 'border-[#2D2D39] hover:border-zinc-600 hover:bg-[#1E1E26]'
+                                    className={`border-2 border-dashed rounded-[32px] p-12 transition-all duration-300 relative group overflow-hidden ${file ? 'border-purple-500/50 bg-purple-500/5' : 'border-border hover:border-foreground/20 hover:bg-secondary/50'
                                         }`}
                                 >
                                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
 
-                                    <div className="w-24 h-24 bg-[#1E1E26] border border-white/5 rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl relative z-10 group-hover:scale-110 transition-transform duration-300">
+                                    <div className="w-24 h-24 bg-card border border-border rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl relative z-10 group-hover:scale-110 transition-transform duration-300">
                                         <div className="w-full h-full rounded-full bg-gradient-to-t from-purple-500/10 to-transparent absolute inset-0" />
-                                        <Upload className="w-10 h-10 text-purple-400 group-hover:text-purple-300 transition-colors" />
+                                        <Upload className="w-10 h-10 text-purple-500 group-hover:text-purple-400 transition-colors" />
                                     </div>
 
-                                    <h3 className="text-2xl font-bold mb-3 text-white">Upload your video</h3>
-                                    <p className="text-zinc-500 mb-8 max-w-sm mx-auto">Drag and drop your video here, or click to browse. Supports MP4, MOV, WebM.</p>
+                                    <h3 className="text-2xl font-bold mb-3 text-foreground">Upload your video</h3>
+                                    <p className="text-muted-foreground mb-8 max-w-sm mx-auto">Drag and drop your video here, or click to browse. Supports MP4, MOV, WebM.</p>
 
                                     <input
                                         type="file"
@@ -277,27 +287,27 @@ export default function DashboardPage() {
                                     {!file ? (
                                         <label
                                             htmlFor="video-upload"
-                                            className="inline-flex cursor-pointer bg-white text-black px-10 py-4 rounded-xl font-bold hover:bg-zinc-200 transition-colors shadow-lg shadow-white/5 relative z-10"
+                                            className="inline-flex cursor-pointer bg-primary text-primary-foreground px-10 py-4 rounded-2xl font-bold hover:opacity-90 transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 duration-200 relative z-10"
                                         >
                                             Select File
                                         </label>
                                     ) : (
                                         <div className="space-y-6 relative z-10">
-                                            <div className="bg-[#0a0a0b] border border-white/10 px-6 py-4 rounded-xl text-zinc-300 flex items-center justify-between shadow-lg">
+                                            <div className="glass-card px-6 py-4 rounded-xl text-foreground flex items-center justify-between shadow-lg border border-border">
                                                 <div className="flex items-center gap-3 overflow-hidden">
-                                                    <div className="w-10 h-10 bg-zinc-800 rounded-lg flex items-center justify-center flex-shrink-0">
-                                                        <FileText className="w-5 h-5 text-zinc-400" />
+                                                    <div className="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center flex-shrink-0">
+                                                        <FileText className="w-5 h-5 text-muted-foreground" />
                                                     </div>
                                                     <span className="truncate max-w-[200px] font-medium">{file.name}</span>
                                                 </div>
-                                                <button onClick={() => setFile(null)} className="text-zinc-500 hover:text-red-400 transition-colors p-2">
+                                                <button onClick={() => setFile(null)} className="text-muted-foreground hover:text-red-400 transition-colors p-2">
                                                     Change
                                                 </button>
                                             </div>
                                             <button
                                                 onClick={handleUpload}
                                                 disabled={loading}
-                                                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-2xl font-bold hover:opacity-90 transition-all shadow-lg shadow-purple-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] duration-200"
                                             >
                                                 {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Start Analysis <ChevronRight className="w-5 h-5" /></>}
                                             </button>
@@ -314,11 +324,11 @@ export default function DashboardPage() {
                                 transition={{ duration: 0.3 }}
                                 className="text-center max-w-xl mx-auto"
                             >
-                                <div className="w-20 h-20 bg-[#1E1E26] border border-white/5 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
-                                    <LinkIcon className="w-10 h-10 text-pink-400" />
+                                <div className="w-20 h-20 bg-card border border-border rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+                                    <LinkIcon className="w-10 h-10 text-pink-500" />
                                 </div>
-                                <h3 className="text-2xl font-bold mb-3 text-white">Import from URL</h3>
-                                <p className="text-zinc-500 mb-8">Paste a link from YouTube, Instagram, or TikTok</p>
+                                <h3 className="text-2xl font-bold mb-3 text-foreground">Import from URL</h3>
+                                <p className="text-muted-foreground mb-8">Paste a link from YouTube, Instagram, or TikTok</p>
 
                                 <div className="relative mb-6">
                                     <input
@@ -326,9 +336,9 @@ export default function DashboardPage() {
                                         placeholder="https://www.tiktok.com/@user/video/..."
                                         value={url}
                                         onChange={(e) => setUrl(e.target.value)}
-                                        className="w-full bg-[#0a0a0b] border border-[#2D2D39] rounded-xl px-6 py-5 text-white placeholder-zinc-700 focus:outline-none focus:border-pink-500 focus:ring-1 focus:ring-pink-500 transition-all font-mono text-sm"
+                                        className="w-full glass-input rounded-2xl px-6 py-5 text-foreground placeholder-muted-foreground focus:ring-1 focus:ring-pink-500 transition-all font-mono text-sm"
                                     />
-                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-600">
+                                    <div className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">
                                         <LinkIcon className="w-4 h-4" />
                                     </div>
                                 </div>
@@ -336,85 +346,28 @@ export default function DashboardPage() {
                                 <button
                                     onClick={handleLinkImport}
                                     disabled={loading || !url}
-                                    className="w-full bg-gradient-to-r from-pink-600 to-orange-600 text-white px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg shadow-pink-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                    className="w-full bg-gradient-to-r from-pink-600 to-orange-600 text-white px-8 py-4 rounded-2xl font-bold hover:opacity-90 transition-all shadow-lg shadow-pink-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] duration-200"
                                 >
                                     {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Analyze Link <ChevronRight className="w-5 h-5" /></>}
                                 </button>
                             </motion.div>
                         ) : (
-                            <motion.div
-                                key="script"
-                                initial={{ opacity: 0, x: -20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 20 }}
-                                transition={{ duration: 0.3 }}
-                                className="text-center max-w-2xl mx-auto"
-                            >
-                                <div className="w-20 h-20 bg-[#1E1E26] border border-white/5 rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
-                                    <FileText className="w-10 h-10 text-blue-400" />
-                                </div>
-                                <h3 className="text-2xl font-bold mb-3 text-white">Analyze Script</h3>
-                                <p className="text-zinc-500 mb-8">Optimize your video script for maximum retention</p>
-
-                                <div className="space-y-6 text-left">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div className="space-y-2">
-                                            <label className="text-xs font-bold text-zinc-500 uppercase tracking-wider ml-1">Platform</label>
-                                            <div className="relative group">
-                                                <select
-                                                    value={scriptPlatform}
-                                                    onChange={(e) => setScriptPlatform(e.target.value)}
-                                                    className="w-full appearance-none bg-[#0a0a0b] border border-[#2D2D39] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all cursor-pointer hover:bg-[#1E1E26]"
-                                                >
-                                                    <option value="TikTok">TikTok</option>
-                                                    <option value="Instagram Reels">Instagram Reels</option>
-                                                    <option value="YouTube Shorts">YouTube Shorts</option>
-                                                </select>
-                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
-                                                    <ChevronRight className="w-4 h-4 rotate-90" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="space-y-2">
-                                            <label className="text-xs font-bold text-zinc-500 uppercase tracking-wider ml-1">Category</label>
-                                            <div className="relative group">
-                                                <select
-                                                    value={scriptCategory}
-                                                    onChange={(e) => setScriptCategory(e.target.value)}
-                                                    className="w-full appearance-none bg-[#0a0a0b] border border-[#2D2D39] rounded-xl px-4 py-3.5 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all cursor-pointer hover:bg-[#1E1E26]"
-                                                >
-                                                    <option value="Education">Education</option>
-                                                    <option value="Entertainment">Entertainment</option>
-                                                    <option value="Lifestyle">Lifestyle</option>
-                                                    <option value="Business">Business</option>
-                                                </select>
-                                                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-zinc-500">
-                                                    <ChevronRight className="w-4 h-4 rotate-90" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-bold text-zinc-500 uppercase tracking-wider ml-1">Script Content</label>
-                                        <textarea
-                                            placeholder="Paste your script, outline, or rough ideas here..."
-                                            value={scriptContent}
-                                            onChange={(e) => setScriptContent(e.target.value)}
-                                            rows={8}
-                                            className="w-full bg-[#0a0a0b] border border-[#2D2D39] rounded-xl px-6 py-4 text-white placeholder-zinc-700 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all resize-none leading-relaxed"
-                                        />
-                                    </div>
-                                </div>
-
-                                <button
-                                    onClick={handleScriptAnalyze}
-                                    disabled={loading || !scriptContent}
-                                    className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                                >
-                                    {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Analyze Script <ChevronRight className="w-5 h-5" /></>}
-                                </button>
-                            </motion.div>
+                            <ScriptAnalysisForm
+                                loading={loading}
+                                onSubmit={handleScriptAnalyze}
+                                scriptContent={scriptContent}
+                                setScriptContent={setScriptContent}
+                                scriptPlatform={scriptPlatform}
+                                setScriptPlatform={setScriptPlatform}
+                                scriptCategory={scriptCategory}
+                                setScriptCategory={setScriptCategory}
+                                scriptGoal={scriptGoal}
+                                setScriptGoal={setScriptGoal}
+                                scriptTone={scriptTone}
+                                setScriptTone={setScriptTone}
+                                scriptAudience={scriptAudience}
+                                setScriptAudience={setScriptAudience}
+                            />
                         )}
                     </AnimatePresence>
 
@@ -422,7 +375,7 @@ export default function DashboardPage() {
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="mt-6 flex items-center gap-3 text-red-400 bg-red-500/10 border border-red-500/20 px-6 py-4 rounded-xl"
+                            className="mt-6 flex items-center gap-3 text-red-500 bg-red-500/10 border border-red-500/20 px-6 py-4 rounded-2xl"
                         >
                             <AlertCircle className="w-5 h-5 flex-shrink-0" />
                             <span className="text-sm font-medium">{error}</span>
@@ -438,3 +391,156 @@ export default function DashboardPage() {
         </div>
     );
 }
+
+// Sub-component for Script Analysis Form to keep main file clean
+function ScriptAnalysisForm({
+    loading, onSubmit,
+    scriptContent, setScriptContent,
+    scriptPlatform, setScriptPlatform,
+    scriptCategory, setScriptCategory,
+    scriptGoal, setScriptGoal,
+    scriptTone, setScriptTone,
+    scriptAudience, setScriptAudience
+}: any) {
+    const preferences = [
+        {
+            id: 'goal', label: 'Goal', icon: Target, value: scriptGoal, setter: setScriptGoal,
+            options: [
+                { value: 'Go Viral', label: 'Viral Growth' },
+                { value: 'Engagement', label: 'Community' },
+                { value: 'Sales', label: 'Sales/Leads' },
+                { value: 'Brand', label: 'Brand Awareness' }
+            ]
+        },
+        {
+            id: 'tone', label: 'Tone', icon: Zap, value: scriptTone, setter: setScriptTone,
+            options: [
+                { value: 'High Energy', label: 'High Energy' },
+                { value: 'Professional', label: 'Professional' },
+                { value: 'Storytelling', label: 'Storytelling' },
+                { value: 'Humorous', label: 'Humorous' }
+            ]
+        },
+        {
+            id: 'audience', label: 'Audience', icon: Users, value: scriptAudience, setter: setScriptAudience,
+            options: [
+                { value: 'Gen Z', label: 'Gen Z' },
+                { value: 'Millennials', label: 'Millennials' },
+                { value: 'Professionals', label: 'Professionals' },
+                { value: 'General Public', label: 'General' }
+            ]
+        }
+    ];
+
+    return (
+        <motion.div
+            key="script"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 20 }}
+            transition={{ duration: 0.3 }}
+            className="max-w-4xl mx-auto"
+        >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                {/* Platform */}
+                <div className="glass-card p-5 rounded-2xl border border-border">
+                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 block flex items-center gap-2">
+                        <Layout className="w-3 h-3" /> Platform
+                    </label>
+                    <div className="grid gap-2">
+                        {['TikTok', 'Instagram Reels', 'YouTube Shorts'].map((p) => (
+                            <button
+                                key={p}
+                                onClick={() => setScriptPlatform(p)}
+                                className={`text-left px-4 py-3 rounded-xl text-sm font-medium transition-all ${scriptPlatform === p
+                                    ? 'bg-primary text-primary-foreground shadow-md'
+                                    : 'bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
+                                    }`}
+                            >
+                                {p}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Category */}
+                <div className="glass-card p-5 rounded-2xl border border-border md:col-span-2">
+                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 block flex items-center gap-2">
+                        <Sparkles className="w-3 h-3" /> Category
+                    </label>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        {['Education', 'Entertainment', 'Lifestyle', 'Business', 'Gaming', 'Motivational'].map((c) => (
+                            <button
+                                key={c}
+                                onClick={() => setScriptCategory(c)}
+                                className={`px-3 py-3 rounded-xl text-sm font-medium transition-all text-center ${scriptCategory === c
+                                    ? 'bg-primary text-primary-foreground shadow-md'
+                                    : 'bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground'
+                                    }`}
+                            >
+                                {c}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-8">
+                <div className="flex items-center gap-2 mb-4">
+                    <Target className="w-4 h-4 text-purple-500" />
+                    <span className="text-sm font-bold text-foreground uppercase tracking-wider">Content Strategy</span>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {preferences.map((pref) => (
+                        <div key={pref.id} className="glass-card p-4 rounded-2xl border border-border">
+                            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-3 block">{pref.label}</label>
+                            <div className="grid grid-cols-1 gap-2">
+                                {pref.options.map((opt) => (
+                                    <button
+                                        key={opt.value}
+                                        onClick={() => pref.setter(opt.value)}
+                                        className={`px-3 py-2 rounded-lg text-xs font-medium transition-all text-left flex items-center justify-between ${pref.value === opt.value
+                                            ? 'bg-primary/10 text-primary border border-primary/20'
+                                            : 'bg-transparent text-muted-foreground hover:bg-secondary hover:text-foreground'
+                                            }`}
+                                    >
+                                        {opt.label}
+                                        {pref.value === opt.value && <Check className="w-3 h-3" />}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            <div className="space-y-4">
+                <div className="flex justify-between items-center">
+                    <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider ml-1 flex items-center gap-2">
+                        <FileText className="w-3 h-3" /> Script Content
+                    </label>
+                    <span className="text-xs text-muted-foreground">{scriptContent.length} chars</span>
+                </div>
+                <textarea
+                    placeholder="Paste your script, outline, or rough ideas here. The more detail, the better the analysis."
+                    value={scriptContent}
+                    onChange={(e) => setScriptContent(e.target.value)}
+                    rows={12}
+                    className="w-full glass-input rounded-2xl px-6 py-6 text-foreground placeholder-muted-foreground focus:ring-1 focus:ring-blue-500 transition-all resize-none leading-relaxed text-base font-mono"
+                />
+            </div>
+
+            <button
+                onClick={onSubmit}
+                disabled={loading || !scriptContent}
+                className="w-full mt-8 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-5 rounded-2xl font-bold hover:opacity-90 transition-all shadow-lg shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-lg hover:scale-[1.01] active:scale-[0.99] duration-200"
+            >
+                {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <>Analyze Script <ChevronRight className="w-5 h-5" /></>}
+            </button>
+        </motion.div>
+    );
+}
+
+// Helper icons
+import { Target, Users, Layout, Check } from 'lucide-react';
+
