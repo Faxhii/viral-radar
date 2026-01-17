@@ -6,10 +6,11 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { Menu, X } from 'lucide-react';
+import { Menu, X, MessageSquare } from 'lucide-react';
 import { AnimatePresence } from 'framer-motion';
 import api from '@/lib/api';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import FeedbackModal from '@/components/FeedbackModal';
 
 function CreditsDisplay() {
     const [credits, setCredits] = useState<number | null>(null);
@@ -60,6 +61,7 @@ export default function DashboardLayout({
     const pathname = usePathname();
     const [mounted, setMounted] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
     useEffect(() => {
         setMounted(true);
@@ -140,6 +142,13 @@ export default function DashboardLayout({
                                 </Link>
                             ))}
                             <button
+                                onClick={() => { setIsMobileMenuOpen(false); setIsFeedbackOpen(true); }}
+                                className="flex items-center gap-4 p-4 rounded-xl text-lg font-medium text-muted-foreground hover:text-purple-400 hover:bg-purple-500/10 w-full transition-colors"
+                            >
+                                <MessageSquare className="w-6 h-6" />
+                                Feedback / Support
+                            </button>
+                            <button
                                 onClick={handleLogout}
                                 className="flex items-center gap-4 p-4 rounded-xl text-lg font-medium text-red-500 hover:bg-red-500/10 w-full transition-colors"
                             >
@@ -195,6 +204,15 @@ export default function DashboardLayout({
                         <span className="text-sm font-medium text-muted-foreground">Theme</span>
                         <ThemeToggle />
                     </div>
+
+                    <button
+                        onClick={() => setIsFeedbackOpen(true)}
+                        className="flex items-center gap-3 px-4 py-3.5 text-muted-foreground hover:text-purple-400 hover:bg-purple-500/10 rounded-xl transition-all w-full group"
+                    >
+                        <MessageSquare className="w-5 h-5 transition-colors" />
+                        Feedback / Support
+                    </button>
+
                     <button
                         onClick={handleLogout}
                         className="flex items-center gap-3 px-4 py-3.5 text-muted-foreground hover:text-red-500 hover:bg-red-500/10 rounded-xl transition-all w-full group"
@@ -204,6 +222,7 @@ export default function DashboardLayout({
                     </button>
                 </div>
             </aside>
+            <FeedbackModal isOpen={isFeedbackOpen} onClose={() => setIsFeedbackOpen(false)} />
 
             {/* Main Content */}
             <main className="flex-1 overflow-y-auto relative pt-20 md:pt-0 bg-background transition-colors duration-300">
@@ -217,6 +236,6 @@ export default function DashboardLayout({
                     {children}
                 </div>
             </main>
-        </div>
+        </div >
     );
 }
