@@ -42,8 +42,7 @@ export default function PricingSection() {
                             {[
                                 "Analyze 15 Short Videos",
                                 "OR 3 Long Videos (10m)",
-                                "OR 30 AI Script Analyses",
-                                "Basic Viral Score"
+                                "OR 30 AI Script Analyses"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-sm text-gray-400">
                                     <Check className="text-gray-600 shrink-0" size={16} />
@@ -85,8 +84,7 @@ export default function PricingSection() {
                             {[
                                 "Analyze 25 Short Videos",
                                 "OR 5 Long Videos (10m)",
-                                "OR 50 AI Script Analyses",
-                                "Deep Psychology Analysis"
+                                "OR 50 AI Script Analyses"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-sm text-gray-200">
                                     <div className="p-1 rounded-full bg-green-500/20 shadow-[0_0_10px_rgba(34,197,94,0.3)]">
@@ -123,8 +121,7 @@ export default function PricingSection() {
                             {[
                                 "Analyze 50 Short Videos",
                                 "OR 10 Long Videos (10m)",
-                                "OR 100 AI Script Analyses",
-                                "Team Consensus & Priority"
+                                "OR 100 AI Script Analyses"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-sm text-gray-400">
                                     <Check className="text-gray-600 shrink-0" size={16} />

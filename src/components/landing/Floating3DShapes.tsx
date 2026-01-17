@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function Floating3DShapes() {
     return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute inset-0 w-full max-w-full overflow-hidden pointer-events-none z-0">
             {/* 3D Cube (CSS only) */}
             <motion.div
                 initial={{ opacity: 0 }}

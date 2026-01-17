@@ -3,7 +3,7 @@ export default function TermsOfService() {
         <div className="min-h-screen bg-black text-zinc-300 p-8 md:p-20">
             <div className="max-w-3xl mx-auto space-y-8">
                 <h1 className="text-4xl font-bold text-white mb-8">Terms of Service</h1>
-                <p className="text-sm text-zinc-500">Last Updated: December 4, 2025</p>
+                <p className="text-sm text-zinc-500">Last Updated: January 17, 2026</p>
 
                 <section className="space-y-4">
                     <h2 className="text-2xl font-bold text-white">1. Agreement to Terms</h2>
@@ -13,36 +13,45 @@ export default function TermsOfService() {
                 </section>
 
                 <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-white">2. Description of Service</h2>
+                    <h2 className="text-2xl font-bold text-white">2. Services & Credits</h2>
                     <p>
-                        ViralRadar AI provides artificial intelligence-based analysis of video content to estimate "viral potential."
-                        <strong>Disclaimer:</strong> The "Viral Score" and insights are estimates based on AI analysis. We do not guarantee that your content will go viral or achieve specific performance metrics.
+                        ViralRadar AI provides AI-based analysis for videos and scripts.
                     </p>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-white">3. User Accounts</h2>
-                    <p>
-                        You are responsible for safeguarding the password that you use to access the service and for any activities or actions under your password.
-                        You agree not to disclose your password to any third party.
-                    </p>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-white">4. User Content</h2>
-                    <p>
-                        You retain all rights to the content you upload. By uploading content, you grant us a license to use, process, and analyze the content solely for the purpose of providing the service to you.
-                        You represent and warrant that you own or have the necessary rights to the content you upload and that it does not violate any third-party rights or laws.
-                    </p>
-                </section>
-
-                <section className="space-y-4">
-                    <h2 className="text-2xl font-bold text-white">5. Prohibited Uses</h2>
-                    <p>You may not use the service to:</p>
                     <ul className="list-disc pl-5 space-y-2">
-                        <li>Upload illegal, harmful, threatening, or sexually explicit content.</li>
-                        <li>Reverse engineer or attempt to extract the source code of the service.</li>
-                        <li>Use the service for any purpose that is illegal or prohibited by these Terms.</li>
+                        <li><strong>Credit System:</strong> Our services operate on a credit basis. Actions such as "Video Analysis" or "Script Analysis" consume specific amounts of credits (e.g., 0.5 to 1+ credits).</li>
+                        <li><strong>Monthly Usage:</strong> Credits are allocated based on your subscription plan (Starter, Pro, Agency) and reset monthly. Unused credits do not roll over.</li>
+                        <li><strong>No Guarantees:</strong> The "Viral Score" is an AI estimate. We do not guarantee actual viral performance or audience engagement.</li>
+                    </ul>
+                </section>
+
+                <section className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">3. Payments & Refunds</h2>
+                    <p>
+                        Payments are processed via Dodo Payments or Razorpay.
+                    </p>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li><strong>Subscription:</strong> Fees are billed monthly in advance.</li>
+                        <li><strong>Refunds:</strong> Generally, payments are non-refundable once credits have been used. If you believe there was a billing error, please contact support within 7 days.</li>
+                    </ul>
+                </section>
+
+                <section className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">4. User Accounts</h2>
+                    <p>
+                        You are responsible for safeguarding your account access. You agree that you will not share your login credentials with third parties.
+                    </p>
+                </section>
+
+                <section className="space-y-4">
+                    <h2 className="text-2xl font-bold text-white">5. User Content & Conducting</h2>
+                    <p>
+                        You retain full ownership of your uploads. By using ViralRadar, you grant us a limited license to process this content solely for analysis.
+                    </p>
+                    <p>You agree NOT to upload:</p>
+                    <ul className="list-disc pl-5 space-y-2">
+                        <li>Illegal, violent, or sexually explicit content.</li>
+                        <li>Copyrighted material you do not own rights to.</li>
+                        <li>Malware or viruses.</li>
                     </ul>
                 </section>
 

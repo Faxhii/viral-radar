@@ -12,7 +12,7 @@ export default function HeroSection() {
     const [isDemoOpen, setIsDemoOpen] = useState(false);
 
     return (
-        <section className="relative min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-20 bg-black">
+        <section className="relative w-full max-w-full min-h-[90vh] flex flex-col items-center justify-center overflow-hidden pt-20 bg-black">
             <DemoModal isOpen={isDemoOpen} onClose={() => setIsDemoOpen(false)} />
 
             {/* Background Animation */}
