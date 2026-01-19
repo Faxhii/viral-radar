@@ -253,7 +253,12 @@ export default function ScriptAnalysisView({ analysis }: ScriptAnalysisViewProps
                                                 <Target className="w-5 h-5 text-blue-500" /> Improved Hooks
                                             </h4>
                                             <div className="space-y-3">
-                                                {analysis.optimized_assets.improved_hook?.map((hook: string, i: number) => (
+                                                {(Array.isArray(analysis.optimized_assets.improved_hook)
+                                                    ? analysis.optimized_assets.improved_hook
+                                                    : typeof analysis.optimized_assets.improved_hook === 'string'
+                                                        ? [analysis.optimized_assets.improved_hook]
+                                                        : []
+                                                ).map((hook: string, i: number) => (
                                                     <div key={i} className="flex items-center justify-between p-4 bg-secondary/50 rounded-lg border border-border hover:border-primary/30 transition-all group cursor-copy"
                                                         onClick={() => { navigator.clipboard.writeText(hook); toast.success("Copied!"); }}>
                                                         <span className="text-muted-foreground text-sm font-medium">{hook}</span>
