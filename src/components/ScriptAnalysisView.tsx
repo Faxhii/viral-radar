@@ -273,7 +273,7 @@ export default function ScriptAnalysisView({ analysis }: ScriptAnalysisViewProps
                                                 <div className="flex items-center justify-between mb-4">
                                                     <h4 className="text-foreground font-bold flex items-center gap-2">
                                                         <Sparkles className="w-5 h-5 text-purple-500" />
-                                                        Viral Rewrite
+                                                        100/100 Viral Rewrite
                                                     </h4>
                                                     <button
                                                         onClick={() => {
