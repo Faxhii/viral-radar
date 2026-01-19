@@ -116,8 +116,8 @@ export default function AnalysisPage() {
                         key={tab}
                         onClick={() => setActiveMobileTab(tab)}
                         className={`px-4 py-2 rounded-full text-xs font-bold transition-all ${activeMobileTab === tab
-                                ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30'
-                                : 'text-zinc-400 hover:text-white'
+                            ? 'bg-purple-600 text-white shadow-lg shadow-purple-500/30'
+                            : 'text-zinc-400 hover:text-white'
                             }`}
                     >
                         {tab.charAt(0).toUpperCase() + tab.slice(1)}
@@ -253,7 +253,12 @@ export default function AnalysisPage() {
                                 <div>
                                     <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-3">Better Titles</h4>
                                     <div className="space-y-2">
-                                        {analysis.optimized_assets?.titles?.map((title: string, i: number) => (
+                                        {(Array.isArray(analysis.optimized_assets?.titles)
+                                            ? analysis.optimized_assets.titles
+                                            : typeof analysis.optimized_assets?.titles === 'string'
+                                                ? [analysis.optimized_assets.titles]
+                                                : []
+                                        ).map((title: string, i: number) => (
                                             <div key={i} className="flex items-center justify-between p-3 bg-secondary/50 border border-border rounded-lg group cursor-pointer hover:bg-secondary hover:border-primary/20 transition-all"
                                                 onClick={() => { navigator.clipboard.writeText(title); toast.success("Copied!"); }}>
                                                 <span className="text-foreground font-medium">{title}</span>
@@ -263,54 +268,58 @@ export default function AnalysisPage() {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-3">Stronger Hooks</h4>
-                                    <div className="space-y-2">
-                                        {analysis.optimized_assets?.improved_hook?.map((hook: string, i: number) => (
-                                            <div key={i} className="p-4 bg-gradient-to-r from-purple-500/10 to-transparent border-l-4 border-purple-500 rounded-r-lg">
-                                                <p className="text-foreground italic">"{hook}"</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Checklist */}
-                        <div className="bg-card dark:bg-card/50 border border-border rounded-3xl p-8 shadow-sm">
-                            <h3 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
-                                <CheckCircle className="w-5 h-5 text-green-500" /> Immediate Action Plan
-                            </h3>
-                            <div className="space-y-3">
-                                {Object.entries(checklistState).map(([key, isChecked]) => (
-                                    <div
-                                        key={key}
-                                        onClick={() => toggleChecklistItem(key)}
-                                        className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all ${isChecked ? 'bg-green-500/5 border-green-500/20 opacity-50' : 'bg-secondary/30 border-border hover:border-primary/30 hover:bg-secondary/50'}`}
-                                    >
-                                        <div className={`mt-1 w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${isChecked ? 'bg-green-500 border-green-500' : 'border-muted-foreground/30'}`}>
-                                            {isChecked && <CheckCircle className="w-3.5 h-3.5 text-white" />}
+                                <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-3">Stronger Hooks</h4>
+                                <div className="space-y-2">
+                                    {(Array.isArray(analysis.optimized_assets?.improved_hook)
+                                        ? analysis.optimized_assets.improved_hook
+                                        : typeof analysis.optimized_assets?.improved_hook === 'string'
+                                            ? [analysis.optimized_assets.improved_hook]
+                                            : []
+                                    ).map((hook: string, i: number) => (
+                                        <div key={i} className="p-4 bg-gradient-to-r from-purple-500/10 to-transparent border-l-4 border-purple-500 rounded-r-lg">
+                                            <p className="text-foreground italic">"{hook}"</p>
                                         </div>
-                                        <span className={`text-sm font-medium ${isChecked ? 'text-muted-foreground line-through' : 'text-foreground'}`}>{key}</span>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Script Rewrite (If present) */}
-                    {analysis.optimized_assets?.script_rewrite_start && (
-                        <div className="bg-card dark:bg-card/50 border border-border rounded-3xl p-8 mb-12 shadow-sm">
-                            <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                                <FileText className="w-5 h-5 text-blue-500" /> Suggested Rewrite (First 15s)
-                            </h3>
-                            <div className="bg-zinc-950 dark:bg-black/50 p-6 rounded-xl border border-border font-mono text-zinc-300 text-sm whitespace-pre-wrap leading-relaxed shadow-inner">
-                                {analysis.optimized_assets.script_rewrite_start}
-                            </div>
+                    {/* Checklist */}
+                    <div className="bg-card dark:bg-card/50 border border-border rounded-3xl p-8 shadow-sm">
+                        <h3 className="text-xl font-bold text-foreground mb-6 flex items-center gap-2">
+                            <CheckCircle className="w-5 h-5 text-green-500" /> Immediate Action Plan
+                        </h3>
+                        <div className="space-y-3">
+                            {Object.entries(checklistState).map(([key, isChecked]) => (
+                                <div
+                                    key={key}
+                                    onClick={() => toggleChecklistItem(key)}
+                                    className={`flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all ${isChecked ? 'bg-green-500/5 border-green-500/20 opacity-50' : 'bg-secondary/30 border-border hover:border-primary/30 hover:bg-secondary/50'}`}
+                                >
+                                    <div className={`mt-1 w-5 h-5 rounded-full border flex items-center justify-center transition-colors ${isChecked ? 'bg-green-500 border-green-500' : 'border-muted-foreground/30'}`}>
+                                        {isChecked && <CheckCircle className="w-3.5 h-3.5 text-white" />}
+                                    </div>
+                                    <span className={`text-sm font-medium ${isChecked ? 'text-muted-foreground line-through' : 'text-foreground'}`}>{key}</span>
+                                </div>
+                            ))}
                         </div>
-                    )}
+                    </div>
                 </div>
+
+                {/* Script Rewrite (If present) */}
+                {analysis.optimized_assets?.script_rewrite_start && (
+                    <div className="bg-card dark:bg-card/50 border border-border rounded-3xl p-8 mb-12 shadow-sm">
+                        <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
+                            <FileText className="w-5 h-5 text-blue-500" /> Suggested Rewrite (First 15s)
+                        </h3>
+                        <div className="bg-zinc-950 dark:bg-black/50 p-6 rounded-xl border border-border font-mono text-zinc-300 text-sm whitespace-pre-wrap leading-relaxed shadow-inner">
+                            {analysis.optimized_assets.script_rewrite_start}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
+        </div >
     );
 }
