@@ -116,12 +116,13 @@ export default function PricingPage() {
                         <p className="text-zinc-400 mb-6 text-xs">Test the waters.</p>
 
                         <ul className="space-y-3 mb-8 flex-1 text-sm">
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={16} />
-                                <span className="font-semibold text-white">3 Credits</span> / one-time
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-zinc-500 shrink-0 mt-0.5" size={16} />
+                                <span><span className="font-semibold text-white">3 Credits</span> / one-time</span>
                             </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-zinc-500" size={16} /> 1 Credit = 2 Mins Video
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-zinc-500 shrink-0 mt-0.5" size={16} />
+                                <span>1 Credit = 2 Mins Video</span>
                             </li>
                         </ul>
                         {isCurrentPlan('free') ? (
@@ -152,25 +153,25 @@ export default function PricingPage() {
                         <p className="text-zinc-400 mb-6 text-xs">Perfect for creators just starting their viral journey.</p>
 
                         <ul className="space-y-3 mb-8 flex-1 text-sm">
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-blue-500" size={16} />
-                                <span className="font-semibold text-white">15 Credits</span> (Analyze ~15 Shorts)
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-blue-500 shrink-0 mt-0.5" size={16} />
+                                <span><span className="font-semibold text-white">15 Credits</span> (Analyze ~15 Shorts)</span>
                             </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-blue-500" size={16} />
-                                Complete Video & Script Analysis
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-blue-500 shrink-0 mt-0.5" size={16} />
+                                <span>Complete Video & Script Analysis</span>
                             </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-blue-500" size={16} />
-                                Actionable Improvement Plan
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-blue-500 shrink-0 mt-0.5" size={16} />
+                                <span>Actionable Improvement Plan</span>
                             </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-blue-500" size={16} />
-                                Viral Potential Score
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-blue-500 shrink-0 mt-0.5" size={16} />
+                                <span>Viral Potential Score</span>
                             </li>
-                            <li className="flex items-center gap-3 text-zinc-300 opacity-80 italic">
-                                <Check className="text-blue-500" size={16} />
-                                + Many more insights inside
+                            <li className="flex items-start gap-3 text-zinc-300 opacity-80 italic">
+                                <Check className="text-blue-500 shrink-0 mt-0.5" size={16} />
+                                <span>+ Many more insights inside</span>
                             </li>
                         </ul>
 
@@ -214,29 +215,29 @@ export default function PricingPage() {
                         <p className="text-purple-200/60 mb-6 text-sm">For serious creators ready to dominate the algorithm.</p>
 
                         <ul className="space-y-4 mb-8 flex-1 text-sm">
-                            <li className="flex items-center gap-3 text-white">
-                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">50 Credits</span> (Analyze ~50 Shorts)
+                            <li className="flex items-start gap-3 text-white">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400 shrink-0 mt-0.5"><Check size={14} /></div>
+                                <span><span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">50 Credits</span> (Analyze ~50 Shorts)</span>
                             </li>
-                            <li className="flex items-center gap-3 text-white">
-                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Advanced Full-Video Analysis
+                            <li className="flex items-start gap-3 text-white">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400 shrink-0 mt-0.5"><Check size={14} /></div>
+                                <span>Advanced Full-Video Analysis</span>
                             </li>
-                            <li className="flex items-center gap-3 text-white">
-                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Actionable Improvement Plan
+                            <li className="flex items-start gap-3 text-white">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400 shrink-0 mt-0.5"><Check size={14} /></div>
+                                <span>Actionable Improvement Plan</span>
                             </li>
-                            <li className="flex items-center gap-3 text-white">
-                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Audience Retention Strategy
+                            <li className="flex items-start gap-3 text-white">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400 shrink-0 mt-0.5"><Check size={14} /></div>
+                                <span>Audience Retention Strategy</span>
                             </li>
-                            <li className="flex items-center gap-3 text-white">
-                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                Viral Script Rewrites
+                            <li className="flex items-start gap-3 text-white">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400 shrink-0 mt-0.5"><Check size={14} /></div>
+                                <span>Viral Script Rewrites</span>
                             </li>
-                            <li className="flex items-center gap-3 text-white opacity-80 italic">
-                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400"><Check size={14} /></div>
-                                + All Deep-Dive Metrics
+                            <li className="flex items-start gap-3 text-white opacity-80 italic">
+                                <div className="p-1 rounded-full bg-purple-500/20 text-purple-400 shrink-0 mt-0.5"><Check size={14} /></div>
+                                <span>+ All Deep-Dive Metrics</span>
                             </li>
                         </ul>
 
@@ -270,25 +271,25 @@ export default function PricingPage() {
                         <p className="text-zinc-400 mb-6 text-sm">Maximum power for high-volume content production & full video analysis.</p>
 
                         <ul className="space-y-4 mb-8 flex-1 text-sm">
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-white" size={18} />
-                                <span className="font-semibold text-white">110 Credits</span> (Analyze ~110 Shorts)
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-white shrink-0 mt-0.5" size={18} />
+                                <span><span className="font-semibold text-white">110 Credits</span> (Analyze ~110 Shorts)</span>
                             </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-white" size={18} />
-                                Priority Analysis Queue (Skip Line)
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-white shrink-0 mt-0.5" size={18} />
+                                <span>Priority Analysis Queue (Skip Line)</span>
                             </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-white" size={18} />
-                                Advanced Script & Content Strategy
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-white shrink-0 mt-0.5" size={18} />
+                                <span>Advanced Script & Content Strategy</span>
                             </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-white" size={18} />
-                                Comprehensive Growth Roadmap
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-white shrink-0 mt-0.5" size={18} />
+                                <span>Comprehensive Growth Roadmap</span>
                             </li>
-                            <li className="flex items-center gap-3 text-zinc-300">
-                                <Check className="text-white" size={18} />
-                                Best Value per Analysis
+                            <li className="flex items-start gap-3 text-zinc-300">
+                                <Check className="text-white shrink-0 mt-0.5" size={18} />
+                                <span>Best Value per Analysis</span>
                             </li>
                         </ul>
 
