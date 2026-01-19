@@ -41,11 +41,11 @@ export default function PricingSection() {
 
                         <ul className="space-y-4 mb-8 flex-1">
                             {[
-                                "15 Credits (Analyze ~15 Shorts)",
-                                "Complete Video & Script Analysis",
+                                "15 Credits / Month",
+                                "Analyze ~15 Shorts or 30 mins Video",
+                                "Script & Video Analysis Included",
                                 "Actionable Improvement Plan",
-                                "Viral Potential Score",
-                                "+ Many more insights inside"
+                                "Viral Potential Score"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-sm text-gray-400">
                                     <Check className="text-gray-600 shrink-0" size={16} />
@@ -81,17 +81,16 @@ export default function PricingSection() {
                             <span className="text-sm text-gray-400">/month</span>
                         </div>
 
-                        <div className="text-sm font-bold text-green-400 mb-4">50 Credits / Month</div>
+                        <div className="text-sm font-bold text-green-400 mb-4">25 Credits / Month</div>
                         <p className="text-gray-300 text-sm mb-6">For serious creators ready to dominate the algorithm.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">
                             {[
-                                "50 Credits (Analyze ~50 Shorts)",
+                                "25 Credits (Analyze ~25 Shorts)",
+                                "Analyze ~50 mins Long Form Video",
                                 "Advanced Full-Video Analysis",
-                                "Actionable Improvement Plan",
                                 "Audience Retention Strategy",
-                                "Viral Script Rewrites",
-                                "+ All Deep-Dive Metrics"
+                                "Viral Script Rewrites"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-sm text-gray-200">
                                     <div className="p-1 rounded-full bg-green-500/20 shadow-[0_0_10px_rgba(34,197,94,0.3)]">
@@ -122,16 +121,16 @@ export default function PricingSection() {
                             <span className="text-sm text-gray-500">/month</span>
                         </div>
 
-                        <div className="text-sm font-bold text-purple-400 mb-4">110 Credits / Month</div>
+                        <div className="text-sm font-bold text-purple-400 mb-4">50 Credits / Month</div>
                         <p className="text-gray-400 text-sm mb-6">Maximum power for high-volume content production & full video analysis.</p>
 
                         <ul className="space-y-4 mb-8 flex-1">
                             {[
-                                "110 Credits (Analyze ~110 Shorts)",
+                                "50 Credits (Analyze ~50 Shorts)",
+                                "Analyze ~100 mins Long Form Video",
                                 "Priority Analysis Queue (Skip Line)",
                                 "Advanced Script & Content Strategy",
-                                "Comprehensive Growth Roadmap",
-                                "Best Value per Analysis"
+                                "Comprehensive Growth Roadmap"
                             ].map((item, i) => (
                                 <li key={i} className="flex items-center gap-3 text-sm text-gray-400">
                                     <Check className="text-gray-600 shrink-0" size={16} />
