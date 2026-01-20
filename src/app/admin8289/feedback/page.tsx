@@ -10,7 +10,8 @@ export default function FeedbackPage() {
                 <p className="text-muted-foreground">User submitted feedback and bug reports.</p>
             </div>
 
-            <FeedbackList type="feature_request" />
+            {/* Show all feedback types - removed the type filter */}
+            <FeedbackList />
         </div>
     );
 }
