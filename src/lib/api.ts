@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-const rawUrl = (process.env.NEXT_PUBLIC_API_URL || 'https://viral-radar-backend.up.railway.app').replace(/\/$/, '');
-// Ensure protocol is present. If it doesn't start with http, prepend https://
-const API_URL = rawUrl.match(/^https?:\/\//) ? rawUrl : `https://${rawUrl}`;
+const rawUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+const API_URL = rawUrl;
 console.log('Current API URL:', API_URL);
 
 const api = axios.create({
