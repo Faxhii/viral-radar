@@ -2,15 +2,9 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-    // Check if the route is an admin route
-    if (request.nextUrl.pathname.startsWith('/admin8289')) {
-        // ... (rest of logic same)
-        const token = request.cookies.get('access_token');
-        if (!token) {
-            return NextResponse.redirect(new URL('/login', request.url));
-        }
-    }
-
+    // Admin route protection is handled client-side in the admin layout
+    // because the JWT token is stored in localStorage, not cookies
+    // The layout.tsx checks for token and superuser status
     return NextResponse.next();
 }
 
