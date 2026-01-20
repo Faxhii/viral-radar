@@ -1,7 +1,18 @@
 import axios from 'axios';
 // import { getAuthToken } from '@/lib/auth';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080';
+// Ensure the API URL has a protocol prefix
+const normalizeUrl = (url: string): string => {
+    // Remove trailing slash
+    url = url.replace(/\/$/, '');
+    // Add https:// if no protocol specified
+    if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+        return `https://${url}`;
+    }
+    return url;
+};
+
+const API_URL = normalizeUrl(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080');
 
 const adminApi = axios.create({
     baseURL: `${API_URL}/admin`,

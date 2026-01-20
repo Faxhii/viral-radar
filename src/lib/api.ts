@@ -1,7 +1,18 @@
 import axios from 'axios';
 
-const rawUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000').replace(/\/$/, '');
-const API_URL = rawUrl;
+// Ensure the API URL has a protocol prefix
+const normalizeUrl = (url: string): string => {
+    // Remove trailing slash
+    url = url.replace(/\/$/, '');
+    // Add https:// if no protocol specified
+    if (url && !url.startsWith('http://') && !url.startsWith('https://')) {
+        return `https://${url}`;
+    }
+    return url;
+};
+
+const rawUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_URL = normalizeUrl(rawUrl);
 console.log('Current API URL:', API_URL);
 
 const api = axios.create({
