@@ -268,29 +268,88 @@ export default function ScriptAnalysisView({ analysis }: ScriptAnalysisViewProps
                                             </div>
                                         </div>
 
-                                        {analysis.optimized_assets.full_script_rewrite && (
-                                            <div className="bg-gradient-to-br from-purple-500/5 to-blue-500/5 rounded-xl p-6 border border-purple-500/20">
-                                                <div className="flex items-center justify-between mb-4">
-                                                    <h4 className="text-foreground font-bold flex items-center gap-2">
-                                                        <Sparkles className="w-5 h-5 text-purple-500" />
-                                                        100/100 Viral Rewrite
-                                                    </h4>
-                                                    <button
-                                                        onClick={() => {
-                                                            navigator.clipboard.writeText(analysis.optimized_assets.full_script_rewrite);
-                                                            toast.success("Script copied!");
-                                                        }}
-                                                        className="flex items-center gap-2 px-3 py-1.5 bg-purple-500/10 hover:bg-purple-500/20 text-purple-500 dark:text-purple-300 rounded-lg text-xs font-bold transition-colors border border-purple-500/20"
-                                                    >
-                                                        <Copy className="w-3 h-3" /> Copy Script
-                                                    </button>
-                                                </div>
-                                                <div className="p-4 bg-background dark:bg-[#0E0E12] rounded-lg border border-border">
-                                                    <pre className="whitespace-pre-wrap font-mono text-sm text-muted-foreground leading-relaxed">
-                                                        {analysis.optimized_assets.full_script_rewrite}
-                                                    </pre>
-                                                </div>
+                                        {/* Strategic Tweaks Section */}
+                                        {analysis.optimized_assets.script_tweaks && analysis.optimized_assets.script_tweaks.length > 0 ? (
+                                            <div className="space-y-4">
+                                                <h4 className="text-foreground font-bold flex items-center gap-2 mb-2">
+                                                    <Sparkles className="w-5 h-5 text-purple-500" />
+                                                    Strategic Script Tweaks
+                                                </h4>
+
+                                                {analysis.optimized_assets.script_tweaks.map((tweak: any, idx: number) => (
+                                                    <div key={idx} className="bg-card dark:bg-[#13131A] border border-border rounded-xl overflow-hidden shadow-sm">
+                                                        <div className="bg-secondary/30 px-4 py-2 border-b border-border flex justify-between items-center">
+                                                            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground bg-secondary px-2 py-1 rounded-md border border-border">
+                                                                {tweak.type}
+                                                            </span>
+                                                            <button
+                                                                onClick={() => {
+                                                                    navigator.clipboard.writeText(tweak.improved);
+                                                                    toast.success("Improved version copied!");
+                                                                }}
+                                                                className="text-xs flex items-center gap-1 text-purple-500 hover:text-purple-400 font-medium transition-colors"
+                                                            >
+                                                                <Copy className="w-3 h-3" /> Copy
+                                                            </button>
+                                                        </div>
+                                                        <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+
+                                                            {/* Arrow visual for desktop */}
+                                                            <div className="hidden md:block absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+                                                                <div className="bg-background border border-border rounded-full p-1.5 shadow-sm text-muted-foreground">
+                                                                    <div className="w-4 h-4">→</div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div className="space-y-2">
+                                                                <p className="text-xs font-bold text-red-500/80 uppercase mb-1">Original</p>
+                                                                <p className="text-sm text-muted-foreground line-through decoration-red-500/30 decoration-2 bg-red-500/5 p-3 rounded-lg border border-red-500/10">
+                                                                    {tweak.original}
+                                                                </p>
+                                                            </div>
+
+                                                            <div className="space-y-2">
+                                                                <p className="text-xs font-bold text-green-500/80 uppercase mb-1">Improved</p>
+                                                                <p className="text-sm text-foreground font-medium bg-green-500/5 p-3 rounded-lg border border-green-500/10 shadow-sm ring-1 ring-green-500/20">
+                                                                    {tweak.improved}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="bg-muted/30 px-5 py-3 border-t border-border">
+                                                            <p className="text-xs text-muted-foreground flex gap-2">
+                                                                <span className="font-bold text-purple-500 shrink-0">Why:</span>
+                                                                {tweak.reason}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                ))}
                                             </div>
+                                        ) : (
+                                            /* Fallback for legacy analysis with full rewrite */
+                                            analysis.optimized_assets.full_script_rewrite && (
+                                                <div className="bg-gradient-to-br from-purple-500/5 to-blue-500/5 rounded-xl p-6 border border-purple-500/20">
+                                                    <div className="flex items-center justify-between mb-4">
+                                                        <h4 className="text-foreground font-bold flex items-center gap-2">
+                                                            <Sparkles className="w-5 h-5 text-purple-500" />
+                                                            100/100 Viral Rewrite
+                                                        </h4>
+                                                        <button
+                                                            onClick={() => {
+                                                                navigator.clipboard.writeText(analysis.optimized_assets.full_script_rewrite);
+                                                                toast.success("Script copied!");
+                                                            }}
+                                                            className="flex items-center gap-2 px-3 py-1.5 bg-purple-500/10 hover:bg-purple-500/20 text-purple-500 dark:text-purple-300 rounded-lg text-xs font-bold transition-colors border border-purple-500/20"
+                                                        >
+                                                            <Copy className="w-3 h-3" /> Copy Script
+                                                        </button>
+                                                    </div>
+                                                    <div className="p-4 bg-background dark:bg-[#0E0E12] rounded-lg border border-border">
+                                                        <pre className="whitespace-pre-wrap font-mono text-sm text-muted-foreground leading-relaxed">
+                                                            {analysis.optimized_assets.full_script_rewrite}
+                                                        </pre>
+                                                    </div>
+                                                </div>
+                                            )
                                         )}
                                     </motion.div>
                                 )}
