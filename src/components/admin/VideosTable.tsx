@@ -24,6 +24,7 @@ export function VideosTable() {
     const [search, setSearch] = useState('');
     const [page, setPage] = useState(1);
     const [total, setTotal] = useState(0);
+    const [activeMenu, setActiveMenu] = useState<number | null>(null);
     const limit = 10;
 
     const fetchVideos = async () => {
@@ -138,9 +139,54 @@ export function VideosTable() {
                                             </span>
                                         </td>
                                         <td className="py-3 px-4">
-                                            <button className="p-2 hover:bg-secondary rounded-lg transition-colors text-muted-foreground hover:text-foreground">
-                                                <MoreVertical className="w-4 h-4" />
-                                            </button>
+                                            <div className="relative">
+                                                <button
+                                                    onClick={() => setActiveMenu(activeMenu === video.id ? null : video.id)}
+                                                    className="p-2 hover:bg-secondary rounded-lg transition-colors text-muted-foreground hover:text-foreground"
+                                                >
+                                                    <MoreVertical className="w-4 h-4" />
+                                                </button>
+
+                                                <AnimatePresence>
+                                                    {activeMenu === video.id && (
+                                                        <>
+                                                            <div
+                                                                className="fixed inset-0 z-10"
+                                                                onClick={() => setActiveMenu(null)}
+                                                            />
+                                                            <motion.div
+                                                                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                                                                animate={{ opacity: 1, scale: 1, y: 0 }}
+                                                                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                                                                className="absolute right-0 top-full mt-2 w-48 bg-card border border-border rounded-xl shadow-xl z-20 overflow-hidden"
+                                                            >
+                                                                <div className="p-1">
+                                                                    <a
+                                                                        href={video.id ? `/dashboard/analysis/${video.id}` : '#'}
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        className="flex items-center gap-2 w-full px-3 py-2 text-sm text-foreground hover:bg-secondary rounded-lg transition-colors"
+                                                                    >
+                                                                        <FileText className="w-4 h-4" />
+                                                                        View Analysis
+                                                                    </a>
+                                                                    <button
+                                                                        onClick={() => {
+                                                                            // Implement delete logic or just alert for now
+                                                                            toast.info("Delete functionality to be implemented needs API endpoint");
+                                                                            setActiveMenu(null);
+                                                                        }}
+                                                                        className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
+                                                                    >
+                                                                        <AlertCircle className="w-4 h-4" />
+                                                                        Delete Video
+                                                                    </button>
+                                                                </div>
+                                                            </motion.div>
+                                                        </>
+                                                    )}
+                                                </AnimatePresence>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))
