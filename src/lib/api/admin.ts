@@ -165,6 +165,29 @@ export const getVideos = async (page: number = 1, limit: number = 10, search: st
     return response.data;
 };
 
+export const deleteVideo = async (id: number): Promise<any> => {
+    const response = await adminApi.delete(`/videos/${id}`);
+    return response.data;
+};
+
+export interface OnboardingStats {
+    funnel: {
+        total_signups: number;
+        started_onboarding: number;
+        goals_set: number;
+        completed: number;
+    };
+    breakdown: {
+        platforms: { name: string; value: number }[];
+        goals: { name: string; value: number }[];
+    };
+}
+
+export const getOnboardingStats = async (): Promise<OnboardingStats> => {
+    const response = await adminApi.get('/stats/onboarding');
+    return response.data;
+};
+
 export const getReviews = async (page: number = 1, limit: number = 10, approved?: boolean): Promise<ReviewListResponse> => {
     const params: any = { page, limit };
     if (approved !== undefined) params.approved = approved;

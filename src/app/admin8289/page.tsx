@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getAdminStats, AdminStats } from '@/lib/api/admin';
-import { Users, Activity, CreditCard, Zap } from 'lucide-react';
+import { getAdminStats, AdminStats, getVideos, Video } from '@/lib/api/admin';
+import { Users, Activity, CreditCard, Zap, Play } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { OnboardingStatsPanel } from '@/components/admin/OnboardingStats';
+import { format } from 'date-fns';
 
-function StatCard({ icon: Icon, label, value, trend }: any) {
+function StatCard({ icon: Icon, label, value }: any) {
     return (
         <div className="glass-card p-6 flex items-start justify-between">
             <div>
@@ -13,11 +15,6 @@ function StatCard({ icon: Icon, label, value, trend }: any) {
                 <h3 className="text-3xl font-bold font-heading">
                     {(value !== undefined && value !== null) ? value.toLocaleString() : '-'}
                 </h3>
-                {trend && (
-                    <p className={`text-xs mt-2 font-medium ${trend > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                        {trend > 0 ? '+' : ''}{trend}% from last month
-                    </p>
-                )}
             </div>
             <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                 <Icon className="w-5 h-5" />
@@ -28,20 +25,25 @@ function StatCard({ icon: Icon, label, value, trend }: any) {
 
 export default function AdminDashboard() {
     const [stats, setStats] = useState<AdminStats | null>(null);
+    const [recentVideos, setRecentVideos] = useState<Video[]>([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function fetchStats() {
+        async function fetchData() {
             try {
-                const data = await getAdminStats();
-                setStats(data);
+                const [statsData, videosData] = await Promise.all([
+                    getAdminStats(),
+                    getVideos(1, 5) // Fetch top 5 recent videos
+                ]);
+                setStats(statsData);
+                setRecentVideos(videosData.data);
             } catch (error) {
-                console.error("Failed to fetch admin stats:", error);
+                console.error("Failed to fetch dashboard data:", error);
             } finally {
                 setLoading(false);
             }
         }
-        fetchStats();
+        fetchData();
     }, []);
 
     const container = {
@@ -60,18 +62,11 @@ export default function AdminDashboard() {
     };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-8">
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-3xl font-bold font-heading">Dashboard</h1>
                     <p className="text-muted-foreground">Overview of ViralRadar performance.</p>
-                </div>
-                <div className="flex gap-2">
-                    <select className="bg-secondary border border-border rounded-lg text-sm px-3 py-1.5 focus:outline-none">
-                        <option>Last 7 Days</option>
-                        <option>Last 30 Days</option>
-                        <option>All Time</option>
-                    </select>
                 </div>
             </div>
 
@@ -86,7 +81,6 @@ export default function AdminDashboard() {
                         icon={Users}
                         label="Total Users"
                         value={stats?.total_users}
-                        trend={12}
                     />
                 </motion.div>
                 <motion.div variants={item}>
@@ -94,7 +88,6 @@ export default function AdminDashboard() {
                         icon={Activity}
                         label="Active Users"
                         value={stats?.active_users}
-                        trend={5}
                     />
                 </motion.div>
                 <motion.div variants={item}>
@@ -102,7 +95,6 @@ export default function AdminDashboard() {
                         icon={CreditCard}
                         label="Paid Users"
                         value={stats?.paid_users}
-                        trend={8}
                     />
                 </motion.div>
                 <motion.div variants={item}>
@@ -110,34 +102,51 @@ export default function AdminDashboard() {
                         icon={Zap}
                         label="Credits Used (Today)"
                         value={stats?.credits_used_today}
-                        trend={-2}
                     />
                 </motion.div>
             </motion.div>
 
-            {/* Placeholder for Charts/Recent Activity */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2 glass-card p-6 h-[400px]">
-                    <h3 className="font-heading font-semibold text-lg mb-4">User Growth</h3>
-                    <div className="w-full h-full flex items-center justify-center text-muted-foreground border-2 border-dashed border-border rounded-xl">
-                        Chart Placeholder
-                    </div>
-                </div>
-                <div className="glass-card p-6 h-[400px]">
-                    <h3 className="font-heading font-semibold text-lg mb-4">Recent Activity</h3>
-                    <div className="space-y-4">
-                        {[1, 2, 3, 4, 5].map((i) => (
-                            <div key={i} className="flex items-center gap-3 pb-3 border-b border-border/50 last:border-0">
-                                <div className="w-8 h-8 rounded-full bg-secondary flex-shrink-0" />
-                                <div>
-                                    <p className="text-sm font-medium">New user registered</p>
-                                    <p className="text-xs text-muted-foreground">2 minutes ago</p>
+            {/* Analytics Section */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+            >
+                <h2 className="text-xl font-bold font-heading mb-4">Onboarding Analytics</h2>
+                <OnboardingStatsPanel />
+            </motion.div>
+
+            {/* Recent Activity */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="glass-card p-6"
+            >
+                <h3 className="font-heading font-semibold text-lg mb-4">Recent Uploads</h3>
+                <div className="space-y-4">
+                    {recentVideos.length === 0 ? (
+                        <p className="text-sm text-muted-foreground">No recent activity.</p>
+                    ) : (
+                        recentVideos.map((video) => (
+                            <div key={video.id} className="flex items-center gap-4 pb-3 border-b border-border/50 last:border-0">
+                                <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground flex-shrink-0">
+                                    <Play className="w-4 h-4 fill-current" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <p className="text-sm font-medium truncate">{video.title || 'Untitled Video'}</p>
+                                    <p className="text-xs text-muted-foreground">
+                                        by User #{video.user_id} • {format(new Date(video.created_at), 'MMM d, h:mm a')}
+                                    </p>
+                                </div>
+                                <div className="text-xs px-2 py-1 rounded-full bg-secondary text-muted-foreground capitalize">
+                                    {video.status}
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        ))
+                    )}
                 </div>
-            </div>
+            </motion.div>
         </div>
     );
 }

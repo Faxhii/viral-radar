@@ -13,7 +13,7 @@ import {
     AlertCircle,
     Loader2
 } from 'lucide-react';
-import { getVideos, Video } from '@/lib/api/admin';
+import { getVideos, Video, deleteVideo } from '@/lib/api/admin';
 import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -171,9 +171,15 @@ export function VideosTable() {
                                                                         View Analysis
                                                                     </a>
                                                                     <button
-                                                                        onClick={() => {
-                                                                            // Implement delete logic or just alert for now
-                                                                            toast.info("Delete functionality to be implemented needs API endpoint");
+                                                                        onClick={async () => {
+                                                                            if (!confirm('Are you sure you want to delete this video?')) return;
+                                                                            try {
+                                                                                await deleteVideo(video.id);
+                                                                                toast.success('Video deleted successfully');
+                                                                                fetchVideos();
+                                                                            } catch (e) {
+                                                                                toast.error('Failed to delete video');
+                                                                            }
                                                                             setActiveMenu(null);
                                                                         }}
                                                                         className="flex items-center gap-2 w-full px-3 py-2 text-sm text-red-500 hover:bg-red-500/10 rounded-lg transition-colors"
