@@ -15,7 +15,7 @@ const normalizeUrl = (url: string): string => {
 const API_URL = normalizeUrl(process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080');
 
 const adminApi = axios.create({
-    baseURL: `${API_URL}/admin`,
+    baseURL: `${API_URL}/api/admin`,
     headers: {
         'Content-Type': 'application/json',
     },
