@@ -85,7 +85,7 @@ export function VideosTable() {
                     <table className="w-full">
                         <thead>
                             <tr className="border-b border-border/50 bg-secondary/30">
-                                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Video Content</th>
+                                <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Content</th>
                                 <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Platform</th>
                                 <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Status</th>
                                 <th className="text-left py-3 px-4 text-xs font-medium text-muted-foreground uppercase tracking-wider">Date</th>
@@ -97,13 +97,13 @@ export function VideosTable() {
                                 <tr>
                                     <td colSpan={5} className="py-8 text-center text-muted-foreground">
                                         <Loader2 className="w-6 h-6 animate-spin mx-auto mb-2" />
-                                        Loading videos...
+                                        Loading content...
                                     </td>
                                 </tr>
                             ) : videos.length === 0 ? (
                                 <tr>
                                     <td colSpan={5} className="py-8 text-center text-muted-foreground">
-                                        No videos found
+                                        No content found
                                     </td>
                                 </tr>
                             ) : (
@@ -112,7 +112,11 @@ export function VideosTable() {
                                         <td className="py-3 px-4">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground">
-                                                    <Play className="w-4 h-4 fill-current" />
+                                                    {video.source_type === 'script' ? (
+                                                        <FileText className="w-4 h-4" />
+                                                    ) : (
+                                                        <Play className="w-4 h-4 fill-current" />
+                                                    )}
                                                 </div>
                                                 <div>
                                                     <p className="font-medium text-sm text-foreground truncate max-w-[200px]" title={video.title || 'Untitled'}>

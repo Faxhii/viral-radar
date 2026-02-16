@@ -65,6 +65,14 @@ export default function AnalysisPage() {
 
     const [activeMobileTab, setActiveMobileTab] = useState<'overview' | 'details' | 'plan'>('overview');
 
+    const getVideoSrc = (url: string) => {
+        if (!url) return '';
+        if (url.startsWith('http')) return url;
+        const apiUrl = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080').replace(/\/$/, '');
+        const cleanPath = url.startsWith('/') ? url : `/${url}`;
+        return `${apiUrl}${cleanPath}`;
+    };
+
     if (loading) {
         return (
             <div className="flex flex-col items-center justify-center min-h-screen text-center p-6 bg-background text-foreground transition-colors duration-300">
@@ -178,7 +186,11 @@ export default function AnalysisPage() {
                                         allowFullScreen
                                     />
                                 ) : (
-                                    <video src={analysis.video_url?.startsWith('http') ? analysis.video_url : `${process.env.NEXT_PUBLIC_API_URL}${analysis.video_url}`} controls className="w-full h-full object-contain" />
+                                    <video
+                                        src={getVideoSrc(analysis.video_url)}
+                                        controls
+                                        className="w-full h-full object-contain"
+                                    />
                                 )}
                             </div>
                             <div className="bg-card dark:bg-card/50 border border-border rounded-2xl p-6 shadow-sm">
