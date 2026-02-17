@@ -8,6 +8,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import UpgradeModal from '@/components/UpgradeModal';
 import { toast } from 'sonner';
 
+import AnalysisLoading from '@/components/AnalysisLoading';
+
 export default function DashboardPage() {
     const router = useRouter();
     const [activeTab, setActiveTab] = useState<'upload' | 'link' | 'script'>('upload');
@@ -22,6 +24,7 @@ export default function DashboardPage() {
     const [scriptAudience, setScriptAudience] = useState('Gen Z');
 
     const [loading, setLoading] = useState(false);
+    const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [error, setError] = useState('');
 
     const [stats, setStats] = useState({ total_analyzed: 0, avg_score: 0, growth_potential: '--' });
@@ -66,6 +69,7 @@ export default function DashboardPage() {
 
     const handleUpload = async () => {
         if (!file) return;
+        setIsAnalyzing(true);
         setLoading(true);
         setError('');
         try {
@@ -78,6 +82,7 @@ export default function DashboardPage() {
                 return;
             }
             setError('Failed to upload video. Please try again.');
+            setIsAnalyzing(false);
         } finally {
             setLoading(false);
         }
@@ -100,6 +105,7 @@ export default function DashboardPage() {
 
     const handleLinkImport = async () => {
         if (!url) return;
+        setIsAnalyzing(true);
         setLoading(true);
         setError('');
         try {
@@ -117,6 +123,7 @@ export default function DashboardPage() {
                 return;
             }
             setError('Failed to import link. Please check the URL.');
+            setIsAnalyzing(false);
         } finally {
             setLoading(false);
         }
@@ -124,6 +131,7 @@ export default function DashboardPage() {
 
     const handleScriptAnalyze = async () => {
         if (!scriptContent) return;
+        setIsAnalyzing(true);
         setLoading(true);
         setError('');
         try {
@@ -150,10 +158,15 @@ ${scriptContent}`;
                 return;
             }
             setError('Failed to analyze script. Please try again.');
+            setIsAnalyzing(false);
         } finally {
             setLoading(false);
         }
     };
+
+    if (isAnalyzing) {
+        return <AnalysisLoading />;
+    }
 
     return (
         <div className="max-w-6xl mx-auto py-8">
