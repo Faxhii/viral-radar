@@ -214,3 +214,29 @@ export const getFeedback = async (page: number = 1, limit: number = 10, status?:
     const response = await adminApi.get('/feedback', { params });
     return response.data;
 };
+
+// Email Log Types
+export interface EmailLog {
+    id: number;
+    user_id?: number;
+    recipient: string;
+    email_type: string;
+    subject: string;
+    status: string;
+    sent_at: string;
+}
+
+export interface EmailLogListResponse {
+    data: EmailLog[];
+    total: number;
+    page: number;
+    limit: number;
+}
+
+export const getEmailLogs = async (page: number = 1, limit: number = 10, status?: string, email_type?: string): Promise<EmailLogListResponse> => {
+    const params: any = { page, limit };
+    if (status) params.status = status;
+    if (email_type) params.email_type = email_type;
+    const response = await adminApi.get('/email-logs', { params });
+    return response.data;
+};

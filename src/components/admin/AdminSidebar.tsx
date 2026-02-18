@@ -10,7 +10,8 @@ import {
     LogOut,
     MessageSquare,
     LifeBuoy,
-    Settings
+    Settings,
+    Mail
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
@@ -22,6 +23,7 @@ const sidebarItems = [
     { label: 'Reviews', icon: ShieldCheck, href: '/admin8289/reviews' },
     { label: 'Feedback', icon: MessageSquare, href: '/admin8289/feedback' },
     { label: 'Support', icon: LifeBuoy, href: '/admin8289/support' },
+    { label: 'Email Logs', icon: Mail, href: '/admin8289/email-logs' },
     { label: 'Settings', icon: Settings, href: '/admin8289/settings' },
 ];
 
